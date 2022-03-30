@@ -33,7 +33,6 @@ export default function parse_file(file, namespace_uri, namespace_prefix, parent
         listener = new hclListener(prog)
         res = parse_terraform({ src_data, listener, prog, file })
         prog.files.push(current_file)
-
         prog.alreadyImported.push(file)
 
         if (res.errors.length != 0) {

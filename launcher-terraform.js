@@ -8,19 +8,22 @@ if (res.errors.length != 0) {
 } else {
     console.log("\n\n\n\n#################### OBJECTS ####################");
     res.files.forEach(st => {
-        for (const key in st.node_types) {
-            if (key.startsWith("http") || key.startsWith("/") || key.includes('.')) {
-
+        console.log(st)
+        for (const key in st) {
+            if (Array.isArray(st[key])) {
+                console.log("\n\n" + key + " = ");
+                for (let i=0; i< st[key].length ; i++) {
+                    console.log("    " + st[key][i].value + "\n");
+                }
             } else {
-                console.log("\n\n" + key + " = " + st.node_types[key].toString());
+                console.log("\n\n" + key + " = " + st[key].value);
             }
         }
     });
 
     console.log("#################### NAME MANAGEMENT ####################");
     res.files.forEach(st => {
-        console.log("\n-------" + st.origin_file + " -------------------------------------");
-        for (const key in st.node_types) {
+        for (const key in st) {
             console.log("key = " + key.toString());
         }
     });

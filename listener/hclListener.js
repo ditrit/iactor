@@ -2,8 +2,19 @@
 // jshint ignore: start
 import antlr4 from 'antlr4';
 import file from './file.js'
-import prog from './prog.js'
+import field from './field.js'
 import directive from './directive.js'
+import terraform_directive from './terraform_directive.js'
+import ressource_directive from './ressource_directive.js'
+import output_directive from './output_directive.js'
+import variable_directive from './variable_directive.js'
+import variable_description from './variable_description.js'
+import variable_type from './variable_type.js'
+import variable_block from './variable_block.js'
+import variable_default from './variable_default.js'
+import provider_directive from './provider_directive.js'
+import expression from './expression.js';
+import object from './object.js';
 
 // This class defines a complete listener for a parse tree produced by hclParser.
 export default class hclListener extends antlr4.tree.ParseTreeListener {
@@ -14,32 +25,14 @@ export default class hclListener extends antlr4.tree.ParseTreeListener {
         this.errors = []
     }
 
-	visitTerminal(node) {
-	}
-
-	visitErrorNode(node) {
-	}
-
-	enterEveryRule(node) {
-	}
-
-	exitEveryRule(node) {
-		this.exitDirective(this.prog)
-	}
-
-	exitMain(ctx) {
-		prog.exit_main();
-	}
-
 	// Enter a parse tree produced by hclParser#file.
 	enterFile(ctx) {
 	}
 
 	// Exit a parse tree produced by hclParser#file.
 	exitFile(ctx) {
-		file.exit_file(this.prog)
+		file.exit_file({ctx : ctx, prog: this.prog})
 	}
-
 
 	// Enter a parse tree produced by hclParser#directive.
 	enterDirective(ctx) {
@@ -47,7 +40,7 @@ export default class hclListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by hclParser#directive.
 	exitDirective(ctx) {
-		directive.exit_direcrive(ctx)
+		directive.exit_direcrive({ctx : ctx, prog: this.prog})
 	}
 
 
@@ -57,6 +50,7 @@ export default class hclListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by hclParser#providerDirective.
 	exitProviderDirective(ctx) {
+		provider_directive.exit_provider_directive({ctx : ctx, prog: this.prog})
 	}
 
 
@@ -66,6 +60,7 @@ export default class hclListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by hclParser#terraformDirective.
 	exitTerraformDirective(ctx) {
+		terraform_directive.exit_terraform_directive({ctx : ctx, prog: this.prog})
 	}
 
 
@@ -75,6 +70,7 @@ export default class hclListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by hclParser#resourceDirective.
 	exitResourceDirective(ctx) {
+		ressource_directive.exit_ressource_directive({ctx : ctx, prog: this.prog})
 	}
 
 
@@ -84,6 +80,7 @@ export default class hclListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by hclParser#variableDirective.
 	exitVariableDirective(ctx) {
+		variable_directive.exit_variable_directive({ctx : ctx, prog: this.prog})
 	}
 
 
@@ -93,6 +90,7 @@ export default class hclListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by hclParser#variableBlock.
 	exitVariableBlock(ctx) {
+		variable_block.exit_variable_block({ctx : ctx, prog: this.prog})
 	}
 
 
@@ -102,6 +100,7 @@ export default class hclListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by hclParser#outputDirective.
 	exitOutputDirective(ctx) {
+		output_directive.exit_output_directive({ctx : ctx, prog: this.prog})
 	}
 
 
@@ -147,6 +146,7 @@ export default class hclListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by hclParser#variableType.
 	exitVariableType(ctx) {
+		variable_type.exit_variable_type({ctx : ctx, prog: this.prog})
 	}
 
 
@@ -161,6 +161,7 @@ export default class hclListener extends antlr4.tree.ParseTreeListener {
 
 	// Enter a parse tree produced by hclParser#object.
 	enterObject(ctx) {
+		object.exit_object({ctx : ctx, prog: this.prog})
 	}
 
 	// Exit a parse tree produced by hclParser#object.
@@ -172,8 +173,9 @@ export default class hclListener extends antlr4.tree.ParseTreeListener {
 	enterField(ctx) {
 	}
 
-	// Exit a parse tree produced by hclParser#field.
+	// Exit a parse tree produced by hclParser#field.1
 	exitField(ctx) {
+		field.exit_field({ctx : ctx, prog: this.prog})
 	}
 
 
@@ -183,6 +185,7 @@ export default class hclListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by hclParser#variableDescription.
 	exitVariableDescription(ctx) {
+		variable_description.exit_variable_description({ctx : ctx, prog: this.prog})
 	}
 
 
@@ -192,6 +195,7 @@ export default class hclListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by hclParser#variableDefault.
 	exitVariableDefault(ctx) {
+		variable_default.exit_variable_default({ctx : ctx, prog: this.prog})
 	}
 
 
@@ -201,6 +205,7 @@ export default class hclListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by hclParser#expression.
 	exitExpression(ctx) {
+		expression.exit_expression({ctx : ctx, prog: this.prog})
 	}
 
 

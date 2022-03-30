@@ -1,24 +1,24 @@
 import { TerraformNode } from './terraform_node.js';
 
-export class Directive extends TerraformNode {
+export class TerraformDirective extends TerraformNode {
     constructor(input, source) {
         super(source)
-        this.value = input
+        this.object = input 
     }
 
     static isValid(input, source) {
         /*if (typeof(input) != 'string' || input == "") {
-            source.errors.push('Terraform input is not a string')
+            source.ctx.grammarError('Terraform input is not a string')
             return false
-        } */
+        }*/
         return true
     }
 }
 
-export function newDirective(input, source) {
+export function newTerraformDirective(input, source) {
     let res
-    if (Directive.isValid(input, source)) {
-        res = new Directive(input, source)
+    if (TerraformDirective.isValid(input, source)) {
+        res = new TerraformDirective(input, source)
     } else {
         res = {}
     }
