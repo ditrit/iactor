@@ -12,7 +12,7 @@ export class TerraformField extends TerraformNode {
 
     static isValid(input, source) {
         if (typeof(input) != 'string' || input == "") {
-            source.ctx.grammarError('Incorrect input for field')
+            source.errors.push('Incorrect input for field')
             return false
         }
         return true

@@ -10,34 +10,67 @@ directive
   | resourceDirective
   | variableDirective
   | outputDirective
+  | moduleDirective
+  ;
+
+moduleDirective
+  : 'module' name object
   ;
 
 providerDirective
-  : 'provider' STRING object
+  : 'provider' name object
   ;
 
 terraformDirective
-  : 'terraform' object
+  : 'terraform' terraformBlock
   ;
 
+terraformBlock
+  : '{' (terraformCloud|terraformBackEnd|terraformVersion|terraformProviders|object)+ '}'
+  ;
+
+terraformCloud
+  : 'cloud' object
+  ;
+  
+terraformBackEnd
+  : 'backend' name object
+  ;
+  
+terraformVersion
+  : 'required_version' '=' STRING
+  ;
+  
+terraformProviders
+  : 'required_providers' object
+  ;
+  
 resourceDirective
-  : 'resource' STRING STRING object
+  : 'resource' resourceType name object
   ;
 
 variableDirective
-  : 'variable' STRING variableBlock
+  : 'variable' name variableBlock
   ;
 
 variableBlock
-  : '{' (variableType|variableDescription|variableDefault)+ '}'
+  : '{' (variableType|variableDescription|variableDefault|variableValidation|variableSensitive|variableNullabl|object)+ '}'
   ;
 
 outputDirective
-  : 'output' STRING outputBlock
+  : 'output' name outputBlock
+  ;
+
+name
+  : STRING
+  ;
+
+resourceType
+  : STRING
   ;
 
 outputBlock
-  : '{' (outputValue|outputDescription|outputSensitive)+ '}'
+  : '{' (outputValue|outputDescription|outputSensitive|outputDependsOn|object)+ '}'
   ;
 
 outputValue
@@ -48,12 +81,24 @@ outputDescription
   : 'description' '=' STRING
   ;
 
+outputDependsOn
+  : 'depends_on' '=' array
+  ;
+
 outputSensitive
+  : 'sensitive' '=' BOOLEAN
+  ;
+
+variableSensitive
   : 'sensitive' '=' BOOLEAN
   ;
 
 variableType
   : 'type' '=' type
+  ;
+
+variableNullabl
+  : 'nullable' '=' BOOLEAN
   ;
 
 type
@@ -66,12 +111,15 @@ type
 
 object
   : '{' '}'
-  | '{' field+ '}'
+  | '{' (complexField|field)+ '}'
   ;
 
 field
-  : IDENTIFIER '=' expression
-  | IDENTIFIER object // for dynamic blocks
+  : ('type'|'description'|IDENTIFIER) '=' expression
+  ;
+
+complexField
+  : ('type'|'description'|IDENTIFIER) object
   ;
 
 variableDescription
@@ -80,6 +128,23 @@ variableDescription
 
 variableDefault
   : 'default' '=' expression
+  ;
+
+variableValidation
+  : 'validation' validation
+  ;
+
+validation
+  : '{' 'condition' '=' condition+
+        'error_message' '=' STRING '}'
+  ;
+
+condition
+  : STRING
+  | NUMBER
+  | BOOLEAN
+  | BOOLEANOP
+  | functionCall
   ;
 
 expression
@@ -100,6 +165,7 @@ complexExpression
   | complexExpression '.' complexExpression // attribute access
   | complexExpression '[' index ']' // indexed array access
   | complexExpression '.' index // indexed attribute access
+  | '<<EOF' (IDENTIFIER|'-')* 'EOF'
   | functionCall
   ;
 
@@ -111,6 +177,19 @@ array
 index
   : NUMBER
   | '*'
+  ;
+
+BOOLEANOP
+  : '&'
+  | '|'
+  | '>'
+  | '<'
+  | '='
+  | '=='
+  | '*'
+  | '-'
+  | '/'
+  | '+'
   ;
 
 BOOLEAN
@@ -130,7 +209,9 @@ TYPE
   | 'any'
   ;
 
-IDENTIFIER:         Letter LetterOrDigit*;
+IDENTIFIER
+  : Letter LetterOrDigit*
+  ;
 
 fragment LetterOrDigit
     : Letter

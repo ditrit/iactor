@@ -3,16 +3,24 @@ import { TerraformNode } from "./terraform_node.js"
 export class TerraformObject extends TerraformNode {
     constructor(input, source) {
         super(source)
-        this.value = input
+        this.value = []
+        input.forEach(e => {
+            this.value.push(e.value)
+        })
     }
 
     toString() {
-        return `${this.value}`
+        let str = ""
+        for(let i=0; i < this.value.length-1; i++ ) {
+            str+= "     " + this.value[i] + ",\n"
+        }
+        str+= "     " + this.value[this.value.length-1]
+        return str
     }
 
     static isValid(input, source) {
-        if (typeof(input) != 'string' || input == "") {
-            source.ctx.grammarError('Incorrect input for object')
+        if (!Array.isArray(input) || input == []) {
+            source.errors.push('Incorrect input for object')
             return false
         }
         return true

@@ -3,12 +3,17 @@ import { TerraformNode } from './terraform_node.js';
 export class ProviderDirective extends TerraformNode {
     constructor(input, source) { 
         super(source)
-        this.value = input
+        this.name = input.name
+        this.value = input.object
+    }
+
+    toString() {     
+        return `  ${this.name} {\n${this.value}\n  }`
     }
 
     static isValid(input, source) {
-        if (typeof(input) != 'string' || input == "") {
-            source.ctx.grammarError('Provider input is not a string')
+        if (typeof(input.object) != 'object' || typeof(input.name) != 'string' ||input == "") {
+            source.errors.push('Incorrect input for provider')
             return false
         } 
         return true

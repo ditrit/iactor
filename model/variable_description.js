@@ -8,7 +8,7 @@ export class VariableDescription extends TerraformNode {
 
     static isValid(input, source) {
         if (typeof(input) != 'string' || input == "") {
-            source.ctx.grammarError('Variable input is not a string')
+            source.errors.push('Incorrect input for variable description')
             return false
         } 
         return true

@@ -8,9 +8,9 @@ export class VariableType extends TerraformNode {
 
     static isValid(input, source) {
         if (typeof(input) != 'string' || input == "") {
-            source.ctx.grammarError('Variable input is not a string')
+            source.errors.push('Incorrect input for variable type')
             return false
-        } 
+        }
         return true
     }
 }

@@ -34,20 +34,6 @@ export default function parse_file(file, namespace_uri, namespace_prefix, parent
         res = parse_terraform({ src_data, listener, prog, file })
         prog.files.push(current_file)
         prog.alreadyImported.push(file)
-
-        if (res.errors.length != 0) {
-            res.errors.forEach(e => {
-                let err = e
-                err.originFile = file
-                prog.errors.push(err)
-            })
-        } else {
-            /*current_file.imports.forEach(fi => {
-                let absPath = getAbsolutePath(current_path, fi, prog)
-                parse_file(absPath, fi.namespace_uri, fi.namespace_prefix, current_file, prog)
-            });*/
-
-        }
     } else {
         prog.errors.push(new Error('IMPORT_ERROR error', 0, `Can not read file ${src.file}`))
         console.log(prog.errors.map(x => x.message));
