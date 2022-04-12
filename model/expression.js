@@ -12,7 +12,7 @@ export class TerraformExpression extends TerraformNode {
 
     static isValid(input, source) {
         if (typeof(input) != 'string' || input == "") {
-            source.ctx.grammarError('Incorrect input for expression')
+            source.errors.push('Incorrect input for expression')
             return false
         }
         return true

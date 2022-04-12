@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>HCL Editor</title>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+</head>
+<body>
+
+<h2>HCL Editor</h2>
+<div id="container" style="width:800px;height:600px;border:1px solid grey"></div>
+
+<script src="node_modules/monaco-editor/min/vs/loader.js"></script>
+<script> var exports = {}; </script>
+<script src="js/main.js"></script>
+
+<script>
+   require.config({ paths: { 'vs': 'node_modules/monaco-editor/min/vs' }});
+   require(['vs/editor/editor.main'], function() {
+      monaco.languages.register({ id: 'hcl' });
+      monaco.languages.setTokensProvider('hcl', window.hclTokensPovider.hclTokensProvider);
+      let literalFg = '3b8737';
+      let idFg = '344482';
+      let symbolsFg = '000000';
+      let keywordFg = '7132a8';
+      let errorFg = 'ff0000';
+      monaco.editor.defineTheme('myCoolTheme', {
+         base: 'vs',
+         inherit: false,
+         rules: [
+            { token: 'string.hcl',   foreground: literalFg },
+            { token: 'type.hcl',           foreground: idFg,       fontStyle: 'italic' },
+            { token: 'boolean.hcl',       foreground: symbolsFg },
+            { token: 'booleanop.hcl',       foreground: symbolsFg },
+            { token: 'index.hcl',        foreground: symbolsFg },
+            { token: 'name.hcl',        foreground: symbolsFg },
+            { token: 'ressourcetype.hcl',         foreground: symbolsFg },
+            { token: 'identifier.hcl',          foreground: symbolsFg },
+            { token: 'number.hcl',          foreground: symbolsFg },
+            { token: 'comment.hcl',     foreground: keywordFg,  fontStyle: 'bold' },
+            { token: 'line_comment.hcl',    foreground: keywordFg,  fontStyle: 'bold' },
+            { token: 'has_comment.hcl',    foreground: keywordFg,  fontStyle: 'bold' },
+            { token: 'unrecognized.hcl', foreground: errorFg }
+         ],
+         colors :{
+            'editor.foreground': '#000000'
+         }
+      });
+      let editor = monaco.editor.create(document.getElementById('container'), {
+         value: [
+            'resource "aws_ebs_volume" "www_srv1" {',
+            '  availability_zone = "${aws_instance.example.availability_zone}"',
+            '  size = 10',
+            '}',
+            ''
+         ].join('\n'),
+         language: 'hcl',
+         theme: 'myCoolTheme'
+      });
+   });
+</script>
+</body>
+</html>

@@ -18,10 +18,10 @@ export class OutputDirective extends TerraformNode {
     }
 
     static isValid(input, source) {        
-        if (typeof(input.value) != 'object' || typeof(input.name) != 'string' ||input == "") {
-            source.errors.push('Incorrect input for Output')
-            return false
-        } 
+        // if (typeof(input.value) != 'object' || typeof(input.name) != 'string' ||input == "") {
+        //     source.errors.push('Incorrect input for Output')
+        //     return false
+        // } 
         return true
     }
 }

@@ -7,10 +7,10 @@ export class VariableBlock extends TerraformNode {
     }
 
     static isValid(input, source) {
-        if (typeof(input) != 'string' || input == "") {
+        /*if (typeof(input) != 'string' || input == "") {
             source.errors.push('Incorrect input for variable block')
             return false
-        } 
+        } */
         return true
     }
 }

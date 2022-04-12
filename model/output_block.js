@@ -7,10 +7,10 @@ export class OutputBlock extends TerraformNode {
     }
 
     static isValid(input, source) {
-        if (typeof(input.description) != 'string' || typeof(input.value) != 'string' || typeof(input.sensitive) != 'string' || input == "") {
-            source.errors.push('Incorrect input for output block')
-            return false
-        } 
+        // if (typeof(input.description) != 'string' || typeof(input.value) != 'string' || typeof(input.sensitive) != 'string' || input == "") {
+        //     source.errors.push('Incorrect input for output block')
+        //     return false
+        // } 
         return true
     }
 }

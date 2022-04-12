@@ -26,6 +26,7 @@ export class TerraformFile {
         this.module_directive = []
 
         this.field = []
+        this.expression = {value:""}
         this.complex_field = false
         this.name = {}
         this.type = {}

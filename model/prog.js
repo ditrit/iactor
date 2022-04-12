@@ -1,10 +1,11 @@
 export class TerraformProg {
-    constructor() {
+    constructor(file) {
         this.errors = []
         this.warnings = []
         this.imports = []
         this.alreadyImported = []
         this.files = []
+        this.fileName = file
     }
 
     toStringType(terraform_type) {

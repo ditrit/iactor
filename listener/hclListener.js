@@ -4,6 +4,7 @@ import antlr4 from 'antlr4';
 
 import file from './file.js'
 import field from './field.js'
+import expression from './expression.js'
 import complex_field from './complex_field.js'
 import object from './object.js';
 import name from './name.js';
@@ -348,6 +349,7 @@ export default class hclListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by hclParser#expression.
 	exitExpression(ctx) {
+		expression.exit_expression({ctx :{ctx, errors: this.prog.errors}, prog: this.prog})
 	}
 
 	// Enter a parse tree produced by hclParser#functionCall.
