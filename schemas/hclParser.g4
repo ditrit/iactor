@@ -13,94 +13,47 @@ directive
   | variableDirective
   | outputDirective
   | moduleDirective
+  | dataDirective
+  ;
+
+dataDirective
+  : 'data' providerType name '{' (object)+ '}'
   ;
 
 moduleDirective
-  : 'module' name object
+  : 'module' name '{' (moduleSource|object)+ '}'
+  ;
+
+moduleSource
+  : 'source' '=' STRING
   ;
 
 providerDirective
-  : 'provider' name object
+  : 'provider' name '{' object '}'
   ;
 
 terraformDirective
-  : 'terraform' terraformBlock
+  : 'terraform' '{' (object)+ '}'
   ;
 
-terraformBlock
-  : '{' (terraformCloud|terraformBackEnd|terraformVersion|terraformProviders|object)+ '}'
-  ;
-
-terraformCloud
-  : 'cloud' object
-  ;
-  
-terraformBackEnd
-  : 'backend' name object
-  ;
-  
-terraformVersion
-  : 'required_version' '=' STRING
-  ;
-  
-terraformProviders
-  : 'required_providers' object
-  ;
-  
 resourceDirective
-  : 'resource' resourceType name object
+  : 'resource' providerType name '{' object '}'
   ;
 
 variableDirective
-  : 'variable' name variableBlock
-  ;
-
-variableBlock
-  : '{' (variableType|variableDescription|variableDefault|variableValidation|variableSensitive|variableNullabl|object)+ '}'
+  : 'variable' name '{' (object)+ '}'
   ;
 
 outputDirective
-  : 'output' name outputBlock
+  : 'output' name '{' (object)+ '}'
   ;
 
 name
   : STRING
   ;
 
-resourceType
+providerType
   : STRING
-  ;
-
-outputBlock
-  : '{' (outputValue|outputDescription|outputSensitive|outputDependsOn|object)+ '}'
-  ;
-
-outputValue
-  : 'value' '=' expression
-  ;
-
-outputDescription
-  : 'description' '=' STRING
-  ;
-
-outputDependsOn
-  : 'depends_on' '=' array
-  ;
-
-outputSensitive
-  : 'sensitive' '=' BOOLEAN
-  ;
-
-variableSensitive
-  : 'sensitive' '=' BOOLEAN
-  ;
-
-variableType
-  : 'type' '=' type
-  ;
-
-variableNullabl
-  : 'nullable' '=' BOOLEAN
   ;
 
 type
@@ -112,28 +65,15 @@ type
   ;
 
 object
-  : '{' '}'
-  | '{' (complexField|field)+ '}'
+  : (complexField|field)+ 
   ;
 
 field
-  : ('type'|'description'|IDENTIFIER) '=' expression+
+  : IDENTIFIER '=' expression
   ;
 
 complexField
-  : ('type'|'description'|IDENTIFIER) object
-  ;
-
-variableDescription
-  : 'description' '=' STRING
-  ;
-
-variableDefault
-  : 'default' '=' expression
-  ;
-
-variableValidation
-  : 'validation' validation
+  : IDENTIFIER '{' object '}'
   ;
 
 validation
@@ -153,9 +93,9 @@ expression
   : NUMBER
   | BOOLEAN
   | array
-  | object
   | complexExpression
   | STRING
+  | type
   ;
 
 functionCall
@@ -168,6 +108,7 @@ complexExpression
   | complexExpression '[' index ']' // indexed array access
   | complexExpression '.' index // indexed attribute access
   | '<<EOF' (IDENTIFIERS|AUTRE|WSS+)+ 'EOF'
+  | STRING complexExpression STRING
   | functionCall
   ;
 

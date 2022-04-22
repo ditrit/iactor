@@ -5,32 +5,22 @@ export class ResourceDirective extends TerraformNode {
         super(source)
         this.type = input.type
         this.name = input.name
-        this.variablesName = input.variables
+        this.variablesName = input.names.variables
         this.variablesObject = []
-        this.resourcesName = input.resources
+        this.resourcesName = input.names.resources
         this.resourcesObject = []
-        this.object = input.object
+        this.datasName = input.names.datas
+        this.datasObject = []
+        this.objects = input.objects
+        this.representation = ""
     }
 
     toString() {     
-        let variables = '['
-        for(let i=0; i< this.variablesObject.length - 1; i++) {
-            variables += this.variablesObject[i].name + ', '
-        };
-        if(this.variablesObject.length > 0) variables += this.variablesObject[this.variablesObject.length - 1].name
-        variables += ']'
-        
-        let resources = '['
-        for(let i=0; i< this.resourcesObject.length - 1; i++) {
-            resources += '\n         type : ' + this.resourcesObject[i].type + ', name : ' + this.resourcesObject[i].name + ','
-        };
-        if(this.resourcesObject.length > 0) resources += '\n         type : ' + this.resourcesObject[this.resourcesObject.length - 1].type + ', name : ' + this.resourcesObject[this.resourcesObject.length - 1].name
-        resources += '\n     ]'
-        return `  ${this.type} ${this.name}{\n${"     variable(s) : " + variables + "\n     resource(s) : " + resources + "\n"}${this.object}\n  }`
+        return `  ${this.name}  {\n${this.objects}\n  }`
     }
 
     static isValid(input, source) {
-        if (typeof(input.object) != 'object' || typeof(input.name) != 'string' || typeof(input.type) != 'string' ||input == "") {
+        if (typeof(input.objects) != 'object' || typeof(input.name) != 'string' || typeof(input.type) != 'string' ||input == "") {
             source.errors.push('Incorrect input for ressource')
             return false
         } 

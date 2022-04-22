@@ -1,127 +1,55 @@
-import { parse } from "./parser/parse.js";
-import fs from 'fs';
+import { parse_directory } from "./parser/parse_directory.js";
+import { verify_schema } from "./parser/parse.js";
+import { get_objects } from "./parser/management_objects.js";
+import { analyse_resources } from "./parser/analyse_metadatas.js";
+import Ajv from 'ajv'
+const ajv = new Ajv()
 
-var files = fs.readdirSync('./tests/tf/');
-let res = []
-files.forEach(e => {
-    res.push(parse("./tests/tf/" + e, 'UTF-8'))
-})
+let values ={
+    provider: [],
+    resources: [],
+    outputs: [],
+    variables: [],
+    modules: [],
+    datas: [],
+    modules_source: [],
+    terraform: [],
+    errors: []
+};
 
-let variables = []
-res.forEach(r => {
-    r.files.forEach(st => {  
-        st["variable_directive"].forEach( v => {
-            variables.push(v)
-        })
-    })
-})
+let result = parse_directory('./tests/tf', values)  
+for(let i=0; i<result.modules_source.length; i++) {
+    let source = result.modules_source[i].split('=')
+    let path = source[1]
+    path = path.replaceAll('"', "")
+    if(path.includes(".."))
+        result = parse_directory(path.replace("..", "./tests"), result)  
+    else if(path.includes("."))
+        result = parse_directory(path.replace(".", "./tests"), result) 
+    else
+        result = parse_directory("./tests"+ path, result) 
+}
 
-let resources = []
-res.forEach(r => {
-    r.files.forEach(st => {  
-        st["resource_directive"].forEach( v => {
-            resources.push(v)
-        })
-    })
-})
+result = get_objects(result.resources, result)
+result = get_objects(result.modules, result, true)
+result = get_objects(result.outputs, result)
 
-res.forEach(r => {
-    r.files.forEach(st => {  
-        st["resource_directive"].forEach( rd => {
-            if(rd.variablesName.length > 0) {
-                rd.variablesName.forEach( rv => {
-                    variables.forEach( v => {
-                        if(rv == v.name) {
-                            rd.variablesObject.push(v)
-                        }
-                    })
-                })
-            } 
-
-            if(rd.variablesName.length != rd.variablesObject.length) {
-                let find = false
-                rd.variablesName.forEach( rv => {
-                    rd.variablesObject.forEach( v => {
-                        if(rv == v.name) {
-                            find = true
-                        }
-                    })
-                    if(!find) {
-                        r.errors.push('Variable ' + rv + ' inconnue')
-                    }
-                })                                
-            }
-        
-            if(rd.resourcesName.length > 0) {
-                rd.resourcesName.forEach( rv => {
-                    resources.forEach( v => {
-                        if(rv.resource == v.type && rv.name == v.name) {
-                            rd.resourcesObject.push(v)
-                        }
-                    })
-                })
-            } 
-
-            if(rd.resourcesName.length != rd.resourcesObject.length) {
-                let find = false
-                rd.resourcesName.forEach( rn => {
-                    rd.resourcesObject.forEach( ro => {
-                        if(rn.resource == ro.type && rn.name == ro.name) {
-                            find = true
-                        }
-                    })
-                    if(!find) {
-                        r.errors.push('Resource type ' + rn.resource + ' : ' + rn.name + ' unknow')
-                    }
-                })                                
-            }
-        })
-    })
-})
-
-res.forEach(r => {
-    if (r.errors.length != 0) {
-        console.log("\n\n\n\n#################### ERRORS ####################");
-        console.log("TERRAFORM ERROR in file : " + r.fileName);
-        r.errors.forEach(e => console.log(e))
+const schema = verify_schema(result.provider[0].name)
+if (!schema.valid) console.log(ajv.errors)
+else {
+    if(schema.metadatas.provider.required && result.provider.length == 0) {
+        result.errors.push('Provider required')
     }
-    console.log("\n\n\n\n#################### OBJECTS ####################");
-    console.log("  File : " + r.fileName)
-    r.files.forEach(st => {  
-        if(st["terraform_directive"].length > 0) {
-            console.log("\n  Terraforms: [")
-            st["terraform_directive"].forEach( e => console.log(e.toString()))        
-            console.log("  ]\n")
-        }
-            
-        if(st["variable_directive"].length > 0) {
-            console.log("\n  Variables: [")
-            st["variable_directive"].forEach( e => console.log(e.toString()))     
-            console.log("  ]\n")
-        }
-    
-        if(st["provider_directive"].length > 0) {
-            console.log("\n  Providers: [")
-            st["provider_directive"].forEach( e => console.log(e.toString()))     
-            console.log("  ]\n")
-        }
-    
-        if(st["resource_directive"].length > 0) {
-            console.log("\n  Resources: [")
-            st["resource_directive"].forEach( e => console.log(e.toString()))     
-            console.log("  ]\n")  
-        }  
-            
-        if(st["output_directive"].length > 0) {
-            console.log("\n  Outputs: [")
-            st["output_directive"].forEach( e => console.log(e.toString()))     
-            console.log("  ]\n")
-        }
-    
-        if(st["module_directive"].length > 0) {
-            console.log("\n  Modules: [")
-            st["module_directive"].forEach( e => console.log(e.toString()))     
-            console.log("  ]\n")
-        }
-    });
-})
+    if(result.provider[0].constructor.name != schema.metadatas.provider.providerType) {
+        result.errors.push('Wrong type for provider')
+    }
+    analyse_resources(result.resources, schema.metadatas.provider.resources).forEach( e => {
+        result.errors.push(e)
+    })
+}
+
+if (result.errors.length != 0) {
+    console.log("\n\n\n\n#################### ERRORS ####################");
+    console.log("TERRAFORM ERROR in file : " + result.fileName);
+    result.errors.forEach(e => console.log(e))
+}

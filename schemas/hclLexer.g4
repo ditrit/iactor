@@ -2,17 +2,13 @@ lexer grammar hclLexer;
 
 MODULE : 'module';
 
+DATA : 'data';
+
+SOURCE : 'source';
+
 PROVIDER : 'provider';
 
 TERRAFORM : 'terraform';
-
-CLOUD : 'cloud';
-
-BACKEND : 'backend';
-
-VERSION : 'required_version';
-
-PROVIDERS : 'required_providers';
 
 RESOURCE : 'resource';
 
@@ -20,27 +16,11 @@ VARIABLE : 'variable';
 
 OUTPUT : 'output';
 
-VALUE : 'value';
-
-DESCRIPTION : 'description';
-
-DEPENDSON : 'depends_on';
-
-SENSITIVE : 'sensitive';
-
-VARIABLETYPE : 'type';
-
-NULLABLE : 'nullable';
-
 LIST : 'list';
 
 MAP : 'map';
 
 OBJECT : 'object';
-
-DEFAULT : 'default';
-
-VALIDATION : 'validation';
 
 CONDITION : 'condition';
 

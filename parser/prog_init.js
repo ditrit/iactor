@@ -15,7 +15,7 @@ export default function parse_file(file, namespace_uri, namespace_prefix, parent
             }
         } else {
             try {
-                src_data = fs.readFileSync(file, 'utf8')                
+                src_data = fs.readFileSync(file, 'utf8')      
             } catch (error) {
                 prog.errors.push(new Error("File error", 0, `Can not read file ${file}`))
                 return null

@@ -8,7 +8,8 @@ export default {
     exit_provider_directive(parsed_rule) {
         let prog = parsed_rule.prog.current_file
         let name = (prog.name) ? prog.name.value : ""
-        let object = (prog.object) ? prog.object : ""
-        parsed_rule.prog.current_file.provider_directive.push(newProviderDirective({name : name, object : object}, parsed_rule.ctx))
+        let objects = (prog.object) ? prog.object : ""
+
+        parsed_rule.prog.current_file.provider_directive.push(newProviderDirective({name : name, objects : objects}, parsed_rule.ctx))
     }
 }

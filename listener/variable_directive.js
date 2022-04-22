@@ -8,7 +8,8 @@ export default {
     exit_variable_directive(parsed_rule) {
         let prog = parsed_rule.prog.current_file
         let name = (prog.name) ? prog.name.value : "";
-        let variable_block = (prog.variable_block) ? prog.variable_block.value : ""
-        parsed_rule.prog.current_file.variable_directive.push(newVariableDirective({name : name, value : variable_block}, parsed_rule.ctx))
+        let objects = (prog.object && prog.object!="") ? prog.object : "" 
+
+        parsed_rule.prog.current_file.variable_directive.push(newVariableDirective({name : name, objects : objects}, parsed_rule.ctx))
     }
 }

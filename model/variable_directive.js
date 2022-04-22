@@ -4,21 +4,15 @@ export class VariableDirective extends TerraformNode {
     constructor(input, source) {
         super(source)
         this.name = input.name
-        this.value = input.value
+        this.objects = input.objects
     }
 
     toString() {
-        let str = ""
-
-        str += `  ${(this.name)} {\n${(this.value.description) ? "     " + this.value.description.value + "\n" : ""}`
-        str += `${(this.value.type) ? "     " + this.value.type.value + "\n" : "" } `
-        str += `${(this.value.default) ? "     " + this.value.default.value + "\n" : "" }  }`
-   
-        return str
+        return `  ${this.name}  {\n${this.objects}\n  }`
     }
 
     static isValid(input, source) {
-        if (typeof(input.value) != 'object' || typeof(input.name) != 'string' ||input == "") {
+        if (typeof(input.objects) != 'object' || typeof(input.name) != 'string' ||input == "") {
             source.errors.push('Incorrect input for Variable')
             return false
         } 

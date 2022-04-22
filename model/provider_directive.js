@@ -4,15 +4,15 @@ export class ProviderDirective extends TerraformNode {
     constructor(input, source) { 
         super(source)
         this.name = input.name
-        this.value = input.object
+        this.objects = input.objects
     }
 
     toString() {     
-        return `  ${this.name} {\n${this.value}\n  }`
+        return `  ${this.name}  {\n${this.objects}\n  }`
     }
 
     static isValid(input, source) {
-        if (typeof(input.object) != 'object' || typeof(input.name) != 'string' ||input == "") {
+        if (typeof(input.objects) != 'object' || typeof(input.name) != 'string' ||input == "") {
             source.errors.push('Incorrect input for provider')
             return false
         } 

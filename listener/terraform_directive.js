@@ -7,7 +7,8 @@ export default {
 
     exit_terraform_directive(parsed_rule) {
         let prog = parsed_rule.prog.current_file
-        let terraform_block = (prog.terraform_block) ? prog.terraform_block.value : ""
-        parsed_rule.prog.current_file.terraform_directive.push(newTerraformDirective(terraform_block, parsed_rule.ctx))
+        let objects = (prog.object && prog.object!="") ? prog.object : "" 
+
+        parsed_rule.prog.current_file.terraform_directive.push(newTerraformDirective(objects, parsed_rule.ctx))
     }
 }

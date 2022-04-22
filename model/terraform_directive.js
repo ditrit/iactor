@@ -3,22 +3,15 @@ import { TerraformNode } from './terraform_node.js';
 export class TerraformDirective extends TerraformNode {
     constructor(input, source) {
         super(source)
-        this.value = input 
+        this.objects = input.objects 
     }
 
     toString() {     
-        let str = ""
-
-        str += `  {\n${(this.value.cloud) ? "      " + this.value.cloud.value + "\n" : ""}`
-        str += `${(this.value.version) ? "      " + this.value.version.value + "\n" : "" } `
-        str += `${(this.value.providers) ? "     " + this.value.providers.value + "\n" : "" } `
-        str += `${(this.value.backend) ? "     " + this.value.backend.value + "\n" : "" }  }`
-   
-        return str
+        return `  ${this.name}  {\n${this.objects}\n  }`
     }
 
     static isValid(input, source) {
-        if (typeof(input) != 'object' || input == "") {
+        if (typeof(input.objects) != 'object' || input == "") {
             source.errors.push('Incorrect input for Terraform')
             return false
         }
