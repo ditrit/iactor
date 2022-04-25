@@ -3,6 +3,7 @@ import { TerraformNode } from './terraform_node.js';
 export class DataDirective extends TerraformNode {
     constructor(input, source) { 
         super(source)
+        this.fileName = ""
         this.name = input.name
         this.type = input.type
         this.objects = input.objects

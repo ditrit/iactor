@@ -272,6 +272,12 @@
                 ],
                 "icon" : "aws_db_instance.svg",
                 "required" : false
+            },
+            {
+                "resourceType" : "default",
+                "representation" : "block",
+                "icon" : "default.svg",
+                "required" : false
             }
         ]   
     }

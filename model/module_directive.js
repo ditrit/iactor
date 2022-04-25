@@ -3,6 +3,8 @@ import { TerraformNode } from './terraform_node.js';
 export class ModuleDirective extends TerraformNode {
     constructor(input, source) { 
         super(source)
+        this.fileName = ""
+        this.moduleSource = input.source
         this.name = input.name
         this.objects = input.objects
         this.variablesName = input.names.variables
@@ -13,6 +15,7 @@ export class ModuleDirective extends TerraformNode {
         this.resourcesObject = []
         this.modulesName = input.names.modules
         this.modulesObject = []
+        this.attributes = []
     }
 
     toString() {     

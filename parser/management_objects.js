@@ -7,8 +7,9 @@ export function get_names(objects, isModule) {
     objects.forEach(e => {
         let values = e.split('=')
         if(values[1] != undefined) {
-            let variableValue = values[1].split(".")  
-            let variableName = get_variable_name(values, variableValue)    
+            let variableValue = values[1].split(".")
+            let variableName;  
+            variableName = get_variable_name(values)    
             let resource="";
             let data="";
             let module="";
@@ -22,7 +23,9 @@ export function get_names(objects, isModule) {
                 module = get_module_name(values, variableValue) 
             }                                                                                  
             if(variableName != "" && !variablesName.includes(variableName)) {
-                variablesName.push(variableName)
+                variableName.forEach( r => {
+                    variablesName.push(r)
+                })
             }                       
             if(resource !== "" && !resources.includes(resource)) {
                 if(Array.isArray(resource)) {
@@ -51,7 +54,7 @@ export function get_objects(array, result, isModule) {
             rd.variablesObject.push(e)
         })
     
-        compare_array_differences(rd.variablesName, rd.variablesObject).forEach( e => {
+        compare_array_differences(rd.variablesName, rd.variablesObject, rd.fileName).forEach( e => {
             result.errors.push(e)
         })
             
@@ -59,7 +62,7 @@ export function get_objects(array, result, isModule) {
             rd.resourcesObject.push(e)
         })
         
-        compare_array_differences(rd.resourcesName, rd.resourcesObject).forEach( e => {
+        compare_array_differences(rd.resourcesName, rd.resourcesObject, rd.fileName).forEach( e => {
             result.errors.push(e)
         })
 
@@ -67,7 +70,7 @@ export function get_objects(array, result, isModule) {
             rd.datasObject.push(e)
         })
         
-        compare_array_differences(rd.datasName, rd.datasObject).forEach( e => {
+        compare_array_differences(rd.datasName, rd.datasObject, rd.fileName).forEach( e => {
             result.errors.push(e)
         })
         
@@ -76,7 +79,7 @@ export function get_objects(array, result, isModule) {
                 rd.modulesObject.push(e)
             })
             
-            compare_array_differences(rd.modulesName, rd.modulesObject).forEach( e => {
+            compare_array_differences(rd.modulesName, rd.modulesObject, rd.fileName).forEach( e => {
                 result.errors.push(e)
             })
         }
@@ -101,7 +104,7 @@ function get_items(arrayNames, items) {
     return arrayObjects
 }
 
-function compare_array_differences(arrayNames, arrayObjects) {
+function compare_array_differences(arrayNames, arrayObjects, fileName) {
     let errors = []
     if(arrayNames.length != arrayObjects.length) {
         let find = false
@@ -116,9 +119,9 @@ function compare_array_differences(arrayNames, arrayObjects) {
             })
             if(!find) {
                 if(rn.type) {
-                    error = 'Object type ' + rn.type + ' : ' + rn.name + ' unknow'
+                    error = 'TERRAFORM ERROR in file : ' + fileName + ' object type ' + rn.type + ' : ' + rn.name + ' unknow'
                 } else {
-                    error = 'Variable ' + rn.name + ' unknow'
+                    error = 'TERRAFORM ERROR in file : ' + fileName + ' variable ' + rn.name + ' unknow'
                 }
                 errors.push(error)
             }
@@ -127,20 +130,29 @@ function compare_array_differences(arrayNames, arrayObjects) {
     return errors
 }
 
-function get_variable_name(values, variableValue) {
-    let variableName="";
-    if(variableValue[0] == "var") {
-        variableName = {var : values[0].split('{')[0], name : '"' + variableValue[1] + '"'}
-    } else if(variableValue[0].substring(3) == "var") {
-        if(variableValue[1][variableValue.length-1] != '"') {
-            variableName = {var : values[0].split('{')[0], name : '"' + variableValue[1].split('}')[0] + '"'}
-        } else {
-            variableName = {var : values[0].split('{')[0], name : '"' + variableValue[1].slice(0, -2) + '"'}
-        }                    
-    } else if(variableValue[0].substring(0,5) == "<<EOF" && variableValue[0].slice(-3) == "var") {
-        let script = variableValue[1].split('\r')
-        variableName = {var : values[0], name : '"' + script[0].slice(0, -2) + '"'}
-    }
+function get_variable_name(values) {
+    let variableName=[];
+    let variableValue;
+    let value = "";
+    values.forEach( v => {
+        variableValue = v.split(".")
+        if(variableValue[0] == "var") {
+            value = {var : values[0], name : '"' + variableValue[1] + '"'};
+            if(!variableName.includes(value)) variableName.push(value)
+        } else if(variableValue[0].substring(3) == "var") {
+            if(variableValue[1][variableValue.length-1] != '"') {
+                value = {var : values[0].split('{')[0], name : '"' + variableValue[1].split('}')[0] + '"'};
+                if(!variableName.includes(value)) variableName.push(value)
+            } else {
+                value = {var : values[0].split('{')[0], name : '"' + variableValue[1].slice(0, -2) + '"'};
+                if(!variableName.includes(value)) variableName.push(value)
+            }                    
+        } else if(variableValue[0].substring(0,5) == "<<EOF" && variableValue[0].slice(-3) == "var") {
+            let script = variableValue[1].split('\r')
+            value = {var : values[0], name : '"' + script[0].slice(0, -2) + '"'}
+            if(!variableName.includes(value)) variableName.push(value)
+        }        
+    })
     return variableName;
 }
 

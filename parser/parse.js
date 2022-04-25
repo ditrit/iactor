@@ -5,7 +5,8 @@ import Ajv from 'ajv'
 const ajv = new Ajv()
 
 export function parse(src) {
-    let fileName = src.split("/")[3]
+    let filePath = src.split("/")
+    let fileName = filePath[filePath.length - 1]
     let prog = new TerraformProg(fileName)
     parse_file(src, "", "", null, prog)
     return prog

@@ -9,10 +9,11 @@ export function analyse_resources(resources, metadatas_resources) {
                             errors.push(e)
                         })
                         if(a.required) {
-                            required_resource(r, r.objects.value, a).forEach( e => {
+                            required_resource(r, a).forEach( e => {
                                 errors.push(e)
                             })
                         }
+                        representation_attributes(r, a)
                     })
                 }
                 r.representation = m.representation
@@ -28,7 +29,7 @@ function resource_type(resources, attribute) {
     resources.forEach( r => {
         if(attribute.variableName == r.name && attribute.resourceType) {
             if(r.value.type != '"' + attribute.resourceType + '"') {
-                errors.push('Wrong type for resource ' + r.name + ' type : ' + r.value.type + ', expected : ' + attribute.resourceType)
+                errors.push('TERRAFORM ERROR in file : ' + r.value.fileName + ' wrong type for resource ' + r.name + ' type : ' + r.value.type + ', expected : ' + attribute.resourceType)
             }
         }
     })
@@ -36,11 +37,11 @@ function resource_type(resources, attribute) {
     return errors;
 }
 
-function required_resource(resource, resourceAttributes, attribute) {
+function required_resource(resource, attribute) {
     let errors = []
     let find = false
 
-    resourceAttributes.forEach( r => {
+    resource.objects.value.forEach( r => {
         if(attribute.variableName == r.split('=')[0] || attribute.variableName == r.split('{')[0]) {
             find = true     
             if(attribute.attributes != undefined) {
@@ -53,8 +54,16 @@ function required_resource(resource, resourceAttributes, attribute) {
         }
     })
     if(!find) {
-        errors.push('Resource ' + attribute.variableName + ' required in ' + resource.name + " type : " + resource.type)
+        errors.push('TERRAFORM ERROR in file : ' + resource.fileName + ' resource ' + attribute.variableName + ' required in ' + resource.name + " type : " + resource.type)
     }  
     
     return errors;
+}
+
+function representation_attributes(resource, attribute) {
+    resource.resourcesObject.forEach( r => {
+        if(attribute.variableName == r.name) {
+            r.representation = attribute.representation                  
+        }
+    })
 }
