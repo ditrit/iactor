@@ -6,6 +6,7 @@ const ajv = new Ajv()
 
 export default function(filesPath, modulePath) {
     let result = parse_directories(filesPath, modulePath);
+    result = get_all_objects(result)
 
     const schema = verify_schema(result.provider[0].name)
     if (!schema.valid) console.log(ajv.errors)
@@ -19,9 +20,7 @@ export default function(filesPath, modulePath) {
         analyse_resources(result.resources, schema.metadatas.provider.resources).forEach( e => {
             result.errors.push(e)
         })
-    }
-    
-    result = get_all_objects(result)
+    }    
 
     let finalResult ={
         provider: [],
