@@ -14,7 +14,7 @@
         "resources" : [
             {
                 "resourceType" : "aws_security_group",
-                "representation" : "block",
+                "representation" : "container",
                 "attributes" : [
                     {
                         "variableName" : "vpc_id",
@@ -33,7 +33,7 @@
                     {
                         "variableName" : "security_groups",
                         "resourceType" : "aws_security_group",
-                        "representation" : "link",
+                        "representation" : "contained",
                         "array" : true,
                         "required" : false
                     },

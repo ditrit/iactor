@@ -16,12 +16,10 @@ export function parse_directories(filesPath, modulesPath) {
             result = parse_directory(modulesPath + path, result, result.modules[i].name) 
     }
 
-    result = get_all_objects(result)
-
     return result
 }
 
-function get_all_objects(result) {
+export function get_all_objects(result) {
     result = get_objects(result.resources, result)
     result = get_objects(result.modules, result, true)
     result = get_objects(result.outputs, result)
@@ -68,10 +66,16 @@ function get_module_attribute(result, finalResult, modules) {
                 }
             })
         }
-        if(!find) {
+        if(!find) {   
             finalResult.push(v)
         }
     })
+
+    return {finalResult : finalResult, modules : modules};
+}
+
+function get_resources(result, finalResult, modules) {
+    newFinalResult = get_module_attribute(result.resources, finalResult.resources, finalResult.modules)
 
     return {finalResult : finalResult, modules : modules};
 }

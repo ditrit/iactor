@@ -1,5 +1,5 @@
 import { TerraformFile } from '../model/file.js'
-import { parse as parse_terraform } from '../schemas/hcl.js'
+import { parse as parse_terraform } from '../../schemas_terraform/hcl.js'
 import hclListener from "../listener/hclListener.js"
 import fs from "fs"
 
