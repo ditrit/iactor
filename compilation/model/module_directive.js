@@ -4,16 +4,17 @@ export class ModuleDirective extends TerraformNode {
     constructor(input, source) { 
         super(source)
         this.fileName = ""
+        this.type = '"module"'
         this.moduleSource = input.source
         this.name = input.name
         this.objects = input.objects
-        this.variablesName = input.names.variables
+        this.variablesName = (input.names.variables) ? input.names.variables : []
         this.variablesObject = []
-        this.datasName = input.names.datas
+        this.datasName = (input.names.datas) ? input.names.datas : []
         this.datasObject = []
-        this.resourcesName = input.names.resources
+        this.resourcesName = (input.names.resources) ? input.names.resources : []
         this.resourcesObject = []
-        this.modulesName = input.names.modules
+        this.modulesName = (input.names.modules) ? input.names.modules : []
         this.modulesObject = []
         this.attributes = []
     }

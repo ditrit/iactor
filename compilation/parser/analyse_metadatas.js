@@ -1,7 +1,7 @@
-export function analyse_resources(resources, metadatas_resources) {
+export function analyse_resources(resources, metadatas) {
     let errors = []
     resources.forEach( r => {
-        metadatas_resources.forEach( m => {
+        metadatas.forEach( m => {
             if(r.type == '"' + m.resourceType + '"') {
                 if(m.attributes != undefined) {
                     m.attributes.forEach( a => {
@@ -17,8 +17,25 @@ export function analyse_resources(resources, metadatas_resources) {
                     })
                 }
                 r.representation = m.representation
+                r.icon = m.icon
             }
         })
+    })
+    return errors
+}
+
+export function analyse_modules(modules, metadatas) {
+    let errors = []
+    modules.forEach( mod => {
+        mod.attributes.forEach( a => {
+            if(a.constructor.name == metadatas.resources.resourceType) {
+                a.representation = metadatas.resources.representation
+            }            
+        })
+        if(!mod.source) {
+            errors.push("Source expected in module")
+        }
+        mod.representation = metadatas.representation
     })
     return errors
 }

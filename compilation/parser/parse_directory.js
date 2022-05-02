@@ -74,12 +74,6 @@ function get_module_attribute(result, finalResult, modules) {
     return {finalResult : finalResult, modules : modules};
 }
 
-function get_resources(result, finalResult, modules) {
-    newFinalResult = get_module_attribute(result.resources, finalResult.resources, finalResult.modules)
-
-    return {finalResult : finalResult, modules : modules};
-}
-
 function parse_directory(filePath, result, moduleName) {   
     let value;
     if(result) { value = result}

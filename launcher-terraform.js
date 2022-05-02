@@ -1,6 +1,6 @@
 import { parse_directories, get_final_result, get_all_objects } from "./compilation/parser/parse_directory.js";
 import { verify_schema } from "./metadatas/verify_schema.js";
-import { analyse_resources } from "./compilation/parser/analyse_metadatas.js";
+import { analyse_resources, analyse_modules } from "./compilation/parser/analyse_metadatas.js";
 import Ajv from 'ajv'
 const ajv = new Ajv()
 
@@ -9,7 +9,7 @@ export default function(filesPath, modulePath) {
     result = get_all_objects(result)
 
     const schema = verify_schema(result.provider[0].name)
-    if (!schema.valid) console.log(ajv.errors)
+    if (!schema.valid) console.log(schema.errors)
     else {
         if(schema.metadatas.provider.required && result.provider.length == 0) {
             result.errors.push('Provider required')
@@ -22,7 +22,7 @@ export default function(filesPath, modulePath) {
         })
     }    
 
-    let finalResult ={
+    let finalResult = {
         provider: [],
         resources: [],
         outputs: [],
@@ -36,10 +36,16 @@ export default function(filesPath, modulePath) {
 
     finalResult = get_final_result(result, finalResult)
 
+    if (schema.valid) {
+        analyse_modules(result.modules, schema.metadatas.provider.modules).forEach( e => {
+            result.errors.push(e)
+        })
+    }   
+
     if (result.errors.length != 0) {
         console.log("\n#################### ERRORS ####################");
         result.errors.forEach(e => console.log(e))
     }
 
-    return finalResult
+    return result
 }

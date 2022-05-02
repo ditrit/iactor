@@ -6,10 +6,11 @@ export function verify_schema(provider) {
     let metadatas, fileMetadatas;
     let schema, fileSchema;
     if(provider == '"aws"') {
-        fileMetadatas = fs.readFileSync('./metadatas/aws.json');
+        fileMetadatas = fs.readFileSync('../metadatas/aws.json');
         metadatas = JSON.parse(fileMetadatas)
     }
-    fileSchema = fs.readFileSync('./metadatas/validation_schema.json');
+    fileSchema = fs.readFileSync('../metadatas/validation_schema.json');
     schema = JSON.parse(fileSchema)
-    return {valid : ajv.validate(schema, metadatas), metadatas : metadatas}
+    const validate = ajv.compile(schema)
+    return {valid : validate(metadatas), metadatas : metadatas, errors : validate.errors}
 }

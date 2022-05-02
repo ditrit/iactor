@@ -1,3 +1,7 @@
+module "server" {
+  source = "../modules/server"
+}
+
 module "variables" {
   source = "../modules/variables"
 

@@ -3,14 +3,18 @@
         "name"  : "aws",
         "required" : true,
         "providerType" : "ProviderDirective",
-        "modules" : [
-            {
-                "source" : {
-                    "required" : true
-                },
-                "representation" : "container"
+        "modules" :  {
+            "representation" : "container",
+            "source" : {
+                "required" : true
+            },
+            "resources" : {
+                "resourceType" : "ResourceDirective",
+                "required" : false,
+                "array" : true,
+                "representation" : "contained"
             }
-        ],
+        },
         "resources" : [
             {
                 "resourceType" : "aws_security_group",
@@ -33,7 +37,14 @@
                     {
                         "variableName" : "security_groups",
                         "resourceType" : "aws_security_group",
-                        "representation" : "link",
+                        "representation" : "inverseLink",
+                        "array" : true,
+                        "required" : false
+                    },
+                    {
+                        "variableName" : "vpc_security_group_ids",
+                        "resourceType" : "aws_security_group",
+                        "representation" : "inverseLink",
                         "array" : true,
                         "required" : false
                     },

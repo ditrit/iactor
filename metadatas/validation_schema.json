@@ -17,15 +17,13 @@
             "required": ["name", "providerType", "resources", "modules"]  
         },
         "modules" : {
-            "type": "array",
-            "items" : { 
-                "type" : "object",
-                "properties": {
-                    "source" : { "type" : "object" },
-                    "representation" : { "type" : "string" }
-                },
-                "required": ["source", "representation"]  
-            }
+            "type": "object",
+            "properties": {
+                "representation" : { "type" : "string" },
+                "source" : { "type" : "object" },
+                "resources" : { "type" : "object" }
+            },
+            "required": ["source", "representation"]  
         },
         "resources" : {
             "type": "array",

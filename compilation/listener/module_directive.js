@@ -11,7 +11,7 @@ export default {
         let name = (prog.name) ? prog.name.value : ""
         let objects = (prog.object) ? prog.object : ""
         let source = (prog.modules_source[prog.modules_source.length - 1]) ? prog.modules_source[prog.modules_source.length - 1] : ""
-        let names = get_names(objects.value, true)       
+        let names = (objects.value) ? get_names(objects.value, true) : []    
 
         parsed_rule.prog.current_file.module_directive.push(newModuleDirective({name : name, objects: objects, source : source, names : names}, parsed_rule.ctx))
     }
