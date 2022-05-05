@@ -137,19 +137,19 @@ function get_variable_name(values) {
     values.forEach( v => {
         variableValue = v.split(".")
         if(variableValue[0] == "var") {
-            value = {var : values[0], name : '"' + variableValue[1] + '"'};
+            value = {var : values[0], name : variableValue[1]};
             if(!variableName.includes(value)) variableName.push(value)
         } else if(variableValue[0].substring(3) == "var") {
             if(variableValue[1][variableValue.length-1] != '"') {
-                value = {var : values[0].split('{')[0], name : '"' + variableValue[1].split('}')[0] + '"'};
+                value = {var : values[0].split('{')[0], name : variableValue[1].split('}')[0]};
                 if(!variableName.includes(value)) variableName.push(value)
             } else {
-                value = {var : values[0].split('{')[0], name : '"' + variableValue[1].slice(0, -2) + '"'};
+                value = {var : values[0].split('{')[0], name : variableValue[1].slice(0, -2)};
                 if(!variableName.includes(value)) variableName.push(value)
             }                    
         } else if(variableValue[0].substring(0,5) == "<<EOF" && variableValue[0].slice(-3) == "var") {
             let script = variableValue[1].split('\r')
-            value = {var : values[0], name : '"' + script[0].slice(0, -2) + '"'}
+            value = {var : values[0], name : script[0].slice(0, -2)}
             if(!variableName.includes(value)) variableName.push(value)
         }        
     })
@@ -159,9 +159,9 @@ function get_variable_name(values) {
 function get_resource_name(values, variableValue) {
     let resource="";
     if(variableValue[0].substring(0,3) == "aws") {
-        resource = {var : values[0], type : '"' + variableValue[0] + '"', name : '"' + variableValue[1] + '"'}    
+        resource = {var : values[0], type : variableValue[0], name : variableValue[1]}    
     } else if(variableValue[0].substring(0,3) == '"${' && variableValue[0].substring(3,6) == "aws") {
-        resource = {var : values[0], type : '"' + variableValue[0].substring(3) + '"', name : '"' + variableValue[1] + '"'}    
+        resource = {var : values[0], type : variableValue[0].substring(3), name : variableValue[1]}    
     }  else if(variableValue[0].substring(0,1) == '[') {
         let array = values[1].split(",")
         resource = [];
@@ -169,11 +169,11 @@ function get_resource_name(values, variableValue) {
             let explode = array[i].split('.')
             if(i==0) {
                 if(explode[0].substring(0,4) == '["${' && explode[0].substring(4,7) == "aws") {
-                    resource.push({var : values[0], type : '"' + explode[0].substring(4) + '"', name : '"' + explode[1] + '"'})
+                    resource.push({var : values[0], type : explode[0].substring(4), name : explode[1]})
                 }
             } else {
                 if(explode[0].substring(0,3) == '"${' && explode[0].substring(3,6) == "aws") {
-                    resource.push({var : values[0], type : '"' + explode[0].substring(3) + '"', name : '"' + explode[1] + '"'})
+                    resource.push({var : values[0], type : explode[0].substring(3), name : explode[1]})
                 }
             }
         }
@@ -184,9 +184,9 @@ function get_resource_name(values, variableValue) {
 function get_data_name(values, variableValue) {
     let data="";
     if(variableValue[0] == "data") {
-        data = {var : values[0], type : '"' + variableValue[1] + '"', name : '"' + variableValue[2] + '"'}    
+        data = {var : values[0], type : variableValue[1], name : variableValue[2]}    
     } else if(variableValue[0].substring(0,3) == '"${' && variableValue[0].substring(3,7) == "data") {
-        data = {var : values[0], type : '"' + variableValue[1] + '"', name : '"' + variableValue[2] + '"'}    
+        data = {var : values[0], type : variableValue[1], name : variableValue[2]}    
     }
     return data;
 }
@@ -194,9 +194,9 @@ function get_data_name(values, variableValue) {
 function get_module_name(values, variableValue) {
     let module="";
     if(variableValue[0] == "module") {
-        module = {var : values[0], name : '"' + variableValue[1] + '"'}    
+        module = {var : values[0], name : variableValue[1]}    
     } else if(variableValue[0].substring(0,3) == '"${' && variableValue[0].substring(3,7) == "module") {
-        module = {var : values[0], name : '"' + variableValue[1] + '"'}    
+        module = {var : values[0], name : variableValue[1]}    
     }
     return module;
 }

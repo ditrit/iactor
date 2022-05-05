@@ -11,8 +11,10 @@
   "dependencies": {
     "ajv-errors": "^3.0.0",
     "antlr4": "^4.9.3",
+    "axios": "^0.21.4",
     "d3": "^7.4.4",
     "jsdom": "^19.0.0",
+    "mathjs": "^10.5.1",
     "node": "^17.7.1"
   },
   "type": "module",

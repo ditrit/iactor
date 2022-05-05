@@ -2,7 +2,7 @@ export function analyse_resources(resources, metadatas) {
     let errors = []
     resources.forEach( r => {
         metadatas.forEach( m => {
-            if(r.type == '"' + m.resourceType + '"') {
+            if(r.type == m.resourceType) {
                 if(m.attributes != undefined) {
                     m.attributes.forEach( a => {
                         resource_type(r.resourcesObject, a).forEach( e => {
@@ -36,6 +36,7 @@ export function analyse_modules(modules, metadatas) {
             errors.push("Source expected in module")
         }
         mod.representation = metadatas.representation
+        mod.icon = metadatas.icon
     })
     return errors
 }
@@ -45,7 +46,7 @@ function resource_type(resources, attribute) {
 
     resources.forEach( r => {
         if(attribute.variableName == r.name && attribute.resourceType) {
-            if(r.value.type != '"' + attribute.resourceType + '"') {
+            if(r.value.type != attribute.resourceType) {
                 errors.push('TERRAFORM ERROR in file : ' + r.value.fileName + ' wrong type for resource ' + r.name + ' type : ' + r.value.type + ', expected : ' + attribute.resourceType)
             }
         }

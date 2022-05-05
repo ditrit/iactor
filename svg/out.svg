@@ -1,1 +1,301 @@
-<svg width="1900" height="900" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arrow" viewBox="0,0,12,12" refX="6" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path d="M2,2 L10,6 L2,10 L6,6 L2,2" stroke="black"></path></marker></defs><rect x="450" y="205" width="430" height="95" style="fill: orange;"></rect><rect x="10" y="640" width="645" height="95" style="fill: orange;"></rect><rect x="10" y="155" width="875" height="165" style="fill: orange;"></rect><rect x="440" y="10" width="860" height="95" style="fill: orange;"></rect><rect x="1315" y="10" width="200" height="40" style="fill: orange;"></rect><text style="fill: black; font-size: 14px;" dy=".35em" x="460" y="215">type : "aws_db_subnet_group"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="20" y="650">type : "aws_route53_zone"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="20" y="165">type : "aws_vpc"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="450" y="20">type : "module"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="1325" y="20">type : "module"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="460" y="235">name : "rds_subnet"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="20" y="670">name : "publicdns"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="20" y="185">name : "vpc_main"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="450" y="40">name : "server"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="1325" y="40">name : "variables"</text><line x1="665" y1="300" x2="110" y2="550" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="447.5" y1="320" x2="110" y2="460" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="447.5" y1="320" x2="325" y2="460" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="447.5" y1="320" x2="540" y2="460" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><rect x="10" y="10" width="200" height="40" style="fill: purple;"></rect><rect x="225" y="10" width="200" height="40" style="fill: purple;"></rect><rect x="440" y="10" width="860" height="95" style="fill: purple;"></rect><rect x="1315" y="10" width="200" height="40" style="fill: purple;"></rect><text style="fill: black; font-size: 14px;" dy=".35em" x="20" y="20">type : "aws_instance"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="235" y="20">type : "aws_key_pair"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="450" y="20">type : "module"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="1325" y="20">type : "module"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="20" y="40">name : "web"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="235" y="40">name : "sshdeploy"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="450" y="40">name : "server"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="1325" y="40">name : "variables"</text><rect x="10" y="550" width="200" height="40" style="fill: red;"></rect><rect x="10" y="460" width="200" height="40" style="fill: red;"></rect><rect x="10" y="370" width="200" height="40" style="fill: red;"></rect><rect x="225" y="460" width="200" height="40" style="fill: red;"></rect><rect x="225" y="550" width="200" height="40" style="fill: red;"></rect><rect x="440" y="550" width="200" height="40" style="fill: red;"></rect><rect x="440" y="460" width="200" height="40" style="fill: red;"></rect><text style="fill: black; font-size: 14px;" dy=".35em" x="20" y="560">type : "aws_db_instance"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="20" y="470">type : "aws_security_group"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="20" y="380">type : "aws_elb"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="235" y="470">type : "aws_security_group"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="235" y="560">type : "aws_instance"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="450" y="560">type : "aws_instance"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="450" y="470">type : "aws_security_group"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="20" y="580">name : "myawsdb"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="20" y="490">name : "sg_rds"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="20" y="400">name : "http-lb"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="235" y="490">name : "sg_elb"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="235" y="580">name : "www-a"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="450" y="580">name : "www-b"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="450" y="490">name : "sg_www"</text><line x1="110" y1="500" x2="110" y2="550" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="210" y1="400" x2="550" y2="710" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="305" y1="460" x2="210" y2="375" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="225" y1="570" x2="120" y2="690" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="305" y1="550" x2="210" y2="375" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="425" y1="560" x2="540" y2="500" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="440" y1="570" x2="335" y2="690" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="520" y1="550" x2="210" y2="375" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="540" y1="550" x2="540" y2="500" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><rect x="460" y="255" width="200" height="40" style="fill: red;"></rect><rect x="675" y="255" width="200" height="40" style="fill: red;"></rect><text style="fill: black; font-size: 14px;" dy=".35em" x="470" y="265">type : "aws_subnet"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="685" y="265">type : "aws_subnet"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="470" y="285">name : "webservers-a"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="685" y="285">name : "webservers-b"</text><line x1="460" y1="275" x2="110" y2="370" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="460" y1="275" x2="325" y2="550" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="675" y1="275" x2="110" y2="370" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="675" y1="275" x2="540" y2="550" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><rect x="20" y="690" width="200" height="40" style="fill: red;"></rect><rect x="235" y="690" width="200" height="40" style="fill: red;"></rect><rect x="450" y="690" width="200" height="40" style="fill: red;"></rect><text style="fill: black; font-size: 14px;" dy=".35em" x="30" y="700">type : "aws_route53_record"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="245" y="700">type : "aws_route53_record"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="460" y="700">type : "aws_route53_record"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="30" y="720">name : "www-a"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="245" y="720">name : "www-b"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="460" y="720">name : "www"</text><rect x="20" y="205" width="200" height="40" style="fill: red;"></rect><rect x="235" y="205" width="200" height="40" style="fill: red;"></rect><rect x="450" y="205" width="430" height="95" style="fill: red;"></rect><text style="fill: black; font-size: 14px;" dy=".35em" x="30" y="215">type : "aws_internet_gateway"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="245" y="215">type : "aws_route"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="460" y="215">type : "aws_db_subnet_group"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="30" y="235">name : "default"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="245" y="235">name : "wan_access"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="460" y="235">name : "rds_subnet"</text><line x1="220" y1="225" x2="235" y2="225" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="665" y1="300" x2="110" y2="550" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><rect x="460" y="255" width="200" height="40" style="fill: yellow;"></rect><rect x="675" y="255" width="200" height="40" style="fill: yellow;"></rect><text style="fill: black; font-size: 14px;" dy=".35em" x="470" y="265">type : "aws_subnet"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="685" y="265">type : "aws_subnet"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="470" y="285">name : "webservers-a"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="685" y="285">name : "webservers-b"</text><line x1="460" y1="275" x2="110" y2="370" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="460" y1="275" x2="325" y2="550" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="675" y1="275" x2="110" y2="370" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="675" y1="275" x2="540" y2="550" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><rect x="450" y="60" width="200" height="40" style="fill: red;"></rect><rect x="665" y="60" width="200" height="40" style="fill: red;"></rect><rect x="880" y="60" width="200" height="40" style="fill: red;"></rect><rect x="1095" y="60" width="200" height="40" style="fill: red;"></rect><text style="fill: black; font-size: 14px;" dy=".35em" x="460" y="70">type : "aws_instance"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="675" y="70">type : "aws_volume_attachment"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="890" y="70">type : "aws_ebs_volume"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="1105" y="70">type : "aws_security_group"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="460" y="90">name : "srv1"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="675" y="90">name : "ebs_att"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="890" y="90">name : "www_srv1"</text><text style="fill: black; font-size: 14px;" dy=".35em" x="1105" y="90">name : "sg_serveurs"</text><line x1="650" y1="80" x2="1095" y2="80" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="650" y1="80" x2="665" y2="80" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line><line x1="880" y1="80" x2="865" y2="80" stroke="black" stroke-width="2" marker-start="url(#arrow)"></line></svg>
+<svg id="svg0"><svg id="web_aws_instance" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="transform: translateX(0px) translateY(0px);">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_instance.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">web</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_instance</tspan>
+        </text>
+    </g>
+</svg><svg id="sshdeploy_aws_key_pair" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="transform: translateX(0px) translateY(0px);">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_key_pair.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">sshdeploy</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_key_pair</tspan>
+        </text>
+    </g>
+</svg><svg id="server_module" version="1.1" width="850" height="120" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="transform: translateX(0px) translateY(0px);">
+    <g>
+        <rect id="content" x="10" y="18" width="820" height="90" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/module.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">server</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">module</tspan>
+        </text>
+    <svg id="srv1_aws_instance" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="20" y="50">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_instance.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">srv1</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_instance</tspan>
+        </text>
+    </g>
+</svg><svg id="ebs_att_aws_volume_attachment" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="210" y="50">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_volume_attachment.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">ebs_att</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_volume_attachment</tspan>
+        </text>
+    </g>
+</svg><svg id="www_srv1_aws_ebs_volume" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="400" y="50">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_ebs_volume.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">www_srv1</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_ebs_volume</tspan>
+        </text>
+    </g>
+</svg><svg id="sg_serveurs_aws_security_group" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="590" y="50">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_security_group.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">sg_serveurs</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_security_group</tspan>
+        </text>
+    </g>
+</svg></g>
+</svg><svg id="variables_module" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="transform: translateX(0px) translateY(0px);">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/module.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">variables</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">module</tspan>
+        </text>
+    </g>
+</svg><svg id="vpc_main_aws_vpc" version="1.1" width="860" height="180" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="transform: translateX(0px) translateY(0px);">
+    <g>
+        <rect id="content" x="10" y="18" width="830" height="150" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_vpc.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">vpc_main</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_vpc</tspan>
+        </text>
+    <svg id="default_aws_internet_gateway" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="20" y="50">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_internet_gateway.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">default</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_internet_gateway</tspan>
+        </text>
+    </g>
+</svg><svg id="wan_access_aws_route" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="210" y="50">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_route.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">wan_access</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_route</tspan>
+        </text>
+    </g>
+</svg><svg id="rds_subnet_aws_db_subnet_group" version="1.1" width="440" height="120" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="400" y="50">
+    <g>
+        <rect id="content" x="10" y="18" width="410" height="90" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_db_subnet_group.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">rds_subnet</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_db_subnet_group</tspan>
+        </text>
+    <svg id="webservers-a_aws_subnet" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="20" y="50">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_subnet.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">webservers-a</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_subnet</tspan>
+        </text>
+    </g>
+</svg><svg id="webservers-b_aws_subnet" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="210" y="50">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_subnet.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">webservers-b</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_subnet</tspan>
+        </text>
+    </g>
+</svg></g>
+</svg></g>
+</svg><svg id="http-lb_aws_elb" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="transform: translateX(-860px) translateY(90px);">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_ebs_volume.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">http-lb</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_elb</tspan>
+        </text>
+    </g>
+</svg><svg id="sg_rds_aws_security_group" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="transform: translateX(-1050px) translateY(180px);">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_security_group.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">sg_rds</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_security_group</tspan>
+        </text>
+    </g>
+</svg><svg id="sg_elb_aws_security_group" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="transform: translateX(-1050px) translateY(180px);">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_security_group.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">sg_elb</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_security_group</tspan>
+        </text>
+    </g>
+</svg><svg id="sg_www_aws_security_group" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="transform: translateX(-1050px) translateY(180px);">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_security_group.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">sg_www</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_security_group</tspan>
+        </text>
+    </g>
+</svg><svg id="myawsdb_aws_db_instance" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="transform: translateX(-1620px) translateY(270px);">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_db_instance.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">myawsdb</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_db_instance</tspan>
+        </text>
+    </g>
+</svg><svg id="www-a_aws_instance" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="transform: translateX(190px) translateY(146px);">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_instance.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">www-a</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_instance</tspan>
+        </text>
+    </g>
+</svg><svg id="www-b_aws_instance" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="transform: translateX(190px) translateY(146px);">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_instance.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">www-b</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_instance</tspan>
+        </text>
+    </g>
+</svg><svg id="publicdns_aws_route53_zone" version="1.1" width="645" height="120" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="transform: translateX(-380px) translateY(270px);">
+    <g>
+        <rect id="content" x="10" y="18" width="615" height="90" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_route53_zone.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">publicdns</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_route53_zone</tspan>
+        </text>
+    <svg id="www-a_aws_route53_record" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="20" y="50">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_route53_record.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">www-a</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_route53_record</tspan>
+        </text>
+    </g>
+</svg><svg id="www-b_aws_route53_record" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="210" y="50">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_route53_record.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">www-b</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_route53_record</tspan>
+        </text>
+    </g>
+</svg><svg id="www_aws_route53_record" version="1.1" width="190" height="74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="400" y="50">
+    <g>
+        <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
+        <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
+        <image x="5" y="5" width="40" height="40" xlink:href="logos/aws_route53_record.svg"></image>
+        <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
+            <tspan x="48" y="12">www</tspan>
+        </text>
+        <text id="type" text-align="center" style="font-family:Alef;font-size:11px;font-weight:bold" xml:space="preserve">
+            <tspan x="48" y="22">aws_route53_record</tspan>
+        </text>
+    </g>
+</svg></g>
+</svg></svg>

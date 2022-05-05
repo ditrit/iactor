@@ -31,11 +31,11 @@ describe("Terraform prog ->", function() {
             resource = prog["resources"];
             expect(resource[0]["datasName"].length).toEqual(1);
             expect(prog["errors"].length).toEqual(0);
-            expect(resource[0]["datasName"][0].type).toEqual('"aws_ami"'); 
-            expect(resource[0]["datasName"][0].name).toEqual('"web"');
+            expect(resource[0]["datasName"][0].type).toEqual('aws_ami'); 
+            expect(resource[0]["datasName"][0].name).toEqual('web');
             expect(resource[0]["datasName"].length).toEqual(resource[0]["datasObject"].length);  
-            expect(resource[0]["datasObject"][0].value.type).toEqual('"aws_ami"'); 
-            expect(resource[0]["datasObject"][0].value.name).toEqual('"web"');            
+            expect(resource[0]["datasObject"][0].value.type).toEqual('aws_ami'); 
+            expect(resource[0]["datasObject"][0].value.name).toEqual('web');            
         })
         
         it("resource using variable", function() { 
@@ -43,9 +43,9 @@ describe("Terraform prog ->", function() {
             resource = prog["resources"];
             expect(resource[1]["variablesName"].length).toEqual(1);
             expect(prog["errors"].length).toEqual(0);
-            expect(resource[1]["variablesName"][0].name).toEqual('"http_port"');
+            expect(resource[1]["variablesName"][0].name).toEqual('http_port');
             expect(resource[1]["variablesName"].length).toEqual(resource[1]["variablesObject"].length);  
-            expect(resource[1]["variablesObject"][0].value.name).toEqual('"http_port"');            
+            expect(resource[1]["variablesObject"][0].value.name).toEqual('http_port');            
         })
 
         

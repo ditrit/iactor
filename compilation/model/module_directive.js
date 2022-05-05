@@ -4,7 +4,7 @@ export class ModuleDirective extends TerraformNode {
     constructor(input, source) { 
         super(source)
         this.fileName = ""
-        this.type = '"module"'
+        this.type = 'module'
         this.moduleSource = input.source
         this.name = input.name
         this.objects = input.objects

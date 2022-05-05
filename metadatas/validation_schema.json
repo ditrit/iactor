@@ -21,9 +21,10 @@
             "properties": {
                 "representation" : { "type" : "string" },
                 "source" : { "type" : "object" },
-                "resources" : { "type" : "object" }
+                "resources" : { "type" : "object" },
+                "icon" : { "type" : "string"}
             },
-            "required": ["source", "representation"]  
+            "required": ["source", "representation", "icon"]  
         },
         "resources" : {
             "type": "array",
@@ -35,9 +36,10 @@
                     "attributes" : { 
                         "type" : "array",
                         "items" : { "$ref" : "#/definitions/variables" }
-                    }
+                    },
+                    "icon" : { "type" : "string"}
                 },                             
-                "required": ["resourceType", "representation"] 
+                "required": ["resourceType", "representation", "icon"] 
             }
         },
         "variables" : {

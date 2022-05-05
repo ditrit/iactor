@@ -5,7 +5,7 @@ const ajv = new Ajv()
 export function verify_schema(provider) {
     let metadatas, fileMetadatas;
     let schema, fileSchema;
-    if(provider == '"aws"') {
+    if(provider == 'aws') {
         fileMetadatas = fs.readFileSync('../metadatas/aws.json');
         metadatas = JSON.parse(fileMetadatas)
     }

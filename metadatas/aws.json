@@ -13,7 +13,8 @@
                 "required" : false,
                 "array" : true,
                 "representation" : "contained"
-            }
+            },
+            "icon" : "module.svg"
         },
         "resources" : [
             {
@@ -282,6 +283,12 @@
                     }
                 ],
                 "icon" : "aws_db_instance.svg",
+                "required" : false
+            },
+            {
+                "resourceType" : "aws_key_pair",
+                "representation" : "block",
+                "icon" : "aws_key_pair.svg",
                 "required" : false
             },
             {
