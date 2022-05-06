@@ -1,4 +1,6 @@
-export function calcul_attributes_objects(datas) {
+import { isArray } from "mathjs";
+
+export function calcul_attributes_objects(datas, orderResources) {
     let widthMin = 200;
     let heightMin = 40;
     let recourceWidthMax = 1000;
@@ -6,13 +8,7 @@ export function calcul_attributes_objects(datas) {
     let xCurrent = 10;
     let yCurrent = 10;
     let containers = []
-    let vpc = []
-    let route53 = []
     let blocks = []
-    let security_group = []
-    let instance = []
-    let elb = []
-    let db_instance = []
     let noRelations = []
 
     datas.resources.forEach( r => {
@@ -20,9 +16,22 @@ export function calcul_attributes_objects(datas) {
             r.contains = []
             r.link = []
             r.containers = []
-            if(r.type == 'aws_vpc') vpc.push(r)
-            if(r.type == 'aws_route53_zone') route53.push(r)
-            containers.push(r)
+            for(let i=0; i<orderResources.length; i++) {
+                if(r.type == orderResources[i]) {
+                    r.order = i
+                    containers.push(r)
+                }
+                if(isArray(orderResources[i])) {
+                    orderResources[i].forEach( type => {
+                        if(r.type == type) {
+                            r.order = i
+                            containers.push(r)
+                        }
+                    })
+                }
+            }
+            if(!containers.includes(r)) 
+                containers.push(r)
         }
     })
 
@@ -30,6 +39,27 @@ export function calcul_attributes_objects(datas) {
         if(m.representation == 'container') {
             m.contains = []
             m.containers = []
+            for(let i=0; i<orderResources.length; i++) {
+                m.attributes.forEach( attribute => {
+                    if(attribute.type == orderResources[i]) {
+                        attribute.order = i
+                        m.contains.push(attribute)
+                    }
+                    if(isArray(orderResources[i])) {
+                        orderResources[i].forEach( type => {
+                            if(attribute.type == type) {
+                                attribute.order = i
+                                m.contains.push(attribute)
+                            }
+                        })
+                    }
+                })
+            }
+            m.attributes.forEach( attribute => {
+                if(!m.contains.includes(attribute) && attribute.representation == 'contained') {
+                    m.contains.push(attribute)
+                }             
+            })
             containers.push(m)
         }
     })
@@ -87,16 +117,22 @@ export function calcul_attributes_objects(datas) {
                 } 
             })
             if(!find && !blocks.includes(r)) {
-                if(r.type == 'aws_security_group') {
-                    security_group.push(r)
-                } else if(r.type == 'aws_elb') {
-                    elb.push(r)
-                } else if(r.type == 'aws_instance' || r.type == 'aws_db_instance') {
-                    instance.push(r)
-                } else if(r.type == 'aws_db_instance') {
-                    db_instance.push(r)
-                }   
-                blocks.push(r)
+                for(let i=0; i<orderResources.length; i++) {
+                    if(r.type == orderResources[i]) {
+                        r.order = i
+                        blocks.push(r)
+                    }
+                    if(isArray(orderResources[i])) {
+                        orderResources[i].forEach( type => {
+                            if(r.type == type) {
+                                r.order = i
+                                blocks.push(r)
+                            }
+                        })
+                    }
+                }
+                if(!blocks.includes(r))
+                    blocks.push(r)
             }
         }
     })
@@ -123,16 +159,7 @@ export function calcul_attributes_objects(datas) {
             }
             if(!find && !noRelations.includes(r)) {
                 noRelations.push(r)
-                let index
-                index = security_group.indexOf(r)
-                if(index != -1) security_group.splice(index,1)
-                index = elb.indexOf(r)
-                if(index != -1) elb.splice(index,1)
-                index = db_instance.indexOf(r)
-                if(index != -1) db_instance.splice(index,1)
-                index = instance.indexOf(r)
-                if(index != -1) instance.splice(index,1)
-                index = blocks.indexOf(r)
+                let index = blocks.indexOf(r)
                 if(index != -1) blocks.splice(index,1)
             }
         }
@@ -163,23 +190,9 @@ export function calcul_attributes_objects(datas) {
     containers.forEach( c => {
         c.resourcesObject.forEach( ro => {
             if(ro.representation == 'contained') {
-                c.width += widthMin + 15
-                c.height += heightMin + 15
                 c.contains.push(ro.value)
             }
         })
-    })
-
-    containers.forEach( c => {
-        if(c.attributes) {
-            c.attributes.forEach( a => {
-                if(a.representation == 'contained') {
-                    c.width += widthMin + 15
-                    c.height += heightMin + 15
-                    c.contains.push(a)
-                }
-            })
-        }
     })
 
     containers.forEach( c => {
@@ -190,6 +203,8 @@ export function calcul_attributes_objects(datas) {
                         if(!c.contains.includes(cs)) {
                             cs.inContainer = true
                             c.contains.push(cs)
+                            let index = containers.indexOf(cs)
+                            containers.splice(index, 1)
                         }                        
                     }
                 })
@@ -197,19 +212,14 @@ export function calcul_attributes_objects(datas) {
         })
     })
 
-
     noRelations.forEach( b => {
-        let dimensions = calcul_dimensions(b, 0, 0, recourceHeightMax)
         b.width = 0
         b.height = 0
-        recourceHeightMax = dimensions.recourceHeightMax
     })
 
     blocks.forEach( b => {
-        let dimensions = calcul_dimensions(b, 0, 0, recourceHeightMax)
         b.width = 0
         b.height = 0
-        recourceHeightMax = dimensions.recourceHeightMax
     })
 
     containers.forEach( c => {
@@ -218,165 +228,105 @@ export function calcul_attributes_objects(datas) {
             c.width = 0
             c.height = 0
         } else {
-            c.width = dimensions.width
-            c.height = dimensions.height
+            c.width = dimensions.width + 20
+            c.height = dimensions.height + 20
         }        
         recourceHeightMax = dimensions.recourceHeightMax
     })
+    
     let resources = []
 
-    let heightFirstLineMax = 0;
-    noRelations.forEach( b => {
-        //resources.push(b)
-        let xy = calcul_xy_container(b, xCurrent, yCurrent)
-        if(xy.x != -1 && xy.y != -1) {
-            xCurrent = xy.x
-            yCurrent = xy.y 
-            recourceHeightMax = xy.recourceHeightMax 
-        }
-        if(b.height > heightFirstLineMax) heightFirstLineMax = b.height
-    })
-
-    yCurrent = yCurrent + heightFirstLineMax + 50
-    xCurrent = 10
-    vpc[0].newY = true
-
-    vpc.forEach( c => {
-        resources.push(c)
-        let xy = calcul_xy_container(c, xCurrent, yCurrent)
-        if(xy.x != -1 && xy.y != -1) {
-            xCurrent = xy.x
-            yCurrent = xy.y  
-            recourceHeightMax = xy.recourceHeightMax 
-        }
-        yCurrent = yCurrent + c.height + 50
-        xCurrent = 10
-    })
-
-    elb[0].newY = true
-    elb.forEach( b => {
-        resources.push(b)
-        let xy = calcul_xy_container(b, xCurrent, yCurrent)
-        if(xy.x != -1 && xy.y != -1) {
-            xCurrent = xy.x
-            yCurrent = xy.y  
-            recourceHeightMax = xy.recourceHeightMax 
-        }
-    })
-
-    yCurrent = yCurrent + heightMin + 50
-    xCurrent = 10
-
-    /*db_instance[0].newY = true
-    db_instance.forEach( b => {
-        blocks.push(b)
-        let xy = calcul_xy_container(b, xCurrent, yCurrent)
-        if(xy.x != -1 && xy.y != -1) {
-            xCurrent = xy.x
-            yCurrent = xy.y  
-            recourceHeightMax = xy.recourceHeightMax 
-        }
-    })*/
-
-    security_group[0].newY = true
-    security_group.forEach( b => {
-        resources.push(b)
-        let xy = calcul_xy_container(b, xCurrent, yCurrent)
-        if(xy.x != -1 && xy.y != -1) {
-            xCurrent = xy.x
-            yCurrent = xy.y  
-            recourceHeightMax = xy.recourceHeightMax 
-        }
-    })
-
-    yCurrent = yCurrent + heightMin + 50
-    xCurrent = 10
-
-    instance[0].newY = true
-    instance.forEach( b => {
-        resources.push(b)
-        let xy = calcul_xy_container(b, xCurrent, yCurrent)
-        if(xy.x != -1 && xy.y != -1) {
-            xCurrent = xy.x
-            yCurrent = xy.y  
-            recourceHeightMax = xy.recourceHeightMax 
-        }
-    })
-
-    yCurrent = yCurrent + heightMin + 50
-    xCurrent = 10
-
-    route53[0].newY = true
-    route53.forEach( c => {
-        resources.push(c)
-        let xy = calcul_xy_container(c, xCurrent, yCurrent)
-        if(xy.x != -1 && xy.y != -1) {
-            xCurrent = xy.x
-            yCurrent = xy.y  
-            recourceHeightMax = xy.recourceHeightMax 
-        }
-        yCurrent = yCurrent + c.height + 50
-        xCurrent = 10
-    })
-
-    /*containers.forEach( c => {
-        if(!route53.includes(c) && !vpc.includes(c) && !noRelations.includes(c)) {
-            let xy = calcul_xy_container(c, xCurrent, yCurrent)
-            if(xy.x != -1 && xy.y != -1) {
-                xCurrent = xy.x
-                yCurrent = xy.y  
-                recourceHeightMax = xy.recourceHeightMax 
+    let order = 0
+    while(order < containers.length + blocks.length) {
+        containers.forEach( container => {
+            if(container.order == order) {
+                resources.push(container)
             }
-            yCurrent = yCurrent + c.height + 50
+            if(order > orderResources.length && !resources.includes(container)) {
+                resources.push(container)                
+            }
+        })
+        blocks.forEach( block => {
+            if(block.order == order) {
+                resources.push(block)
+            }
+            if(order > orderResources.length && !resources.includes(block)) {
+                resources.push(block)  
+                order = containers.length + blocks.length           
+            }
+        })
+        order++
+    }
+
+    order = 0
+    let heightMax = heightMin
+    let widthMax = widthMin
+
+    for(let i=0; i<resources.length; i++) {
+        let xy = calcul_xy_container(resources[i], xCurrent, yCurrent)
+        if(i + 1 < resources.length && resources[i+1].order != resources[i].order) {
+            if(resources[i].height > heightMax) heightMax = resources[i].height
+            yCurrent = yCurrent + heightMax + 75
             xCurrent = 10
+            heightMax = heightMin
+        } else if(xy.x != -1 && xy.y != -1) {
+            xCurrent = xy.x
+            yCurrent = xy.y  
+            if(resources[i].height > heightMax) heightMax = resources[i].height
         }
-    })*/
+        if(resources[i].width > widthMax) widthMax = resources[i].width
+    }
 
-    noRelations.forEach( nr => {
-        if(containers.includes(nr)) {
-            let index = containers.indexOf(nr)
-            if(index != -1)
-                containers.splice(index,1)
-        }
-    })
+    yCurrent = 10
+    xCurrent = widthMax + 50
+    heightMax = heightMin
 
-    return {containers : containers, blocks : blocks, noRelations : noRelations, resources : resources}
+    for(let i=0; i<noRelations.length; i++) {
+        calcul_xy_container(noRelations[i], xCurrent, yCurrent)
+        if(noRelations[i].height > heightMax) heightMax = noRelations[i].height
+        yCurrent = yCurrent + heightMax + 75
+        xCurrent = widthMax + 50
+        heightMax = heightMin
+        if(!resources.includes(noRelations[i])) resources.push(noRelations[i])
+    }
+
+    return resources
 }
 
 
 
 function calcul_dimensions(container, width, widthMax, recourceHeightMax) { 
-    let height
     let widthMin = 190;
     let heightMin = 70;
-    if(container.contains && container.contains.length > 0) {  
-        height = heightMin + 20
+    let height = heightMin + 20
+    if(container.attributes) { 
+        for(let i=0; i<container.contains.length; i++) {
+            if(i + 1 < container.contains.length && container.contains[i+1].order != container.contains[i].order) {
+                if(container.contains[i].representation != 'container') {
+                    height += heightMin + 15  
+                } else {
+                    let dimensions = calcul_dimension_container(container.contains[i], widthMax, heightMin)
+                    width += dimensions.width
+                    height += dimensions.height
+                }
+            } else if(i + 1 < container.contains.length && container.contains[i].order>=0 && container.contains[i+1].order==undefined) {
+                height += heightMin + 15    
+            } else {                    
+                width += widthMin + 20    
+            }
+        }
+    } else if(container.contains && container.contains.length > 0) {  
         container.contains.forEach( c => {
             if(c.representation != 'container') {
-                if(width + widthMin + 15 >= widthMax) {
+                if(width + widthMin + 20 >= widthMax) {
                     height += heightMin + 15
                 } else {
-                    width += widthMin + 15
+                    width += widthMin + 20
                 }            
             } else {
-                if(c.contains.length > 0) {
-                    if(!c.width && !c.height) {
-                        let dimensions = calcul_dimensions(c, width, height)
-                        width += dimensions.width
-                        height += dimensions.height
-                    } else {    
-                        if(c.height >= height) {
-                            height += c.height - heightMin
-                        }            
-                        if(width + c.width >= widthMax) {
-                            height += c.height + 40
-                            width += 10
-                        } else {
-                            height += 40
-                            width += c.width + 10
-                        }      
-                    }
-                }
+                let dimensions = calcul_dimension_container(c, widthMax, heightMin)
+                width += dimensions.width + 20
+                height += dimensions.height
             }
         })
     } else {
@@ -389,6 +339,31 @@ function calcul_dimensions(container, width, widthMax, recourceHeightMax) {
     return {width : width, height : height, recourceHeightMax : recourceHeightMax}
 }
 
+function calcul_dimension_container(container, widthMax, heightMin) {    
+    let width = 0, height = 0
+    if(container.contains.length > 0) {
+        if(!container.width && !container.height) {
+            let dimensions = calcul_dimensions(container, 0, widthMax, height)
+            width += dimensions.width
+            height += dimensions.height
+            container.width = dimensions.width
+            container.height = dimensions.height + 20
+        } else {    
+            if(container.height >= height) {
+                height += container.height - heightMin
+            }            
+            if(width + container.width >= widthMax) {
+                height += container.height + 40
+                width += 20
+            } else {
+                height += 40
+                width += container.width + 20
+            }      
+        }
+    }
+    return {width : width, height, height}
+}
+
 function calcul_xy(object, x, y, container, recourceHeightMax) { 
     if(object.representation != 'container') {
         object.width = 0
@@ -396,18 +371,18 @@ function calcul_xy(object, x, y, container, recourceHeightMax) {
     }     
 
     let returnY = -1
-    let xMax = x + object.width;
+    let xMax = x + ((object.width > 0) ? object.width : 160);
     if(xMax >= ((container) ? (container.width + container.x) : widthMax)) {
-        x = ((container) ? container.x : 0) + 10
-        xMax = x + object.width
-        returnY = (!container) ? (y + recourceHeightMax + 15) : (y + 30 + 15)
+        x = ((container) ? container.x : 0)
+        xMax = x + ((object.width > 0) ? object.width : 160)
+        returnY = (!container) ? (y + recourceHeightMax + 50) : y
         if(!container) {
             recourceHeightMax = returnY + recourceHeightMax
         }        
     }
     object.x = x
     object.y = (returnY != -1) ? returnY : y
-    x = xMax + 15
+    x = xMax + 50
 
     return {x : x, y : (returnY != -1) ? returnY : y, recourceHeightMax : recourceHeightMax}
 }
@@ -415,15 +390,29 @@ function calcul_xy(object, x, y, container, recourceHeightMax) {
 function calcul_xy_container(container, x, y, content, recourceHeightMax) {
     let newX = -1
     let newY = -1
+    let heightMin = 40;
     if(!container.inContainer || content) {
         let xy = calcul_xy(container, x, y, true, recourceHeightMax)
         newX = xy.x
         newY = xy.y 
         recourceHeightMax = xy.recourceHeightMax
         
-        if(container.contains && container.contains.length > 0) {
-            let cox = container.x + 10
-            let coy = container.y + 50
+        if(container.attributes) { 
+            let cox = 20
+            let coy = 60
+
+            for(let i=0; i<container.contains.length; i++) {
+                let xy = calcul_xy_container(container.contains[i], cox, coy, true, recourceHeightMax)
+                cox = xy.x
+                coy = xy.y 
+                if(i + 1 < container.contains.length && container.contains[i+1].order != container.contains[i].order) {
+                    coy = coy + ((container.contains[i].height > 0) ? container.contains[i].height : heightMin) + 50
+                    cox = 20
+                }
+            }
+        } else if(container.contains && container.contains.length > 0) {
+            let cox = 20
+            let coy = 60
 
             container.contains.forEach( co => {  
                 let xy = calcul_xy_container(co, cox, coy, true, recourceHeightMax)

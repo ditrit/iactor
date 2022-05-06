@@ -15,7 +15,7 @@
     "d3": "^7.4.4",
     "jsdom": "^19.0.0",
     "mathjs": "^10.5.1",
-    "node": "^17.7.1"
+    "node": "^17.7.2"
   },
   "type": "module",
   "devDependencies": {
