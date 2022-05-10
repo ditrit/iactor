@@ -1,4 +1,4 @@
-import hclParser from "../compilation/parser/hclParser.js";
+import hclParser from "./hclParser.js";
 import hclLexer from "./hclLexer.js";
 import antlr4 from 'antlr4';
 import fs from "fs"

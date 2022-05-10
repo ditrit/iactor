@@ -1,4 +1,4 @@
-// Generated from c:\Users\nolwe\Documents\Stage\test_antlr\hcl\schemas\hclParser.g4 by ANTLR 4.8
+// Generated from c:\Users\nolwe\Documents\Stage\test_antlr\hcl\schemas_terraform\hclParser.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
