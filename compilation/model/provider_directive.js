@@ -9,7 +9,7 @@ export class ProviderDirective extends TerraformNode {
     }
 
     toString() {     
-        return `  ${this.name}  {\n${this.objects}\n  }`
+        return `provider "${this.name}" {\n${this.objects}\n}`
     }
 
     static isValid(input, source) {

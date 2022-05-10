@@ -7,7 +7,7 @@ export class ModuleDirective extends TerraformNode {
         this.type = 'module'
         this.moduleSource = input.source
         this.name = input.name
-        this.objects = input.objects
+        this.objects = (input.objects.value) ? input.objects : ""
         this.variablesName = (input.names.variables) ? input.names.variables : []
         this.variablesObject = []
         this.datasName = (input.names.datas) ? input.names.datas : []
@@ -20,7 +20,10 @@ export class ModuleDirective extends TerraformNode {
     }
 
     toString() {     
-        return `  ${this.name}  {\n${this.objects}\n  }`
+        if(this.objects == "")
+            return `module "${this.name}" {\n  ${this.moduleSource}\n}`
+        else 
+            return `module "${this.name}" {\n  ${this.moduleSource}\n${this.objects}\n}`
     }
 
     static isValid(input, source) {

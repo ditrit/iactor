@@ -5,13 +5,12 @@ import { select } from 'd3';
 import { writeFileSync } from 'fs';
 import { calcul_attributes_objects } from './calcul_attributes_objects.js';
 import fs from 'fs';
-import { cos, evaluate } from "mathjs";
+import { evaluate } from "mathjs";
 
 const dom = new JSDOM(`<!DOCTYPE html><body></body>`);
-
-const datas = get_datas('../tests/tf', '../tests');
-let orderResources = ['aws_vpc', 'aws_elb', 'aws_security_group', ['aws_db_instance', 'aws_instance'], 'aws_route53_zone']
-let resources = calcul_attributes_objects(datas, orderResources)
+let arg = process.argv.slice(2).toString();
+const datas = get_datas(arg);
+let resources = calcul_attributes_objects(datas)
 
 let body = select(dom.window.document.querySelector("body"))
 let svg = body.append('svg').attr('id', 'svg0').attr('width', 2000).attr('height', 1000).attr('xmlns',"http://www.w3.org/2000/svg")
@@ -40,7 +39,7 @@ function drawSVG(datas, parentDatas, svgParent, parentName, content) {
     datas.forEach( d => {
         let data = { logopath: 'logos/' + d.icon,  width: d.width, height: d.height, name: d.name, type: d.type, id : d.name + "_" + d.type };
         const svgDom = SVGinstanciate(res, data, dom);
-        body.select("#"+parentName).node().append(svgDom.documentElement);
+        body.select("#"+parentName).node().append(svgDom.documentElement)
         var model = dom.window.document.getElementById(d.name + "_" + d.type)
         if(content) {
             svgParent.querySelector("g").appendChild(model)
@@ -137,6 +136,16 @@ function drawSVG(datas, parentDatas, svgParent, parentName, content) {
             })
         }    
     })
+
+    /*let svgs = body.selectAll('svg')   
+    svgs.on('click', function(d, i){
+        this.append('rect')
+            .attr('x',10)
+            .attr('y',10)
+            .attr('width',10)
+            .attr('height',10)
+            .attr('color','red')
+    })   */     
 }
 
 function SVGmatch(text, data) {

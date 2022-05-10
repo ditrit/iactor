@@ -9,7 +9,7 @@ export class VariableDirective extends TerraformNode {
     }
 
     toString() {
-        return `  ${this.name}  {\n${this.objects}\n  }`
+        return `variable "${this.name}" {\n${this.objects}\n}`
     }
 
     static isValid(input, source) {

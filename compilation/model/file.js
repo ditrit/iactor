@@ -16,7 +16,9 @@ export class TerraformFile {
         this.modules_source = []
 
         this.field = []
-        this.complex_field = false
+        this.complex_field = []
+        this.complex_field_object = []
+        this.is_complex_field = false
         this.name = {}
         this.type = {}
         this.object = {}

@@ -11,6 +11,7 @@
                 "name" : { "type" : "string" },
                 "required" : { "type" : "boolean" },
                 "providerType" : { "type" : "string" },
+                "orderResources" : { "type" : "array" },
                 "modules" : { "$ref" : "#/definitions/modules"},
                 "resources" : { "$ref" : "#/definitions/resources"}
             },

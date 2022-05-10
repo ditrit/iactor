@@ -1,51 +1,75 @@
 export function get_names(objects, isModule) {    
-    let variablesName = []
+    let variables = []
     let resources = []
     let datas = []
     let modules = []
     
     objects.forEach(e => {
-        let values = e.split('=')
-        if(values[1] != undefined) {
-            let variableValue = values[1].split(".")
-            let variableName;  
-            variableName = get_variable_name(values)    
-            let resource="";
-            let data="";
-            let module="";
-            if(variableName == "") {
-                resource = get_resource_name(values, variableValue) 
-            }               
-            if(resource == "") {
-                data = get_data_name(values, variableValue) 
-            }               
-            if(data == "") {
-                module = get_module_name(values, variableValue) 
-            }                                                                                  
-            if(variableName != "" && !variablesName.includes(variableName)) {
-                variableName.forEach( r => {
-                    variablesName.push(r)
-                })
-            }                       
-            if(resource !== "" && !resources.includes(resource)) {
-                if(Array.isArray(resource)) {
-                    resource.forEach( r => {
-                        resources.push(r)
-                    })
-                } else {
-                    resources.push(resource)                    
-                }                
-            }    
-            if(data != "" && !datas.includes(data)) {
+        if(e.constructor.name == 'TerraformComplexField') {
+            let result = get_names(e.objects)
+            result.variables.forEach( variable => {
+                variables.push(variable)
+            }) 
+            result.resources.forEach( resource => {
+                resources.push(resource)
+            }) 
+            result.datas.forEach( data => {
                 datas.push(data)
-            } 
-            if(isModule && module != "" && !modules.includes(module)) {
+            }) 
+            result.modules.forEach( module => {
                 modules.push(module)
-            } 
+            })
+        } else {
+            let variableName = "";   
+            let resource = "";
+            let data = "";
+            let module = "";
+            let values = e.split('=')
+            if(values[1] != undefined) {
+                let variableValue = values[1].split(".")
+                variableName = get_variable_name(values)  
+                if(variableName.length == 0) {
+                    resource = get_resource_name(values, variableValue) 
+                }               
+                if(resource.length == 0) {
+                    data = get_data_name(values, variableValue) 
+                }               
+                if(data.length == 0) {
+                    module = get_module_name(values, variableValue) 
+                }                                                                                  
+                if(variableName != "") {
+                    let find = false
+                    variableName.forEach( variable => {
+                        variables.forEach( v => {
+                            if(v.var == variable.var && v.name == variable.name)
+                                find = true
+                        })
+                        if(!find) 
+                            variables.push(variable)
+                        else
+                            find = false
+                    })
+                }                       
+                if(resource != "" && !resources.includes(resource)) {
+                    if(Array.isArray(resource)) {
+                        resource.forEach( r => {
+                            resources.push(r)
+                        })
+                    } else {
+                        resources.push(resource)                    
+                    }                
+                }    
+                if(data != "" && !datas.includes(data)) {
+                    datas.push(data)
+                } 
+                if(isModule && module != "" && !modules.includes(module)) {
+                    modules.push(module)
+                } 
+            }
         }
     });
 
-    return {variables : variablesName, resources : resources, datas : datas, modules : modules}
+    return {variables : variables, resources : resources, datas : datas, modules : modules}
 }
 
 export function get_objects(array, result, isModule) {

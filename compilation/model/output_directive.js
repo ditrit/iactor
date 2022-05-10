@@ -15,7 +15,7 @@ export class OutputDirective extends TerraformNode {
     }
 
     toString() {   
-        return `  ${this.name}  {\n${this.objects}\n  }`
+        return `output "${this.name}" {\n${this.objects}\n}`
     }
 
     static isValid(input, source) {        

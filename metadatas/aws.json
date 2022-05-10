@@ -3,6 +3,7 @@
         "name"  : "aws",
         "required" : true,
         "providerType" : "ProviderDirective",
+        "orderResources" : ["aws_vpc", "aws_elb", "aws_security_group", ["aws_db_instance", "aws_instance"], "aws_route53_zone"],
         "modules" :  {
             "representation" : "container",
             "source" : {

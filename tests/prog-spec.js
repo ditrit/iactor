@@ -1,4 +1,4 @@
-import {parse_directories} from '../parser/parse_directory.js'
+import {parse_directories} from '../compilation/parser/parse_directory.js'
 
 describe("Terraform prog ->", function() {
     describe("Data directive ->", function() {
@@ -54,6 +54,18 @@ describe("Terraform prog ->", function() {
             resource = prog["resources"];
             expect(resource[2]["variablesName"].length).toEqual(2);
             expect(prog["errors"].length).toEqual(0);
+        })
+    })
+    
+    describe("Variable directive ->", function() {
+        let prog, variable; 
+
+        it("simple variable", function() { 
+            prog = parse_directories('./tests/modules/variables/variablesExample.tf')
+            variable = prog["variables"];
+            expect(variable.length).toEqual(4); 
+            expect(prog["errors"].length).toEqual(0);
+            expect(variable[0]["objects"].value.length).toEqual(2); 
         })
     })
 })

@@ -1,6 +1,6 @@
 import { isArray } from "mathjs";
 
-export function calcul_attributes_objects(datas, orderResources) {
+export function calcul_attributes_objects(datas) {
     let widthMin = 200;
     let heightMin = 40;
     let recourceWidthMax = 1000;
@@ -10,6 +10,7 @@ export function calcul_attributes_objects(datas, orderResources) {
     let containers = []
     let blocks = []
     let noRelations = []
+    let orderResources = datas.provider[0].orderResources
 
     datas.resources.forEach( r => {
         if(r.representation == 'container') {

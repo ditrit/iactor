@@ -17,7 +17,7 @@ export class ResourceDirective extends TerraformNode {
     }
 
     toString() {     
-        return `  ${this.name}  {\n${this.objects}\n  }`
+        return `resource "${this.type}" "${this.name}" {\n${this.objects}\n}`
     }
 
     static isValid(input, source) {

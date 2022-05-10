@@ -59,18 +59,32 @@ function required_resource(resource, attribute) {
     let errors = []
     let find = false
 
-    resource.objects.value.forEach( r => {
-        if(attribute.variableName == r.split('=')[0] || attribute.variableName == r.split('{')[0]) {
-            find = true     
-            if(attribute.attributes != undefined) {
-                attribute.attributes.forEach( a => {
-                    if(!r.includes(a.variableName)) {
-                        find = false
-                    }
-                })
-            }                    
-        }
-    })
+    if(resource.objects.value) {
+        resource.objects.value.forEach( object => {
+            if(object.constructor.name == 'TerraformComplexField') {
+                if(attribute.variableName == object.name) {
+                    find = true     
+                    if(attribute.attributes != undefined) {
+                        attribute.attributes.forEach( att => {
+                            required_resource(object, att).forEach( error => {
+                                errors.push(error)
+                            })
+                        })
+                    }                    
+                }
+            } else {
+                if(attribute.variableName == object.split('=')[0] || attribute.variableName == object.split('{')[0]) {
+                    find = true                     
+                }
+            }
+        })
+    } else {
+        resource.objects.forEach( object => {
+            if(attribute.variableName == object.split('=')[0] || attribute.variableName == object.split('{')[0]) {
+                find = true                     
+            }
+        })
+    }
     if(!find) {
         errors.push('TERRAFORM ERROR in file : ' + resource.fileName + ' resource ' + attribute.variableName + ' required in ' + resource.name + " type : " + resource.type)
     }  

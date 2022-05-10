@@ -10,7 +10,7 @@ export class DataDirective extends TerraformNode {
     }
 
     toString() {     
-        return `  ${this.name} {\n${this.object}\n  }`
+        return `data "${this.type}" "${this.name}" {\n${this.objects}\n}`
     }
 
     static isValid(input, source) {
