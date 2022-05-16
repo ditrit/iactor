@@ -4,7 +4,10 @@
   "description": "",
   "main": "hcl.js",
   "scripts": {
-    "test": "node jasmine.js"
+    "test": "node jasmine.js",
+    "lint:fix": "eslint --fix .",
+    "lint:report": "eslint . -f json-relative > eslint.json || true",
+    "lint:watch": "esw --no-ignore -w ."
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +23,11 @@
   },
   "type": "module",
   "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-formatter-json-relative": "^0.1.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-watch": "^8.0.0",
     "jasmine": "^4.1.0"
   }
 }

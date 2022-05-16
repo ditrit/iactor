@@ -1,5 +1,21 @@
 # iactor
 
+## Default commands
+
+Explanation of usage of scripts in `package.json`.
+
+### lint:fix
+
+Apply default fix for eslint in project.
+
+### lint:report
+
+Generate report of lint issues for sonar.
+
+### lint:watch
+
+To use in development, to see current lint errors with auto-refresh.
+
 ## Development
 
 ### Git: Default branches
