@@ -4,6 +4,10 @@
 
 Explanation of usage of scripts in `package.json`.
 
+### build
+
+Build source and package it in `dist` folder.
+
 ### lint:fix
 
 Apply default fix for eslint in project.
