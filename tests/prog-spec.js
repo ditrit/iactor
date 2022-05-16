@@ -17,17 +17,17 @@ describe("Terraform prog ->", function() {
 
     describe("Resource directive ->", function() {
         let prog, resource; 
+        beforeAll(function() {
+            prog = parse_directories('./tests/resourceLink')
+        });
 
         it("simple resource", function() { 
-            prog = parse_directories('./tests/tf/sshKeyExample.tf')
             resource = prog["resources"];
-            expect(resource.length).toEqual(1); 
             expect(prog["errors"].length).toEqual(0);
             expect(resource[0]["objects"].value.length).toEqual(2); 
         })
         
         it("resource using datas", function() { 
-            prog = parse_directories('./tests/resourceLink')
             resource = prog["resources"];
             expect(resource[0]["datasName"].length).toEqual(1);
             expect(prog["errors"].length).toEqual(0);
@@ -39,9 +39,8 @@ describe("Terraform prog ->", function() {
         })
         
         it("resource using variable", function() { 
-            prog = parse_directories('./tests/resourceLink')
             resource = prog["resources"];
-            expect(resource[1]["variablesName"].length).toEqual(1);
+            expect(resource[1]["variablesName"].length).toEqual(2);
             expect(prog["errors"].length).toEqual(0);
             expect(resource[1]["variablesName"][0].name).toEqual('http_port');
             expect(resource[1]["variablesName"].length).toEqual(resource[1]["variablesObject"].length);  
@@ -50,10 +49,16 @@ describe("Terraform prog ->", function() {
 
         
         it("resource using variables", function() { 
-            prog = parse_directories('./tests/resourceLink')
             resource = prog["resources"];
-            expect(resource[2]["variablesName"].length).toEqual(2);
+            expect(resource[2]["variablesName"].length).toEqual(4);
             expect(prog["errors"].length).toEqual(0);
+        })
+
+        it("resource using resource", function() { 
+            resource = prog["resources"];
+            expect(prog["errors"].length).toEqual(0);
+            expect(resource[5]["resourcesName"].length).toEqual(1);
+            expect(resource[5]["resourcesName"].length).toEqual(resource[5]["resourcesObject"].length);
         })
     })
     

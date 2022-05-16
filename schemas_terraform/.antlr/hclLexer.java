@@ -1,4 +1,4 @@
-// Generated from c:\Users\nolwe\Documents\Stage\test_antlr\hcl\schemas_terraform\hclLexer.g4 by ANTLR 4.8
+// Generated from c:\Users\nolwe\Documents\Stage\test_antlr\hcl\schemas\hclLexer.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
