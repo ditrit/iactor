@@ -15,6 +15,12 @@ jobs:
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting
           fetch-depth: 0
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - name: Generate reports
+        run: npm install && npm run lint:report
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
