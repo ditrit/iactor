@@ -18,6 +18,20 @@ To use in development, to see current lint errors with auto-refresh.
 
 ## Development
 
+### How to release
+
+We use [Semantic Versioning](https://semver.org/spec/v2.0.0.html) as guideline for the version management.
+
+Steps to release:
+- Checkout a branch `release/vX.Y.Z` from the latest `dev`.
+- Improve your version number in `package.json`, `package-lock.json` and `changelog.md`.
+- Verify the content of the `changelog.md`.
+- Commit your modification with this commit's name `Release version X.Y.Z`.
+- Create a pull request on github to this branch in `dev`.
+- After the previous PR is merged, create a pull request on github to `dev` in `main`.
+- After the previous PR is merged, tag the `main` branch with `vX.Y.Z`
+- After the tag is push, make the release on the tag in GitHub
+
 ### Git: Default branches
 
 There is two default branches on this projecs: `main` and `dev`.
