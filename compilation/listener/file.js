@@ -1,4 +1,4 @@
 export default {
-  exit_file(parsed_rule) {
-  },
-};
+    exit_file(parsed_rule) { 
+    }
+}
