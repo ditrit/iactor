@@ -4,6 +4,10 @@
 
 Explanation of usage of scripts in `package.json`.
 
+### build
+
+Build source and package it in `dist` folder.
+
 ### lint:fix
 
 Apply default fix for eslint in project.
@@ -17,6 +21,28 @@ Generate report of lint issues for sonar.
 To use in development, to see current lint errors with auto-refresh.
 
 ## Development
+
+### Directory structure
+
+This is the default directory structure we use for this project:
+
+```
+iactor                 ⇨
+├ .github              ⇨ Contains all files for github management
+│ ├ ISSUE_TEMPLATE     ⇨ Contains all template used in github
+│ └ workflows          ⇨ Contains all workflow used in github actions
+├ compilation          ⇨ Contains all file to make the Iactor compilator
+│ ├ litener            ⇨ Contains all listeners used by the compilator
+│ ├ model              ⇨ Contains all the models that describe the modelized object  
+│ └ parser             ⇨ Contains all the files that used for parsing
+├ dist                 ⇨ Contains all the build files
+├ graphisme            ⇨
+├ metadatas            ⇨
+├ schemas_terraform    ⇨
+├ svg                  ⇨ Contains all the assets and the generated output
+│ └ logos              ⇨ Contains all the logos used by the compilator
+└ tests                ⇨ Contains all files related to the tests
+```
 
 ### How to release
 
