@@ -1,61 +1,34 @@
 import jsdom from 'jsdom';
-const { JSDOM } = jsdom;
-import get_datas from '../launcher-terraform.js'
+import get_datas from '../../launcher-terraform.js'
 import { select } from 'd3';
 import { writeFileSync } from 'fs';
 import { calcul_attributes_objects } from './calcul_attributes_objects.js';
 import fs from 'fs';
 import { evaluate } from "mathjs";
 
-const dom = new JSDOM(`<!DOCTYPE html><body></body>`);
-//let arg = process.argv.slice(2).toString();
-const datas = get_datas('./tests/tf');
-let resources = calcul_attributes_objects(datas)
-
-let body = select(dom.window.document.querySelector("body"))
-let svg = body.append('svg').attr('id', 'svg0').attr('width', 2000).attr('height', 1000).attr('xmlns',"http://www.w3.org/2000/svg")
-        .attr('xmlns:xlink', "http://www.w3.org/1999/xlink");
-svg.append('g');
-const res = fs.readFileSync('./svg/resource.svg').toString()
-
-svg.append('svg:defs')
-    .append('svg:marker')
-    .attr('id', 'arrow')
-    .attr('viewBox', [0, 0, 12, 12])
-    .attr('refX', 6)
-    .attr('refY', 6)
-    .attr('markerWidth', 12)
-    .attr('markerHeight', 12)
-    .attr('orient', 'auto-start-reverse')
-    .append('svg:path')
-        .attr('d', "M2,2 L10,6 L2,10 L6,6 L2,2")
-        .attr('stroke', 'black');
-
-drawSVG(resources, [], svg, "svg0")
-
-writeFileSync('./svg/out.svg', body.html());
-
-function drawSVG(datas, parentDatas, svgParent, parentName, content) {
-    datas.forEach( d => {
-        let data = { logopath: 'logos/' + d.icon,  width: d.width, height: d.height, name: d.name, type: d.type, id : d.name + "_" + d.type };
-        const svgDom = SVGinstanciate(res, data, dom);
-        body.select("#"+parentName).node().append(svgDom.documentElement)
-        var model = dom.window.document.getElementById(d.name + "_" + d.type)
-        if(content) {
-            svgParent.querySelector("g").appendChild(model)
-            model.setAttribute('x', d.x)
-            model.setAttribute('y', d.y)
-            d.x = parentDatas.x + d.x
-            d.y = parentDatas.y + d.y
-        } else {
-            dom.window.document.getElementById(parentName).querySelector("g").appendChild(model)
-            model.setAttribute('x', d.x)
-            model.setAttribute('y', d.y)
-        }
-        if(d.contains) {
-            drawSVG(d.contains, d, model, d.name + "_" + d.type, true)  
-        }       
-    })
+function drawSVG(resourcesDatas, parentDatas, svgParent, parentName, content, provider) {
+  resourcesDatas.forEach((d) => {
+    const data = {
+      logopath: `../plugins/terraform/${provider}/assets/${d.icon}`, width: d.width, height: d.height, name: d.name, type: d.type, id: `${d.name}_${d.type}`,
+    };
+    const svgDom = SVGinstanciate(res, data, dom);
+    body.select(`#${parentName}`).node().append(svgDom.documentElement);
+    const model = dom.window.document.getElementById(`${d.name}_${d.type}`);
+    if (content) {
+      svgParent.querySelector('g').appendChild(model);
+      model.setAttribute('x', d.x);
+      model.setAttribute('y', d.y);
+      d.x = parentDatas.x + d.x;
+      d.y = parentDatas.y + d.y;
+    } else {
+      dom.window.document.getElementById(parentName).querySelector('g').appendChild(model);
+      model.setAttribute('x', d.x);
+      model.setAttribute('y', d.y);
+    }
+    if (d.contains) {
+      drawSVG(d.contains, d, model, `${d.name}_${d.type}`, true, provider);
+    }
+  });
 
     datas.forEach( blockEnd => {
         if(blockEnd.link) {
@@ -136,16 +109,6 @@ function drawSVG(datas, parentDatas, svgParent, parentName, content) {
             })
         }    
     })
-
-    /*let svgs = body.selectAll('svg')   
-    svgs.on('click', function(d, i){
-        this.append('rect')
-            .attr('x',10)
-            .attr('y',10)
-            .attr('width',10)
-            .attr('height',10)
-            .attr('color','red')
-    })   */     
 }
 
 function SVGmatch(text, data) {
@@ -166,3 +129,34 @@ function SVGinstanciate(svgVars, data, dom) {
     const svgTxt = SVGmatch(svgVars, data);
     return domParser.parseFromString(svgTxt, "image/svg+xml");
 }
+
+const { JSDOM } = jsdom;
+
+const dom = new JSDOM('<!DOCTYPE html><body></body>');
+const arg = process.argv.slice(2).toString();
+const datas = getDatas(arg);
+const resources = calculAttributesObjects(datas);
+
+const body = select(dom.window.document.querySelector('body'));
+const svg = body.append('svg').attr('id', 'svg0').attr('width', 2000).attr('height', 1000)
+  .attr('xmlns', 'http://www.w3.org/2000/svg')
+  .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink');
+svg.append('g');
+const res = readFileSync('./src/plugins/terraform/' + datas.provider[0].name + '/assets/resource.svg').toString();
+
+svg.append('svg:defs')
+  .append('svg:marker')
+  .attr('id', 'arrow')
+  .attr('viewBox', [0, 0, 12, 12])
+  .attr('refX', 6)
+  .attr('refY', 6)
+  .attr('markerWidth', 12)
+  .attr('markerHeight', 12)
+  .attr('orient', 'auto-start-reverse')
+  .append('svg:path')
+  .attr('d', 'M2,2 L10,6 L2,10 L6,6 L2,2')
+  .attr('stroke', 'black');
+
+drawSVG(resources, [], svg, 'svg0', false, datas.provider[0].name);
+
+writeFileSync('./src/assets/out.svg', body.html());
