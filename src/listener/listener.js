@@ -3,11 +3,11 @@ import file from './file.js';
 import prog from './prog.js';
 
 class Listener extends antlr4.tree.ParseTreeListener {
-    
+
 }
 
-export default{
-    ...file,
-    ...prog,
-    ...Listener,
-}
+export default {
+  ...file,
+  ...prog,
+  ...Listener,
+};

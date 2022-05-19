@@ -1,15 +1,15 @@
 import { newProviderDirective } from '../model/provider_directive.js';
 
 export default {
-    enter_provider_directive(parsed_rule) {
-        parsed_rule.prog.current_file.field = []   
-    }, 
-    
-    exit_provider_directive(parsed_rule) {
-        let prog = parsed_rule.prog.current_file
-        let name = (prog.name) ? prog.name.value : ""
-        let objects = (prog.object) ? prog.object : ""
+  enter_provider_directive(parsed_rule) {
+    parsed_rule.prog.current_file.field = [];
+  },
 
-        parsed_rule.prog.current_file.provider_directive.push(newProviderDirective({name : name, objects : objects}, parsed_rule.ctx))
-    }
-}
+  exit_provider_directive(parsed_rule) {
+    const prog = parsed_rule.prog.current_file;
+    const name = (prog.name) ? prog.name.value : '';
+    const objects = (prog.object) ? prog.object : '';
+
+    parsed_rule.prog.current_file.provider_directive.push(newProviderDirective({ name, objects }, parsed_rule.ctx));
+  },
+};

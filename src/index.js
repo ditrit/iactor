@@ -29,104 +29,103 @@ function drawSVG(resourcesDatas, parentDatas, svgParent, parentName, content, pr
     }
   });
 
-    datas.forEach( blockEnd => {
-        if(blockEnd.link) {
-            blockEnd.link.forEach( blockBegin => {
-                let xEnd, yEnd, xBegin, yBegin;
-                let blockEndWidth = ((blockEnd.width > 0) ? blockEnd.width + 30 : 160) 
-                let blockBeginWidth = ((blockBegin.width > 0) ? blockBegin.width + 30 : 160) 
-                let blockEndHeight = ((blockEnd.height > 0) ? blockEnd.height + 30 : 44) 
-                let blockBeginHeight = ((blockBegin.height > 0) ? blockBegin.height + 30 : 44) 
-                let endX1 = blockEnd.x + blockEndWidth
-                let endX2 = blockBegin.x + blockBeginWidth
-                let endY1 = blockEnd.y + blockEndHeight
-                let endY2 = blockBegin.y + blockBeginHeight
-                if(blockBegin.y == blockEnd.y && blockBeginHeight == blockEndHeight) {
-                    yEnd = blockEnd.y + blockEndHeight/2
-                    yBegin = blockBegin.y + blockBeginHeight/2
-                    if(blockBegin.x > blockEnd.x) {
-                        yEnd+= 10
-                        yBegin+= 10
-                        xEnd = endX1 + 10
-                        xBegin = blockBegin.x + 4
-                    } else {
-                        yEnd-= 10
-                        yBegin-= 10
-                        xEnd = blockEnd.x
-                        xBegin = endX2 + 4
-                    }
-                } else if(blockBegin.x == blockEnd.x && blockBeginWidth == blockEndWidth){
-                    xEnd = blockEnd.x + blockEndWidth/2
-                    xBegin = blockBegin.x + blockBeginWidth/2
-                    if(blockBegin.y > blockEnd.y) {
-                        xEnd+= 10
-                        xBegin+= 10
-                        yEnd = endY1 + 10
-                        yBegin = blockBegin.y + 4
-                    } else {
-                        xEnd-= 10
-                        xBegin-= 10
-                        yEnd = blockEnd.y
-                        yBegin = endY2 + 4
-                    }
-                } else { 
-                    if(blockEndWidth > blockBegin.x && blockEndWidth > endX2) {
-                        xEnd = blockEnd.x + blockEndWidth/2 + 5 - 10
-                        xBegin = blockBegin.x + blockBeginWidth/2 + 10
-                        yEnd = endY1 - 10
-                        yBegin = blockBegin.y + 4
-                    } else if(endX2 > endX1 && endY2 > endY1) {
-                        xEnd = endX1 + 8
-                        xBegin = blockBegin.x + blockBeginWidth/2 - 10
-                        yEnd = blockEnd.y + blockEndHeight/2 + 10
-                        yBegin = blockBegin.y + 4
-                    } else if(endX2 > endX1 && endY2 < endY1) {
-                        xEnd = endX1 + 8
-                        xBegin = blockBegin.x + blockBeginWidth/2 - 10
-                        yEnd = blockEnd.y + blockEndHeight/2 - 10
-                        yBegin = endY2 + 4
-                    } else if(endX2 < endX1 && endY2 < endY1) {
-                        xEnd = blockEnd.x + blockEndWidth/2 - 10
-                        xBegin = endX2 + 4
-                        yEnd = blockEnd.y
-                        yBegin = blockBegin.y + blockBeginHeight/2 - 10
-                    } else {
-                        xEnd = blockEnd.x
-                        xBegin = blockBegin.x + blockBeginWidth/2 + 10
-                        yEnd = blockEnd.y + blockEndHeight/2 + 10
-                        yBegin = blockBegin.y + 4
-                    }
-                }
-                svg.append("line")
-                    .attr("x1",xEnd)  
-                    .attr("y1",yEnd)  
-                    .attr("x2",xBegin)  
-                    .attr("y2",yBegin)  
-                    .attr("stroke","black")  
-                    .attr("stroke-width",1)  
-                    .attr("marker-start","url(#arrow)");
-            })
-        }    
-    })
+  resourcesDatas.forEach((blockEnd) => {
+    if (blockEnd.link) {
+      blockEnd.link.forEach((blockBegin) => {
+        let xEnd; let yEnd; let xBegin; let
+          yBegin;
+        const blockEndWidth = ((blockEnd.width > 0) ? blockEnd.width + 30 : 160);
+        const blockBeginWidth = ((blockBegin.width > 0) ? blockBegin.width + 30 : 160);
+        const blockEndHeight = ((blockEnd.height > 0) ? blockEnd.height + 30 : 44);
+        const blockBeginHeight = ((blockBegin.height > 0) ? blockBegin.height + 30 : 44);
+        const endX1 = blockEnd.x + blockEndWidth;
+        const endX2 = blockBegin.x + blockBeginWidth;
+        const endY1 = blockEnd.y + blockEndHeight;
+        const endY2 = blockBegin.y + blockBeginHeight;
+        if (blockBegin.y == blockEnd.y && blockBeginHeight == blockEndHeight) {
+          yEnd = blockEnd.y + blockEndHeight / 2;
+          yBegin = blockBegin.y + blockBeginHeight / 2;
+          if (blockBegin.x > blockEnd.x) {
+            yEnd += 10;
+            yBegin += 10;
+            xEnd = endX1 + 10;
+            xBegin = blockBegin.x + 4;
+          } else {
+            yEnd -= 10;
+            yBegin -= 10;
+            xEnd = blockEnd.x;
+            xBegin = endX2 + 4;
+          }
+        } else if (blockBegin.x == blockEnd.x && blockBeginWidth == blockEndWidth) {
+          xEnd = blockEnd.x + blockEndWidth / 2;
+          xBegin = blockBegin.x + blockBeginWidth / 2;
+          if (blockBegin.y > blockEnd.y) {
+            xEnd += 10;
+            xBegin += 10;
+            yEnd = endY1 + 10;
+            yBegin = blockBegin.y + 4;
+          } else {
+            xEnd -= 10;
+            xBegin -= 10;
+            yEnd = blockEnd.y;
+            yBegin = endY2 + 4;
+          }
+        } else if (blockEndWidth > blockBegin.x && blockEndWidth > endX2) {
+          xEnd = blockEnd.x + blockEndWidth / 2 + 5 - 10;
+          xBegin = blockBegin.x + blockBeginWidth / 2 + 10;
+          yEnd = endY1 - 10;
+          yBegin = blockBegin.y + 4;
+        } else if (endX2 > endX1 && endY2 > endY1) {
+          xEnd = endX1 + 8;
+          xBegin = blockBegin.x + blockBeginWidth / 2 - 10;
+          yEnd = blockEnd.y + blockEndHeight / 2 + 10;
+          yBegin = blockBegin.y + 4;
+        } else if (endX2 > endX1 && endY2 < endY1) {
+          xEnd = endX1 + 8;
+          xBegin = blockBegin.x + blockBeginWidth / 2 - 10;
+          yEnd = blockEnd.y + blockEndHeight / 2 - 10;
+          yBegin = endY2 + 4;
+        } else if (endX2 < endX1 && endY2 < endY1) {
+          xEnd = blockEnd.x + blockEndWidth / 2 - 10;
+          xBegin = endX2 + 4;
+          yEnd = blockEnd.y;
+          yBegin = blockBegin.y + blockBeginHeight / 2 - 10;
+        } else {
+          xEnd = blockEnd.x;
+          xBegin = blockBegin.x + blockBeginWidth / 2 + 10;
+          yEnd = blockEnd.y + blockEndHeight / 2 + 10;
+          yBegin = blockBegin.y + 4;
+        }
+        svg.append('line')
+          .attr('x1', xEnd)
+          .attr('y1', yEnd)
+          .attr('x2', xBegin)
+          .attr('y2', yBegin)
+          .attr('stroke', 'black')
+          .attr('stroke-width', 1)
+          .attr('marker-start', 'url(#arrow)');
+      });
+    }
+  });
 }
 
 function SVGmatch(text, data) {
-    function matchTxt(m, op, found, s) {
-      return op == "N"
-        ? evaluate(found, data)
-        : found
-            .split(",")
-            .map((x) => (data[x] ? data[x] : x))
-            .join("");
-    }
+  function matchTxt(m, op, found, s) {
+    return op == 'N'
+      ? evaluate(found, data)
+      : found
+        .split(',')
+        .map((x) => (data[x] ? data[x] : x))
+        .join('');
+  }
 
-    return text.replace(/([TN]){{([^}]*)}}/g, matchTxt);
+  return text.replace(/([TN]){{([^}]*)}}/g, matchTxt);
 }
 
 function SVGinstanciate(svgVars, data, dom) {
-    const domParser = new dom.window.DOMParser();
-    const svgTxt = SVGmatch(svgVars, data);
-    return domParser.parseFromString(svgTxt, "image/svg+xml");
+  const domParser = new dom.window.DOMParser();
+  const svgTxt = SVGmatch(svgVars, data);
+  return domParser.parseFromString(svgTxt, 'image/svg+xml');
 }
 
 const { JSDOM } = jsdom;
@@ -141,7 +140,7 @@ const svg = body.append('svg').attr('id', 'svg0').attr('width', 2000).attr('heig
   .attr('xmlns', 'http://www.w3.org/2000/svg')
   .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink');
 svg.append('g');
-const res = readFileSync('./src/plugins/terraform/' + datas.provider[0].name + '/assets/resource.svg').toString();
+const res = readFileSync(`./src/plugins/terraform/${datas.provider[0].name}/assets/resource.svg`).toString();
 
 svg.append('svg:defs')
   .append('svg:marker')
