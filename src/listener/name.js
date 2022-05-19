@@ -1,4 +1,4 @@
-import { newTerraformName } from "../model/name.js"
+import { newTerraformName } from '../model/name.js';
 
 export default {
     exit_name(parsed_rule) {

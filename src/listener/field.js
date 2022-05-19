@@ -1,4 +1,4 @@
-import { newTerraformField } from "../model/field.js"
+import { newTerraformField } from '../model/field.js';
 
 export default {
     exit_field(parsed_rule) {

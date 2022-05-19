@@ -1,4 +1,4 @@
-import { newVariableDirective } from "../model/variable_directive.js";
+import { newVariableDirective } from '../model/variable_directive.js';
 
 export default {
     enter_variable_directive(parsed_rule) {  

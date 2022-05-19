@@ -1,4 +1,4 @@
-import {parse_directories} from '../compilation/parser/parse_directory.js'
+import { parse_directories } from '../compilation/parser/parse_directory.js';
 
 describe("Terraform prog ->", function() {
     describe("Data directive ->", function() {

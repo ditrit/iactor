@@ -1,4 +1,4 @@
-lexer grammar hclLexer;
+lexer grammar terraformLexer;
 
 MODULE : 'module';
 

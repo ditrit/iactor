@@ -1,5 +1,5 @@
-import { isArray } from "mathjs"
-import { TerraformNode } from "./terraform_node.js"
+import { isArray } from 'mathjs';
+import { TerraformNode } from './terraform_node.js';
 
 export class TerraformComplexField extends TerraformNode {
     constructor(input, source) {

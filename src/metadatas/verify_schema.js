@@ -1,6 +1,7 @@
 import fs from 'fs';
-import Ajv from 'ajv'
-const ajv = new Ajv()
+import Ajv from 'ajv';
+
+const ajv = new Ajv();
 
 export function verify_schema(provider) {
     let metadatas, fileMetadatas;

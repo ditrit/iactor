@@ -2,7 +2,7 @@
     <g>
         <rect id="content" x="10" y="18" width="880" height="200" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_vpc.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_vpc.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">vpc_main</tspan>
         </text>
@@ -13,7 +13,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_internet_gateway.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_internet_gateway.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">default</tspan>
         </text>
@@ -25,7 +25,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_route.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_route.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">wan_access</tspan>
         </text>
@@ -37,7 +37,7 @@
     <g>
         <rect id="content" x="10" y="18" width="420" height="110" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_db_subnet_group.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_db_subnet_group.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">rds_subnet</tspan>
         </text>
@@ -48,7 +48,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_subnet.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_subnet.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">webservers-a</tspan>
         </text>
@@ -60,7 +60,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_subnet.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_subnet.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">webservers-b</tspan>
         </text>
@@ -74,7 +74,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_elb.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_elb.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">http-lb</tspan>
         </text>
@@ -86,7 +86,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_security_group.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_security_group.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">sg_rds</tspan>
         </text>
@@ -98,7 +98,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_security_group.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_security_group.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">sg_elb</tspan>
         </text>
@@ -110,7 +110,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_security_group.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_security_group.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">sg_www</tspan>
         </text>
@@ -122,7 +122,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_db_instance.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_db_instance.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">myawsdb</tspan>
         </text>
@@ -134,7 +134,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_instance.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_instance.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">www-a</tspan>
         </text>
@@ -146,7 +146,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_instance.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_instance.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">www-b</tspan>
         </text>
@@ -158,7 +158,7 @@
     <g>
         <rect id="content" x="10" y="18" width="650" height="110" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_route53_zone.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_route53_zone.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">publicdns</tspan>
         </text>
@@ -169,7 +169,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_route53_record.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_route53_record.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">www-a</tspan>
         </text>
@@ -181,7 +181,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_route53_record.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_route53_record.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">www-b</tspan>
         </text>
@@ -193,7 +193,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_route53_record.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_route53_record.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">www</tspan>
         </text>
@@ -206,7 +206,7 @@
     <g>
         <rect id="content" x="10" y="18" width="440" height="280" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/module.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/module.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">server</tspan>
         </text>
@@ -217,7 +217,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_security_group.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_security_group.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">sg_serveurs</tspan>
         </text>
@@ -229,7 +229,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_instance.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_instance.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">srv1</tspan>
         </text>
@@ -241,7 +241,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_volume_attachment.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_volume_attachment.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">ebs_att</tspan>
         </text>
@@ -253,7 +253,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_ebs_volume.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_ebs_volume.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">www_srv1</tspan>
         </text>
@@ -266,7 +266,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/module.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/module.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">variables</tspan>
         </text>
@@ -278,7 +278,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_instance.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_instance.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">web</tspan>
         </text>
@@ -290,7 +290,7 @@
     <g>
         <rect id="content" x="10" y="18" width="0" height="0" ry="4" style="fill:none;stroke-width:1.2;stroke:#000"></rect>
         <rect id="logo_frame" x="4" y="4" width="160" height="44" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" style="paint-order:stroke fill markers"></rect>
-        <image x="5" y="5" width="40" height="40" xlink:href="../plugins/terraform/aws/assets/aws_key_pair.svg"></image>
+        <image x="5" y="5" width="40" height="40" xlink:href="./src/plugins/terraform/aws/assets/aws_key_pair.svg"></image>
         <text id="name" text-align="center" style="font-family:Alef;font-size:12px;font-style:italic" xml:space="preserve">
             <tspan x="48" y="12">sshdeploy</tspan>
         </text>

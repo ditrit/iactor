@@ -1,4 +1,4 @@
-import { newTerraformType } from "../model/provider_type.js"
+import { newTerraformType } from '../model/provider_type.js';
 
 export default {
     exit_provider_type(parsed_rule) {

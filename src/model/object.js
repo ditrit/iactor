@@ -1,4 +1,4 @@
-import { TerraformNode } from "./terraform_node.js"
+import { TerraformNode } from './terraform_node.js';
 
 export class TerraformObject extends TerraformNode {
     constructor(input, source) {

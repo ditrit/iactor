@@ -1,4 +1,4 @@
-import { newDataDirective } from "../model/data_directive.js";
+import { newDataDirective } from '../model/data_directive.js';
 
 export default {
     enter_data_directive(parsed_rule) {

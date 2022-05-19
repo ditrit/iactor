@@ -1,4 +1,4 @@
-import { newProviderDirective } from "../model/provider_directive.js";
+import { newProviderDirective } from '../model/provider_directive.js';
 
 export default {
     enter_provider_directive(parsed_rule) {

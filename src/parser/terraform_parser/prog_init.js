@@ -1,7 +1,7 @@
-import { TerraformFile } from '../model/file.js'
-import { parse as parse_terraform } from '../../schemas_terraform/hcl.js'
-import hclListener from "../listener/hclListener.js"
-import fs from "fs"
+import fs from 'fs';
+import { TerraformFile } from '../../model/file.js';
+import { parse as parse_terraform } from '../antlr_parser/index.js';
+import hclListener from '../../listener/terraformListener.js';
 
 export default function parse_file(file, namespace_uri, namespace_prefix, parent_file, prog) {
     let src_data, res, listener

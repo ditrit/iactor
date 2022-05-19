@@ -1,4 +1,4 @@
-import { newTerraformDirective } from "../model/terraform_directive.js";
+import { newTerraformDirective } from '../model/terraform_directive.js';
 
 export default {
     enter_terraform_directive(parsed_rule) {

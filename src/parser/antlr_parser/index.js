@@ -1,7 +1,7 @@
-import hclParser from "./hclParser.js";
-import hclLexer from "./hclLexer.js";
 import antlr4 from 'antlr4';
-import fs from "fs"
+import fs from 'fs';
+import hclParser from './terraformParser.js';
+import hclLexer from './terraformLexer.js';
 
 export function parse(src) {
     var input = fs.readFileSync(src.file, 'UTF-8')

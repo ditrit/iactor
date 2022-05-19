@@ -1,15 +1,14 @@
 import jsdom from 'jsdom';
-import get_datas from '../../launcher-terraform.js'
+import { evaluate } from 'mathjs';
 import { select } from 'd3';
-import { writeFileSync } from 'fs';
-import { calcul_attributes_objects } from './calcul_attributes_objects.js';
-import fs from 'fs';
-import { evaluate } from "mathjs";
+import { writeFileSync, readFileSync } from 'fs';
+import getDatas from './plugins/terraform/index.js';
+import { calculAttributesObjects } from './utils/svg_maths.js';
 
 function drawSVG(resourcesDatas, parentDatas, svgParent, parentName, content, provider) {
   resourcesDatas.forEach((d) => {
     const data = {
-      logopath: `../plugins/terraform/${provider}/assets/${d.icon}`, width: d.width, height: d.height, name: d.name, type: d.type, id: `${d.name}_${d.type}`,
+      logopath: `./src/plugins/terraform/${provider}/assets/${d.icon}`, width: d.width, height: d.height, name: d.name, type: d.type, id: `${d.name}_${d.type}`,
     };
     const svgDom = SVGinstanciate(res, data, dom);
     body.select(`#${parentName}`).node().append(svgDom.documentElement);
@@ -159,4 +158,4 @@ svg.append('svg:defs')
 
 drawSVG(resources, [], svg, 'svg0', false, datas.provider[0].name);
 
-writeFileSync('./src/assets/out.svg', body.html());
+writeFileSync('./out.svg', body.html());

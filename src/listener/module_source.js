@@ -1,4 +1,4 @@
-import { newModuleSource } from "../model/module_source.js";
+import { newModuleSource } from '../model/module_source.js';
 
 export default {
     enter_module_source(parsed_rule) {

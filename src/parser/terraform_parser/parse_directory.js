@@ -1,6 +1,6 @@
-import { parse } from "./parse.js";
-import { get_objects } from "./management_objects.js";
 import fs from 'fs';
+import { parse } from './parse_file.js';
+import { get_objects } from './get_links_between_objects.js';
 
 export function parse_directories(filesPath) {
     let result = parse_directory(filesPath)  

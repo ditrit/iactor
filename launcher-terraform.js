@@ -1,6 +1,6 @@
-import { parse_directories, get_module_attribute } from "./src/compilation/parser/parse_directory.js";
-import { verify_schema } from "./src/metadatas/verify_schema.js";
-import { analyse_resources, analyse_modules } from "./src/compilation/parser/analyse_metadatas.js";
+import { parse_directories, get_module_attribute } from './src/compilation/parser/parse_directory.js';
+import { verify_schema } from './src/metadatas/verify_schema.js';
+import { analyse_resources, analyse_modules } from './src/compilation/parser/analyse_metadatas.js';
 
 export default function(filesPath) {
     let result = parse_directories(filesPath);

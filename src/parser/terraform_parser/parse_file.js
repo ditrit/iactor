@@ -1,4 +1,4 @@
-import { TerraformProg } from '../model/prog.js';
+import { TerraformProg } from '../../model/prog.js';
 import parse_file from './prog_init.js';
 
 export function parse(src) {
