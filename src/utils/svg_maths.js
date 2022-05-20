@@ -3,6 +3,7 @@ import { isArray } from 'mathjs';
 export function calculAttributesObjects(datas) {
   const widthMin = 200;
   const heightMin = 40;
+  const windowWidthMax = 2000;
   const recourceWidthMax = 1000;
   let recourceHeightMax = 0;
   let xCurrent = 10;
@@ -263,12 +264,17 @@ export function calculAttributesObjects(datas) {
 
   for (let i = 0; i < resources.length; i++) {
     const xy = calcul_xy_container(resources[i], xCurrent, yCurrent);
-    if (i + 1 < resources.length && resources[i + 1].order != resources[i].order) {
+    const widthNextResource = (i + 1 < resources.length && resources[i+1].width > 0) ? resources[i+1].width : 190
+    if (i + 1 < resources.length && !noRelations.includes(resources[i + 1])  && (resources[i + 1].order != resources[i].order || widthNextResource + xCurrent >= windowWidthMax)) {
       if (resources[i].height > heightMax) heightMax = resources[i].height;
       yCurrent = yCurrent + heightMax + 75;
       xCurrent = 10;
       heightMax = heightMin;
-    } else if (xy.x != -1 && xy.y != -1) {
+    } else if (i === resources.length - 1) {
+      yCurrent = yCurrent + heightMax;
+      xCurrent = 10;
+      heightMax = heightMin;
+    } else if (xy.x != -1 && xy.y != -1 && !noRelations.includes(resources[i])) {
       xCurrent = xy.x;
       yCurrent = xy.y;
       if (resources[i].height > heightMax) heightMax = resources[i].height;
@@ -276,17 +282,24 @@ export function calculAttributesObjects(datas) {
     if (resources[i].width > widthMax) widthMax = resources[i].width;
   }
 
-  yCurrent = 10;
-  xCurrent = widthMax + 50;
+  yCurrent += 75;
+  xCurrent = 10
   heightMax = heightMin;
 
-  for (let i = 0; i < noRelations.length; i++) {
-    calcul_xy_container(noRelations[i], xCurrent, yCurrent);
-    if (noRelations[i].height > heightMax) heightMax = noRelations[i].height;
-    yCurrent = yCurrent + heightMax + 75;
-    xCurrent = widthMax + 50;
-    heightMax = heightMin;
-    if (!resources.includes(noRelations[i])) resources.push(noRelations[i]);
+  for(let i = 0; i < noRelations.length; i++) {
+    let xy = calcul_xy_container(noRelations[i], xCurrent, yCurrent);
+    if(i + 1 < noRelations.length && noRelations[i+1].width + xCurrent >= windowWidthMax) {
+        if(noRelations[i].height > heightMax) heightMax = noRelations[i].height;
+        yCurrent = yCurrent + heightMax + 75;
+        xCurrent = 10;
+        heightMax = heightMin;
+    } else if(xy.x != -1 && xy.y != -1) {            
+        xCurrent = xy.x;
+        yCurrent = xy.y;
+        if(resources[i].height > heightMax) heightMax = resources[i].height;
+    }
+    if(noRelations[i].width > widthMax) widthMax = noRelations[i].width;
+    if(!resources.includes(noRelations[i])) resources.push(noRelations[i]);
   }
 
   return resources;

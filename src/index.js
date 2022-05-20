@@ -136,7 +136,7 @@ const datas = getDatas(arg);
 const resources = calculAttributesObjects(datas);
 
 const body = select(dom.window.document.querySelector('body'));
-const svg = body.append('svg').attr('id', 'svg0').attr('width', 2000).attr('height', 1000)
+const svg = body.append('svg').attr('id', 'svg0').attr('width', 2000).attr('height', 2000)
   .attr('xmlns', 'http://www.w3.org/2000/svg')
   .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink');
 svg.append('g');
