@@ -140,7 +140,9 @@ const svg = body.append('svg').attr('id', 'svg0').attr('width', 2000).attr('heig
   .attr('xmlns', 'http://www.w3.org/2000/svg')
   .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink');
 svg.append('g');
-const res = readFileSync(`./src/plugins/terraform/${datas.provider[0].name}/assets/resource.svg`).toString();
+const filePlugins = readFileSync(`./src/plugins/terraform/plugins.json`);
+const plugins = JSON.parse(filePlugins);
+const res = readFileSync(`./src/plugins/terraform/${plugins[datas.provider[0].name]}/assets/resource.svg`).toString();
 
 svg.append('svg:defs')
   .append('svg:marker')
@@ -155,6 +157,6 @@ svg.append('svg:defs')
   .attr('d', 'M2,2 L10,6 L2,10 L6,6 L2,2')
   .attr('stroke', 'black');
 
-drawSVG(resources, [], svg, 'svg0', false, datas.provider[0].name);
+drawSVG(resources, [], svg, 'svg0', false, plugins[datas.provider[0].name]);
 
 writeFileSync('./out.svg', body.html());
