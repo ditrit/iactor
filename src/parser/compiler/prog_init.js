@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { TerraformFile } from '../../model/file.js';
-import { parse as parse_terraform } from '../antlr_parser/index.js';
+import { parse as parse_terraform } from '../grammar_parsing/index.js';
 import hclListener from '../../listener/terraformListener.js';
 
 export default function parse_file(file, namespace_uri, namespace_prefix, parent_file, prog) {

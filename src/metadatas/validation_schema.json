@@ -15,7 +15,7 @@
                 "modules" : { "$ref" : "#/definitions/modules"},
                 "resources" : { "$ref" : "#/definitions/resources"}
             },
-            "required": ["name", "providerType", "resources", "modules"]  
+            "required": ["name", "providerType", "resources"]  
         },
         "modules" : {
             "type": "object",

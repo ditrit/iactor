@@ -1,5 +1,5 @@
 import { newResourceDirective } from '../model/resource_directive.js';
-import { get_names } from '../parser/terraform_parser/get_links_between_objects.js';
+import { get_names } from '../parser/compiler/get_links_between_objects.js';
 
 export default {
   enter_resource_directive(parsed_rule) {
