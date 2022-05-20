@@ -5,6 +5,7 @@
   "main": "hcl.js",
   "scripts": {
     "test": "node jasmine.js",
+    "iactor": "node ./src/index.js",
     "lint:fix": "eslint --fix .",
     "lint:report": "eslint . -f json-relative > eslint.json || true",
     "lint:watch": "esw --no-ignore -w ."
