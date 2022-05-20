@@ -1,5 +1,5 @@
 import { newModuleDirective } from '../model/module_directive.js';
-import { get_names } from '../parser/terraform_parser/get_links_between_objects.js';
+import { get_names } from '../parser/compiler/get_links_between_objects.js';
 
 export default {
   enter_module_directive(parsed_rule) {
