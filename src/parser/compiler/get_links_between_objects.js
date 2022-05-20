@@ -180,20 +180,18 @@ function get_variable_name(values) {
 
 function get_resource_name(values, variableValue) {
   let resource = '';
-  if (variableValue[0].substring(0, 3) == 'aws') {
-    resource = { var: values[0], type: variableValue[0], name: variableValue[1] };
-  } else if (variableValue[0].substring(0, 3) == '"${' && variableValue[0].substring(3, 6) == 'aws') {
+  if (variableValue[0].substring(0, 3) == '"${' && variableValue.length === 3) {
     resource = { var: values[0], type: variableValue[0].substring(3), name: variableValue[1] };
-  } else if (variableValue[0].substring(0, 1) == '[') {
+  } else if (variableValue[0].substring(0, 1) == '[' && variableValue.length >= 2) {
     const array = values[1].split(',');
     resource = [];
     for (let i = 0; i < array.length; i++) {
       const explode = array[i].split('.');
       if (i == 0) {
-        if (explode[0].substring(0, 4) == '["${' && explode[0].substring(4, 7) == 'aws') {
+        if (explode[0].substring(0, 4) == '["${') {
           resource.push({ var: values[0], type: explode[0].substring(4), name: explode[1] });
         }
-      } else if (explode[0].substring(0, 3) == '"${' && explode[0].substring(3, 6) == 'aws') {
+      } else if (explode[0].substring(0, 3) == '"${') {
         resource.push({ var: values[0], type: explode[0].substring(3), name: explode[1] });
       }
     }

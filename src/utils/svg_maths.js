@@ -296,7 +296,7 @@ export function calculAttributesObjects(datas) {
     } else if(xy.x != -1 && xy.y != -1) {            
         xCurrent = xy.x;
         yCurrent = xy.y;
-        if(resources[i].height > heightMax) heightMax = resources[i].height;
+        if(noRelations[i].height > heightMax) heightMax = noRelations[i].height;
     }
     if(noRelations[i].width > widthMax) widthMax = noRelations[i].width;
     if(!resources.includes(noRelations[i])) resources.push(noRelations[i]);
