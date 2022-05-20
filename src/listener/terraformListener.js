@@ -1,4 +1,4 @@
-// Generated from hcl.g4 by ANTLR 4.9.3
+// Generated from terraformParser.g4 by ANTLR 4.9.3
 // jshint ignore: start
 import antlr4 from 'antlr4';
 
@@ -18,216 +18,216 @@ import output_directive from './output_directive.js';
 import variable_directive from './variable_directive.js';
 import provider_directive from './provider_directive.js';
 
-// This class defines a complete listener for a parse tree produced by hclParser.
-export default class hclListener extends antlr4.tree.ParseTreeListener {
+// This class defines a complete listener for a parse tree produced by terraformParser.
+export default class terraformParserListener extends antlr4.tree.ParseTreeListener {
   constructor(prog) {
     super();
     this.prog = prog;
   }
 
-  // Enter a parse tree produced by hclParser#file.
+  // Enter a parse tree produced by terraformParser#file.
   enterFile(ctx) {
   }
 
-  // Exit a parse tree produced by hclParser#file.
+  // Exit a parse tree produced by terraformParser#file.
   exitFile(ctx) {
     file.exit_file({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Enter a parse tree produced by hclParser#directive.
+  // Enter a parse tree produced by terraformParser#directive.
   enterDirective(ctx) {
   }
 
-  // Exit a parse tree produced by hclParser#directive.
+  // Exit a parse tree produced by terraformParser#directive.
   exitDirective(ctx) {
   }
 
-  // Enter a parse tree produced by hclParser#dataDirective.
+  // Enter a parse tree produced by terraformParser#dataDirective.
   enterDataDirective(ctx) {
     data_directive.enter_data_directive({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Exit a parse tree produced by hclParser#dataDirective.
+  // Exit a parse tree produced by terraformParser#dataDirective.
   exitDataDirective(ctx) {
     data_directive.exit_data_directive({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Enter a parse tree produced by hclParser#moduleDirective.
+  // Enter a parse tree produced by terraformParser#moduleDirective.
   enterModuleDirective(ctx) {
     module_directive.enter_module_directive({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Exit a parse tree produced by hclParser#moduleDirective.
+  // Exit a parse tree produced by terraformParser#moduleDirective.
   exitModuleDirective(ctx) {
     module_directive.exit_module_directive({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Enter a parse tree produced by hclParser#moduleSource.
+  // Enter a parse tree produced by terraformParser#moduleSource.
   enterModuleSource(ctx) {
   }
 
-  // Exit a parse tree produced by hclParser#moduleSource.
+  // Exit a parse tree produced by terraformParser#moduleSource.
   exitModuleSource(ctx) {
     module_source.exit_module_source({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Enter a parse tree produced by hclParser#providerDirective.
+  // Enter a parse tree produced by terraformParser#providerDirective.
   enterProviderDirective(ctx) {
     provider_directive.enter_provider_directive({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Exit a parse tree produced by hclParser#providerDirective.
+  // Exit a parse tree produced by terraformParser#providerDirective.
   exitProviderDirective(ctx) {
     provider_directive.exit_provider_directive({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Enter a parse tree produced by hclParser#terraformDirective.
+  // Enter a parse tree produced by terraformParser#terraformDirective.
   enterTerraformDirective(ctx) {
     terraform_directive.enter_terraform_directive({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Exit a parse tree produced by hclParser#terraformDirective.
+  // Exit a parse tree produced by terraformParser#terraformDirective.
   exitTerraformDirective(ctx) {
     terraform_directive.exit_terraform_directive({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Enter a parse tree produced by hclParser#resourceDirective.
+  // Enter a parse tree produced by terraformParser#resourceDirective.
   enterResourceDirective(ctx) {
     resource_directive.enter_resource_directive({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Exit a parse tree produced by hclParser#resourceDirective.
+  // Exit a parse tree produced by terraformParser#resourceDirective.
   exitResourceDirective(ctx) {
     resource_directive.exit_resource_directive({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Enter a parse tree produced by hclParser#variableDirective.
+  // Enter a parse tree produced by terraformParser#variableDirective.
   enterVariableDirective(ctx) {
     variable_directive.enter_variable_directive({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Exit a parse tree produced by hclParser#variableDirective.
+  // Exit a parse tree produced by terraformParser#variableDirective.
   exitVariableDirective(ctx) {
     variable_directive.exit_variable_directive({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Enter a parse tree produced by hclParser#outputDirective.
+  // Enter a parse tree produced by terraformParser#outputDirective.
   enterOutputDirective(ctx) {
     output_directive.enter_output_directive({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Exit a parse tree produced by hclParser#outputDirective.
+  // Exit a parse tree produced by terraformParser#outputDirective.
   exitOutputDirective(ctx) {
     output_directive.exit_output_directive({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Enter a parse tree produced by hclParser#name.
+  // Enter a parse tree produced by terraformParser#name.
   enterName(ctx) {
   }
 
-  // Exit a parse tree produced by hclParser#name.
+  // Exit a parse tree produced by terraformParser#name.
   exitName(ctx) {
     name.exit_name({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Enter a parse tree produced by hclParser#resourceType.
+  // Enter a parse tree produced by terraformParser#resourceType.
   enterProviderType(ctx) {
   }
 
-  // Exit a parse tree produced by hclParser#resourceType.
+  // Exit a parse tree produced by terraformParser#resourceType.
   exitProviderType(ctx) {
     provider_type.exit_provider_type({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Enter a parse tree produced by hclParser#type.
+  // Enter a parse tree produced by terraformParser#type.
   enterType(ctx) {
   }
 
-  // Exit a parse tree produced by hclParser#type.
+  // Exit a parse tree produced by terraformParser#type.
   exitType(ctx) {
   }
 
-  // Enter a parse tree produced by hclParser#object.
+  // Enter a parse tree produced by terraformParser#object.
   enterObject(ctx) {
   }
 
-  // Exit a parse tree produced by hclParser#object.
+  // Exit a parse tree produced by terraformParser#object.
   exitObject(ctx) {
     object.exit_object({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Enter a parse tree produced by hclParser#field.
+  // Enter a parse tree produced by terraformParser#field.
   enterField(ctx) {
   }
 
-  // Exit a parse tree produced by hclParser#field.1
+  // Exit a parse tree produced by terraformParser#field.1
   exitField(ctx) {
     field.exit_field({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Enter a parse tree produced by hclParser#complexField.
+  // Enter a parse tree produced by terraformParser#complexField.
   enterComplexField(ctx) {
     complex_field.enter_complex_field({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Exit a parse tree produced by hclParser#complexField.
+  // Exit a parse tree produced by terraformParser#complexField.
   exitComplexField(ctx) {
     complex_field.exit_complex_field({ ctx: { ctx, errors: this.prog.errors }, prog: this.prog });
   }
 
-  // Enter a parse tree produced by hclParser#validation.
+  // Enter a parse tree produced by terraformParser#validation.
   enterValidation(ctx) {
   }
 
-  // Exit a parse tree produced by hclParser#validation.
+  // Exit a parse tree produced by terraformParser#validation.
   exitValidation(ctx) {
   }
 
-  // Enter a parse tree produced by hclParser#condition.
+  // Enter a parse tree produced by terraformParser#condition.
   enterCondition(ctx) {
   }
 
-  // Exit a parse tree produced by hclParser#condition.
+  // Exit a parse tree produced by terraformParser#condition.
   exitCondition(ctx) {
   }
 
-  // Enter a parse tree produced by hclParser#expression.
+  // Enter a parse tree produced by terraformParser#expression.
   enterExpression(ctx) {
   }
 
-  // Exit a parse tree produced by hclParser#expression.
+  // Exit a parse tree produced by terraformParser#expression.
   exitExpression(ctx) {
   }
 
-  // Enter a parse tree produced by hclParser#functionCall.
+  // Enter a parse tree produced by terraformParser#functionCall.
   enterFunctionCall(ctx) {
   }
 
-  // Exit a parse tree produced by hclParser#functionCall.
+  // Exit a parse tree produced by terraformParser#functionCall.
   exitFunctionCall(ctx) {
   }
 
-  // Enter a parse tree produced by hclParser#complexExpression.
+  // Enter a parse tree produced by terraformParser#complexExpression.
   enterComplexExpression(ctx) {
   }
 
-  // Exit a parse tree produced by hclParser#complexExpression.
+  // Exit a parse tree produced by terraformParser#complexExpression.
   exitComplexExpression(ctx) {
   }
 
-  // Enter a parse tree produced by hclParser#array.
+  // Enter a parse tree produced by terraformParser#array.
   enterArray(ctx) {
   }
 
-  // Exit a parse tree produced by hclParser#array.
+  // Exit a parse tree produced by terraformParser#array.
   exitArray(ctx) {
   }
 
-  // Enter a parse tree produced by hclParser#index.
+  // Enter a parse tree produced by terraformParser#index.
   enterIndex(ctx) {
   }
 
-  // Exit a parse tree produced by hclParser#index.
+  // Exit a parse tree produced by terraformParser#index.
   exitIndex(ctx) {
   }
 }

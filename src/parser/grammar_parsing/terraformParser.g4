@@ -1,6 +1,6 @@
-parser grammar hclParser;
+parser grammar terraformParser;
 
-options { tokenVocab=hclLexer; }
+options { tokenVocab=terraformLexer; }
 
 file
   : directive+
