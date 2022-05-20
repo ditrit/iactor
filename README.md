@@ -1,5 +1,38 @@
 # iactor
 
+Iactor provide a low-environment for infrastructure languages and specifically for Terraform.
+At this time, you could add your terraform's files and get a svg representation to the output.
+In futur, iactor will become a leto's module. Leto will provide all the development environment.
+When iactor will be integrated into leto, you will be able to modified the graphic.
+
+## Get started 
+
+### Install the dependencies
+
+```
+npm install
+```
+
+### Launch Iactor
+
+```
+npm run iactor <FilesPath> <-- This is required
+```
+
+### Example with AWS provider
+
+<div align="center">
+    <img src="/src/assets/awsExampleReadme.PNG" width="800px" height="400px"</img> 
+</div>
+
+### To use a specifique provider
+
+ * Add a folder into `src/plugins/terraform`.
+ * In this folder, you should made a git clone of your repository git.
+ * To define your provider, you just have to add a line in the file `src/plugins/terraform/plugins.json` : `provider metadatas' name : repository git path`
+ * Finally, you could add the files you want to compile in a folder and throw the application with the path of the folder you just create.
+ * You could find your generate svg in the file `out.svg`.
+
 ## Default commands
 
 Explanation of usage of scripts in `package.json`.
