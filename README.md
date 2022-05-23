@@ -84,6 +84,7 @@ iactor
 │         └ assets     ⇨ Contains all the assets used to represent aws resources
 │ └ utils              ⇨ Contains all utils files of the project
 └ tests                ⇨ Contains all files related to the tests
+```
 
 ### How to release
 
