@@ -4,7 +4,6 @@
   "description": "",
   "main": "hcl.js",
   "scripts": {
-    "test": "node jasmine.js",
     "iactor": "node ./src/index.js",
     "lint:fix": "eslint --fix .",
     "lint:report": "eslint . -f json-relative > eslint.json || true",
@@ -29,6 +28,5 @@
     "eslint-formatter-json-relative": "^0.1.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-watch": "^8.0.0",
-    "jasmine": "^4.1.0"
   }
 }
