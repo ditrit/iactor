@@ -61,7 +61,7 @@ function required_resource(resource, attribute) {
 
   if (resource.objects.value) {
     resource.objects.value.forEach((object) => {
-      if (object.constructor.name == 'TerraformComplexField') {
+      if (object.constructor.name == 'Object') {
         if (attribute.variableName == object.name) {
           find = true;
           if (attribute.attributes != undefined) {
