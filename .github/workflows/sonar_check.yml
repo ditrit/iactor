@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 16
       - name: Generate reports
-        run: npm install && npm run lint:report
+        run: npm install && npm run lint:report && npm run test:unit:coverage
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
