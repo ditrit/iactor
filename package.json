@@ -7,7 +7,9 @@
     "iactor": "node ./src/index.js",
     "lint:fix": "eslint --fix .",
     "lint:report": "eslint . -f json-relative > eslint.json || true",
-    "lint:watch": "esw --no-ignore -w ."
+    "lint:watch": "esw --no-ignore -w .",
+    "test:unit": "NODE_OPTIONS=--experimental-vm-modules jest --ci",
+    "test:unit:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --coverage"
   },
   "author": "",
   "license": "ISC",
@@ -23,10 +25,16 @@
   },
   "type": "module",
   "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "babel-jest": "^28.1.0",
     "eslint": "^8.15.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-formatter-json-relative": "^0.1.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-watch": "^8.0.0",
+    "jasmine": "^4.1.0",
+    "jest": "^28.1.0",
+    "jest-sonar-reporter": "^2.0.0"
   }
 }
