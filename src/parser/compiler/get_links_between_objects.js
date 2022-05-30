@@ -1,3 +1,5 @@
+import { TerraformComplexField } from "../../model/complex_field.js";
+
 export function get_names(objects, isModule) {
   const variables = [];
   const resources = [];
@@ -5,7 +7,7 @@ export function get_names(objects, isModule) {
   const modules = [];
 
   objects.forEach((e) => {
-    if (e.constructor.name == 'TerraformComplexField') {
+    if (e instanceof TerraformComplexField) {
       const result = get_names(e.objects);
       result.variables.forEach((variable) => {
         variables.push(variable);

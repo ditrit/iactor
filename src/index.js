@@ -140,7 +140,7 @@ const svg = body.append('svg').attr('id', 'svg0').attr('width', 2000).attr('heig
   .attr('xmlns', 'http://www.w3.org/2000/svg')
   .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink');
 svg.append('g');
-const filePlugins = readFileSync(`./src/plugins/terraform/plugins.json`);
+const filePlugins = readFileSync('./src/plugins/terraform/plugins.json');
 const plugins = JSON.parse(filePlugins);
 const res = readFileSync(`./src/plugins/terraform/${plugins[datas.provider[0].name]}/assets/resource.svg`).toString();
 

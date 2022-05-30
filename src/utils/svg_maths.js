@@ -264,14 +264,14 @@ export function calculAttributesObjects(datas) {
 
   for (let i = 0; i < resources.length; i++) {
     const xy = calcul_xy_container(resources[i], xCurrent, yCurrent);
-    const widthNextResource = (i + 1 < resources.length && resources[i+1].width > 0) ? resources[i+1].width : 190
-    if (i + 1 < resources.length && !noRelations.includes(resources[i + 1])  && (resources[i + 1].order != resources[i].order || widthNextResource + xCurrent >= windowWidthMax)) {
+    const widthNextResource = (i + 1 < resources.length && resources[i + 1].width > 0) ? resources[i + 1].width : 190;
+    if (i + 1 < resources.length && !noRelations.includes(resources[i + 1]) && (resources[i + 1].order != resources[i].order || widthNextResource + xCurrent >= windowWidthMax)) {
       if (resources[i].height > heightMax) heightMax = resources[i].height;
       yCurrent = yCurrent + heightMax + 75;
       xCurrent = 10;
       heightMax = heightMin;
     } else if (i === resources.length - 1) {
-      yCurrent = yCurrent + heightMax;
+      yCurrent += heightMax;
       xCurrent = 10;
       heightMax = heightMin;
     } else if (xy.x != -1 && xy.y != -1 && !noRelations.includes(resources[i])) {
@@ -283,23 +283,23 @@ export function calculAttributesObjects(datas) {
   }
 
   yCurrent += 75;
-  xCurrent = 10
+  xCurrent = 10;
   heightMax = heightMin;
 
-  for(let i = 0; i < noRelations.length; i++) {
-    let xy = calcul_xy_container(noRelations[i], xCurrent, yCurrent);
-    if(i + 1 < noRelations.length && noRelations[i+1].width + xCurrent >= windowWidthMax) {
-        if(noRelations[i].height > heightMax) heightMax = noRelations[i].height;
-        yCurrent = yCurrent + heightMax + 75;
-        xCurrent = 10;
-        heightMax = heightMin;
-    } else if(xy.x != -1 && xy.y != -1) {            
-        xCurrent = xy.x;
-        yCurrent = xy.y;
-        if(noRelations[i].height > heightMax) heightMax = noRelations[i].height;
+  for (let i = 0; i < noRelations.length; i++) {
+    const xy = calcul_xy_container(noRelations[i], xCurrent, yCurrent);
+    if (i + 1 < noRelations.length && noRelations[i + 1].width + xCurrent >= windowWidthMax) {
+      if (noRelations[i].height > heightMax) heightMax = noRelations[i].height;
+      yCurrent = yCurrent + heightMax + 75;
+      xCurrent = 10;
+      heightMax = heightMin;
+    } else if (xy.x != -1 && xy.y != -1) {
+      xCurrent = xy.x;
+      yCurrent = xy.y;
+      if (noRelations[i].height > heightMax) heightMax = noRelations[i].height;
     }
-    if(noRelations[i].width > widthMax) widthMax = noRelations[i].width;
-    if(!resources.includes(noRelations[i])) resources.push(noRelations[i]);
+    if (noRelations[i].width > widthMax) widthMax = noRelations[i].width;
+    if (!resources.includes(noRelations[i])) resources.push(noRelations[i]);
   }
 
   return resources;
