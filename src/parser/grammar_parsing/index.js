@@ -4,7 +4,7 @@ import hclParser from './terraformParser.js';
 import hclLexer from './terraformLexer.js';
 
 export function parse(src) {
-  const input = fs.readFileSync(src.file, 'UTF-8');
+  const input = src.src_data
   const chars = new antlr4.InputStream(input);
   const lexer = new hclLexer(chars);
   const tokens = new antlr4.CommonTokenStream(lexer);
