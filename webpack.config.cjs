@@ -6,7 +6,7 @@ module.exports = {
 		bundle: path.resolve(__dirname, './src/plugins/terraform/index.js'),
 	},
 	output: {
-		path: path.resolve(__dirname, "../frontend/public/dist"),
+		path: path.resolve(__dirname, "./dist"),
 		filename: "[name].js",
 		clean: true,
 	},
