@@ -1,6 +1,4 @@
 import { parse_directories, get_module_attribute } from '../../parser/compiler/parse_directory.js';
-import { verify_schema } from '../../metadatas/verify_schema.js';
-import { analyse_resources, analyse_modules } from '../../parser/compiler/schema_parser.js';
 
 onmessage = function(event) {
 	const datas = getDatas(event.data)

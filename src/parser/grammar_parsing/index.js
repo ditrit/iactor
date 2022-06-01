@@ -1,5 +1,4 @@
 import antlr4 from 'antlr4';
-import fs from 'fs';
 import hclParser from './terraformParser.js';
 import hclLexer from './terraformLexer.js';
 

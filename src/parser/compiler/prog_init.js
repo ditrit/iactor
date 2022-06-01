@@ -36,9 +36,6 @@ export default function parse_file(file, namespace_uri, namespace_prefix, parent
     });
     prog.files.push(current_file);
     prog.alreadyImported.push(file);
-  } else {
-    prog.errors.push(new Error('IMPORT_ERROR error', 0, `Can not read file ${src.file}`));
-    console.log(prog.errors.map((x) => x.message));
   }
   return res;
 }
