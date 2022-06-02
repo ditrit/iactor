@@ -69,11 +69,12 @@ object
   ;
 
 field
-  : IDENTIFIER '=' expression
+  : (IDENTIFIER|SOURCE) '=' expression
   ;
 
 complexField
   : IDENTIFIER '{' object '}'
+  | IDENTIFIER '=' '{' (STRING '=' STRING)+ '}'
   ;
 
 validation
@@ -104,6 +105,7 @@ functionCall
 
 complexExpression
   : IDENTIFIER
+  | (IDENTIFIER|'-')+
   | complexExpression '.' complexExpression // attribute access
   | complexExpression '[' index ']' // indexed array access
   | complexExpression '.' index // indexed attribute access
