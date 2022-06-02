@@ -19,6 +19,10 @@ export function analyse_resources(resources, metadatas) {
         r.representation = m.representation;
         r.icon = m.icon;
       }
+      if (m.resourceType == 'default' && r.icon == undefined) {
+        r.representation = m.representation;
+        r.icon = m.icon;
+      }
     });
   });
   return errors;
