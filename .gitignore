@@ -107,5 +107,9 @@ dist
 .idea
 .vscode
 
+# Tests report files
+reports/
+test-report.xml
+
 # External repository git
 src/plugins/terraform/external
