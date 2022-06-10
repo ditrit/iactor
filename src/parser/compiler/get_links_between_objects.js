@@ -180,13 +180,23 @@ function get_resource_name(values, variableValue) {
     resource = [];
     for (let i = 0; i < array.length; i++) {
       const explode = array[i].split('.');
-      if (i == 0) {
-        if (explode[0].substring(0, 4) == '["${') {
-          resource.push({ var: values[0], type: explode[0].substring(4), name: explode[1] });
+      if (i == 0 || i == array.length - 1) {
+        let type = explode[0];
+        let name = explode[1];
+        if(i == 0) {
+          type = explode[0].substring(1);
+        } 
+        if(i == array.length - 1 && explode[0].substring(0, 3) !== '"${'  && explode[0].substring(0, 4) !== '["${') {
+          name = explode[1].slice(0, -1);
+        }
+        if (explode[0].substring(0, 3) == '"${' || explode[0].substring(0, 4) == '["${') {
+          resource.push({ var: values[0], type: type.substring(3), name: name });
+        } else if (explode.length === 3 || explode.length === 2) {
+          resource.push({ var: values[0], type: type, name: name });
         }
       } else if (explode[0].substring(0, 3) == '"${') {
         resource.push({ var: values[0], type: explode[0].substring(3), name: explode[1] });
-      } else if (explode.length === 3) {
+      } else if (explode.length === 3 || explode.length === 2) {
         resource.push({ var: values[0], type: explode[0], name: explode[1] });
       }
     }
