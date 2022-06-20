@@ -14,6 +14,7 @@ export function analyse_resources(resources, metadatas) {
               });
             }
           });
+          r.attributes = m.attributes;
         }
         r.representation = m.representation;
         r.icon = m.icon;
