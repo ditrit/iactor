@@ -3,6 +3,7 @@ import { newVariableDirective } from '../model/variable_directive.js';
 export default {
   enter_variable_directive(parsed_rule) {
     parsed_rule.prog.current_file.field = [];
+    parsed_rule.prog.current_file.complex_field = [];
   },
 
   exit_variable_directive(parsed_rule) {

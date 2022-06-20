@@ -3,6 +3,7 @@ import { newModuleSource } from '../model/module_source.js';
 export default {
   enter_module_source(parsed_rule) {
     parsed_rule.prog.current_file.field = [];
+    parsed_rule.prog.current_file.complex_field = [];
   },
 
   exit_module_source(parsed_rule) {

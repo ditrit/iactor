@@ -13,7 +13,6 @@ export function analyse_resources(resources, metadatas) {
                 errors.push(e);
               });
             }
-            representation_attributes(r, a);
           });
         }
         r.representation = m.representation;
@@ -49,8 +48,10 @@ function resource_type(resources, attribute) {
   const errors = [];
 
   resources.forEach((r) => {
-    if (attribute.variableName == r.name && attribute.resourceType) {
-      if (r.value.type != attribute.resourceType) {
+    if (attribute.variableName == r.name) {
+      if(!attribute.resourceType || r.value.type == attribute.resourceType) {
+        r.representation = attribute.representation;
+      } else {
         errors.push(`TERRAFORM ERROR in file : ${r.value.fileName} wrong type for resource ${r.name} type : ${r.value.type}, expected : ${attribute.resourceType}`);
       }
     }
@@ -92,12 +93,4 @@ function required_resource(resource, attribute) {
   }
 
   return errors;
-}
-
-function representation_attributes(resource, attribute) {
-  resource.resourcesObject.forEach((r) => {
-    if (attribute.variableName == r.name) {
-      r.representation = attribute.representation;
-    }
-  });
 }
