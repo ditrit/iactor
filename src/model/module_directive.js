@@ -16,7 +16,7 @@ export class ModuleDirective extends TerraformNode {
     this.resourcesObject = [];
     this.modulesName = (input.names.modules) ? input.names.modules : [];
     this.modulesObject = [];
-    this.attributes = [];
+    this.resources = [];
   }
 
   toString() {

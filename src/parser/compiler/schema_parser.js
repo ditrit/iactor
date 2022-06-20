@@ -31,7 +31,7 @@ export function analyse_resources(resources, metadatas) {
 export function analyse_modules(modules, metadatas) {
   const errors = [];
   modules.forEach((mod) => {
-    mod.attributes.forEach((a) => {
+    mod.objects.forEach((a) => {
       if (a.constructor.name == metadatas.resources.resourceType) {
         a.representation = metadatas.resources.representation;
       }

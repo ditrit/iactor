@@ -31,7 +31,7 @@ export function get_module_attribute(result, module) {
   result.forEach((v) => {
     if (v.moduleName) {
       if (module.name == v.moduleName) {
-        module.attributes.push(v);
+        module.resources.push(v);
       }
     }
   });
