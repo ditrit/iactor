@@ -52,6 +52,8 @@ function resource_type(resources, attribute) {
     if (attribute.variableName == r.name) {
       if(!attribute.resourceType || r.value.type == attribute.resourceType) {
         r.representation = attribute.representation;
+        r.required = attribute.required;
+        r.array = attribute.array;
       } else {
         errors.push(`TERRAFORM ERROR in file : ${r.value.fileName} wrong type for resource ${r.name} type : ${r.value.type}, expected : ${attribute.resourceType}`);
       }
