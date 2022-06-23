@@ -200,7 +200,7 @@ function get_resource_name(values, variableValue) {
         resource.push({ var: values[0], type: explode[0], name: explode[1] });
       }
     }
-  } else if(variableValue.length === 3) {
+  } else if(variableValue.length >= 2) {
     resource = { var: values[0], type: variableValue[0], name: variableValue[1] };
   }
   return resource;
