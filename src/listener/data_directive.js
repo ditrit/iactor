@@ -3,6 +3,7 @@ import { newDataDirective } from '../model/data_directive.js';
 export default {
   enter_data_directive(parsed_rule) {
     parsed_rule.prog.current_file.field = [];
+    parsed_rule.prog.current_file.complex_field = [];
   },
 
   exit_data_directive(parsed_rule) {

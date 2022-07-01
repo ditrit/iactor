@@ -13,9 +13,13 @@ export function analyse_resources(resources, metadatas) {
                 errors.push(e);
               });
             }
-            representation_attributes(r, a);
           });
+          r.attributes = m.attributes;
         }
+        r.representation = m.representation;
+        r.icon = m.icon;
+      }
+      if (m.resourceType == 'default' && r.icon == undefined) {
         r.representation = m.representation;
         r.icon = m.icon;
       }
@@ -27,7 +31,7 @@ export function analyse_resources(resources, metadatas) {
 export function analyse_modules(modules, metadatas) {
   const errors = [];
   modules.forEach((mod) => {
-    mod.attributes.forEach((a) => {
+    mod.objects.forEach((a) => {
       if (a.constructor.name == metadatas.resources.resourceType) {
         a.representation = metadatas.resources.representation;
       }
@@ -45,8 +49,12 @@ function resource_type(resources, attribute) {
   const errors = [];
 
   resources.forEach((r) => {
-    if (attribute.variableName == r.name && attribute.resourceType) {
-      if (r.value.type != attribute.resourceType) {
+    if (attribute.variableName == r.name) {
+      if(!attribute.resourceType || r.value.type == attribute.resourceType) {
+        r.representation = attribute.representation;
+        r.required = attribute.required;
+        r.array = attribute.array;
+      } else {
         errors.push(`TERRAFORM ERROR in file : ${r.value.fileName} wrong type for resource ${r.name} type : ${r.value.type}, expected : ${attribute.resourceType}`);
       }
     }
@@ -61,7 +69,7 @@ function required_resource(resource, attribute) {
 
   if (resource.objects.value) {
     resource.objects.value.forEach((object) => {
-      if (object.constructor.name == 'TerraformComplexField') {
+      if (object instanceof Object) {
         if (attribute.variableName == object.name) {
           find = true;
           if (attribute.attributes != undefined) {
@@ -88,12 +96,4 @@ function required_resource(resource, attribute) {
   }
 
   return errors;
-}
-
-function representation_attributes(resource, attribute) {
-  resource.resourcesObject.forEach((r) => {
-    if (attribute.variableName == r.name) {
-      r.representation = attribute.representation;
-    }
-  });
 }

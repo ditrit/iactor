@@ -4,6 +4,7 @@ import { get_names } from '../parser/compiler/get_links_between_objects.js';
 export default {
   enter_module_directive(parsed_rule) {
     parsed_rule.prog.current_file.field = [];
+    parsed_rule.prog.current_file.complex_field = [];
   },
 
   exit_module_directive(parsed_rule) {

@@ -1,4 +1,4 @@
-// Generated from terraformLexer.g4 by ANTLR 4.9.3
+// Generated from .\terraformLexer.g4 by ANTLR 4.9.3
 // jshint ignore: start
 import antlr4 from 'antlr4';
 

@@ -1,4 +1,3 @@
-import fs from 'fs';
 import { parse } from './parse_file.js';
 import { get_objects } from './get_links_between_objects.js';
 
@@ -32,7 +31,7 @@ export function get_module_attribute(result, module) {
   result.forEach((v) => {
     if (v.moduleName) {
       if (module.name == v.moduleName) {
-        module.attributes.push(v);
+        module.resources.push(v);
       }
     }
   });
@@ -52,18 +51,20 @@ function parse_directory(filePath, result, moduleName) {
       errors: [],
     };
   }
-  const stats = fs.statSync(filePath);
-  let files;
+
+  // var stats = fs.statSync(filePath);
+  // var files;
   const res = [];
 
-  if (stats.isDirectory()) {
-    files = fs.readdirSync(filePath);
-    files.forEach((e) => {
-      res.push(parse(`${filePath}/${e}`, 'UTF-8'));
-    });
-  } else {
-    res.push(parse(filePath, 'UTF-8'));
-  }
+  // if(stats.isDirectory()) {
+  //     files = fs.readdirSync(filePath);
+  //     files.forEach(e => {
+  //         res.push(parse(filePath + '/' + e, 'UTF-8'))
+  //     })
+  // } else {
+  //     res.push(parse(filePath, 'UTF-8'))
+  // }
+  res.push(parse(filePath, 'UTF-8'));
 
   res.forEach((r) => {
     r.files.forEach((st) => {

@@ -1,3 +1,5 @@
+import { TerraformComplexField } from "../../model/complex_field.js";
+
 export function get_names(objects, isModule) {
   const variables = [];
   const resources = [];
@@ -5,7 +7,7 @@ export function get_names(objects, isModule) {
   const modules = [];
 
   objects.forEach((e) => {
-    if (e.constructor.name == 'TerraformComplexField') {
+    if (e instanceof TerraformComplexField) {
       const result = get_names(e.objects);
       result.variables.forEach((variable) => {
         variables.push(variable);
@@ -76,7 +78,7 @@ export function get_objects(array, result, isModule) {
       rd.variablesObject.push(e);
     });
 
-    compare_array_differences(rd.variablesName, rd.variablesObject, rd.fileName).forEach((e) => {
+    compare_array_differences(rd.variablesName, rd.variablesObject).forEach((e) => {
       result.errors.push(e);
     });
 
@@ -84,7 +86,7 @@ export function get_objects(array, result, isModule) {
       rd.resourcesObject.push(e);
     });
 
-    compare_array_differences(rd.resourcesName, rd.resourcesObject, rd.fileName).forEach((e) => {
+    compare_array_differences(rd.resourcesName, rd.resourcesObject).forEach((e) => {
       result.errors.push(e);
     });
 
@@ -92,7 +94,7 @@ export function get_objects(array, result, isModule) {
       rd.datasObject.push(e);
     });
 
-    compare_array_differences(rd.datasName, rd.datasObject, rd.fileName).forEach((e) => {
+    compare_array_differences(rd.datasName, rd.datasObject).forEach((e) => {
       result.errors.push(e);
     });
 
@@ -101,7 +103,7 @@ export function get_objects(array, result, isModule) {
         rd.modulesObject.push(e);
       });
 
-      compare_array_differences(rd.modulesName, rd.modulesObject, rd.fileName).forEach((e) => {
+      compare_array_differences(rd.modulesName, rd.modulesObject).forEach((e) => {
         result.errors.push(e);
       });
     }
@@ -126,11 +128,10 @@ function get_items(arrayNames, items) {
   return arrayObjects;
 }
 
-function compare_array_differences(arrayNames, arrayObjects, fileName) {
+function compare_array_differences(arrayNames, arrayObjects) {
   const errors = [];
   if (arrayNames.length != arrayObjects.length) {
     let find = false;
-    let error;
     arrayNames.forEach((rn) => {
       arrayObjects.forEach((ro) => {
         if (ro.type && rn.type == ro.type && rn.name == ro.name) {
@@ -139,14 +140,6 @@ function compare_array_differences(arrayNames, arrayObjects, fileName) {
           find = true;
         }
       });
-      if (!find) {
-        if (rn.type) {
-          error = `TERRAFORM ERROR in file : ${fileName} object type ${rn.type} : ${rn.name} unknow`;
-        } else {
-          error = `TERRAFORM ERROR in file : ${fileName} variable ${rn.name} unknow`;
-        }
-        errors.push(error);
-      }
     });
   }
   return errors;
@@ -187,14 +180,28 @@ function get_resource_name(values, variableValue) {
     resource = [];
     for (let i = 0; i < array.length; i++) {
       const explode = array[i].split('.');
-      if (i == 0) {
-        if (explode[0].substring(0, 4) == '["${') {
-          resource.push({ var: values[0], type: explode[0].substring(4), name: explode[1] });
+      if (i == 0 || i == array.length - 1) {
+        let type = explode[0];
+        let name = explode[1];
+        if(i == 0) {
+          type = explode[0].substring(1);
+        } 
+        if(i == array.length - 1 && explode[0].substring(0, 3) !== '"${'  && explode[0].substring(0, 4) !== '["${') {
+          name = explode[1].slice(0, -1);
+        }
+        if (explode[0].substring(0, 3) == '"${' || explode[0].substring(0, 4) == '["${') {
+          resource.push({ var: values[0], type: type.substring(3), name: name });
+        } else if (explode.length === 3 || explode.length === 2) {
+          resource.push({ var: values[0], type: type, name: name });
         }
       } else if (explode[0].substring(0, 3) == '"${') {
         resource.push({ var: values[0], type: explode[0].substring(3), name: explode[1] });
+      } else if (explode.length === 3 || explode.length === 2) {
+        resource.push({ var: values[0], type: explode[0], name: explode[1] });
       }
     }
+  } else if(variableValue.length >= 2) {
+    resource = { var: values[0], type: variableValue[0], name: variableValue[1] };
   }
   return resource;
 }

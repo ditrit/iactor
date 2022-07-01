@@ -3,6 +3,7 @@ import { newProviderDirective } from '../model/provider_directive.js';
 export default {
   enter_provider_directive(parsed_rule) {
     parsed_rule.prog.current_file.field = [];
+    parsed_rule.prog.current_file.complex_field = [];
   },
 
   exit_provider_directive(parsed_rule) {
