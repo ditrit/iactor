@@ -80,7 +80,6 @@ typings/
 
 # Nuxt.js build / generate output
 .nuxt
-dist
 
 # Gatsby files
 .cache/
@@ -109,3 +108,8 @@ dist
 
 # External repository git
 src/plugins/terraform/external
+
+dist/
+reports/
+docs/
+test-report.xml
