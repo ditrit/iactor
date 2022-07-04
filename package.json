@@ -4,31 +4,36 @@
   "description": "",
   "main": "hcl.js",
   "scripts": {
-    "test": "node jasmine.js",
-    "iactor": "node ./src/index.js",
-    "lint:fix": "eslint --fix .",
-    "lint:report": "eslint . -f json-relative > eslint.json || true",
-    "lint:watch": "esw --no-ignore -w ."
+    "test": "jest",
+    "build": "webpack",
+    "build:docs": "esdoc",
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src",
+    "lint:report": "eslint src -f json-relative > eslint.json",
+    "lint:watch": "esw --no-ignore -w src"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "ajv-errors": "^3.0.0",
-    "antlr4": "^4.9.3",
-    "axios": "^0.21.4",
-    "d3": "^7.4.4",
-    "glob": "^8.0.3",
-    "jsdom": "^19.0.0",
-    "mathjs": "^10.5.1",
-    "node": "^17.7.2"
+    "antlr4": "^4.9.3"
   },
-  "type": "module",
   "devDependencies": {
+    "@babel/core": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "babel-jest": "^28.1.2",
+    "babel-loader": "^8.2.5",
+    "esdoc": "^1.1.0",
+    "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^8.15.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-formatter-json-relative": "^0.1.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-watch": "^8.0.0",
-    "jasmine": "^4.1.0"
+    "eslint-webpack-plugin": "^3.1.1",
+    "jest": "^28.1.2",
+    "jest-sonar-reporter": "^2.0.0",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
   }
 }
