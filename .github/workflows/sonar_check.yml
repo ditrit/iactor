@@ -19,8 +19,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16
-      - name: Generate reports
-        run: npm install && npm run lint:report
+      - name: Install dependencies
+        run: npm install
+      - name: Run unit test
+        run: npm run test
+      - name: Run checkstyle
+        run: npm run lint
+      - name: Run build
+        run: npm run build
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
