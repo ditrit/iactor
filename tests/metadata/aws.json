@@ -35,7 +35,8 @@
             "variableName": "vpc_id",
             "resourceType": "aws_vpc",
             "representation": "link",
-            "required": false
+            "required": false,
+            "widget": "inputString"
           }
         ],
         "icon": "aws_security_group.svg",
@@ -50,20 +51,23 @@
             "resourceType": "aws_security_group",
             "representation": "inverseLink",
             "array": true,
-            "required": false
+            "required": false,
+            "widget": "inputString"
           },
           {
             "variableName": "vpc_security_group_ids",
             "resourceType": "aws_security_group",
             "representation": "inverseLink",
             "array": true,
-            "required": false
+            "required": false,
+            "widget": "inputString"
           },
           {
             "variableName": "subnet_id",
             "resourceType": "aws_subnet",
             "representation": "link",
-            "required": false
+            "required": false,
+            "widget": "inputString"
           }
         ],
         "icon": "aws_instance.svg",
@@ -75,19 +79,22 @@
         "attributes": [
           {
             "variableName": "device_name",
-            "required": true
+            "required": true,
+            "widget": "inputString"
           },
           {
             "variableName": "volume_id",
             "resourceType": "aws_ebs_volume",
             "representation": "link",
-            "required": true
+            "required": true,
+            "widget": "inputString"
           },
           {
             "variableName": "instance_id",
             "resourceType": "aws_instance",
             "representation": "link",
-            "required": true
+            "required": true,
+            "widget": "inputString"
           }
         ],
         "icon": "aws_volume_attachment.svg",
@@ -99,7 +106,8 @@
         "attributes": [
           {
             "variableName": "availability_zone",
-            "required": true
+            "required": true,
+            "widget": "inputString"
           }
         ],
         "icon": "aws_ebs_volume.svg",
@@ -111,22 +119,27 @@
         "attributes": [
           {
             "variableName": "listener",
+            "widget": "inputString",
             "attributes": [
               {
                 "variableName": "instance_port",
-                "required": true
+                "required": true,
+                "widget": "inputString"
               },
               {
                 "variableName": "lb_port",
-                "required": true
+                "required": true,
+                "widget": "inputString"
               },
               {
                 "variableName": "lb_protocol",
-                "required": true
+                "required": true,
+                "widget": "inputString"
               },
               {
                 "variableName": "instance_protocol",
-                "required": true
+                "required": true,
+                "widget": "inputString"
               }
             ],
             "required": true
@@ -136,21 +149,24 @@
             "resourceType": "aws_subnet",
             "representation": "link",
             "array": true,
-            "required": false
+            "required": false,
+            "widget": "inputString"
           },
           {
             "variableName": "security_groups",
             "resourceType": "aws_security_group",
             "representation": "link",
             "array": true,
-            "required": false
+            "required": false,
+            "widget": "inputString"
           },
           {
             "variableName": "instances",
             "resourceType": "aws_instance",
             "representation": "link",
             "array": true,
-            "required": false
+            "required": false,
+            "widget": "inputString"
           }
         ],
         "icon": "aws_elb.svg",
@@ -170,7 +186,8 @@
             "variableName": "vpc_id",
             "resourceType": "aws_vpc",
             "representation": "contained",
-            "required": false
+            "required": false,
+            "widget": "inputString"
           }
         ],
         "icon": "aws_internet_gateway.svg",
@@ -183,13 +200,15 @@
           {
             "variableName": "route_table_id",
             "representation": "contained",
-            "required": true
+            "required": true,
+            "widget": "inputString"
           },
           {
             "variableName": "gateway_id",
             "resourceType": "aws_internet_gateway",
             "representation": "link",
-            "required": false
+            "required": false,
+            "widget": "inputString"
           }
         ],
         "icon": "aws_route.svg",
@@ -203,13 +222,15 @@
             "variableName": "vpc_id",
             "resourceType": "aws_vpc",
             "representation": "containedInOtherContainer",
-            "required": true
+            "required": true,
+            "widget": "inputString"
           },
           {
             "variableName": "gateway_id",
             "resourceType": "aws_internet_gateway",
             "representation": "link",
-            "required": false
+            "required": false,
+            "widget": "inputString"
           }
         ],
         "icon": "aws_subnet.svg",
@@ -224,7 +245,8 @@
             "resourceType": "aws_subnet",
             "representation": "contained",
             "array": true,
-            "required": true
+            "required": true,
+            "widget": "inputString"
           }
         ],
         "icon": "aws_db_subnet_group.svg",
@@ -236,7 +258,8 @@
         "attributes": [
           {
             "variableName": "name",
-            "required": true
+            "required": true,
+            "widget": "inputString"
           }
         ],
         "icon": "aws_route53_zone.svg",
@@ -250,21 +273,25 @@
             "variableName": "zone_id",
             "resourceType": "aws_route53_zone",
             "representation": "contained",
-            "required": true
+            "required": true,
+            "widget": "inputString"
           },
           {
             "variableName": "name",
-            "required": true
+            "required": true,
+            "widget": "inputString"
           },
           {
             "variableName": "type",
-            "required": true
+            "required": true,
+            "widget": "inputString"
           },
           {
             "variableName": "records",
             "representation": "link",
             "array": true,
-            "required": false
+            "required": false,
+            "widget": "inputString"
           }
         ],
         "icon": "aws_route53_record.svg",
@@ -276,20 +303,26 @@
         "attributes": [
           {
             "variableName": "instance_class",
-            "required": true
+            "required": true,
+            "widget": "select",
+            "options": ["a", "b", "c"] 
           },
           {
             "variableName": "db_subnet_group_name",
             "resourceType": "aws_db_subnet_group",
             "representation": "link",
-            "required": false
+            "required": false,
+            "widget": "inputInteger",
+            "min": 0,
+            "max": 100
           },
           {
             "variableName": "vpc_security_group_ids",
             "resourceType": "aws_security_group",
             "representation": "link",
             "array": true,
-            "required": false
+            "required": false,
+            "widget": "inputString"
           }
         ],
         "icon": "aws_db_instance.svg",

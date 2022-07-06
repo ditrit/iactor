@@ -51,8 +51,17 @@ export default {
         representation: { type: 'string' },
         array: { type: 'boolean' },
         required: { type: 'boolean' },
+        widget: { type: 'string' },
+        min: { type: 'integer' },
+        max: { type: 'integer' },
+        options: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
       },
-      required: ['variableName'],
+      required: ['variableName', 'widget'],
     },
   },
   required: ['provider'],
