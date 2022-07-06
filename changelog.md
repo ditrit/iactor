@@ -12,5 +12,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changelog file.
 - Template for bug report and user story.
 - Organizing of the directory structure.
+- Metadata validation.
 
 [unreleased]: https://github.com/ditrit/iactor/blob/dev/changelog.md#unreleased
