@@ -13,6 +13,15 @@ class TerraformModule extends TerraformBlock {
   constructor(name = null, variables = []) {
     super('module', name, variables);
   }
+
+  validate(metadata, errors = []) {
+    if (metadata.provider?.modules[0].source.required
+      && !this.variables.some((variable) => variable.name === 'source')) {
+      errors.push(`Module "${this.name}" does not contain source attribute.`);
+      return false;
+    }
+    return true;
+  }
 }
 
 export default TerraformModule;

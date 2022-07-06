@@ -13,6 +13,15 @@ class TerraformProvider extends TerraformBlock {
   constructor(name = null, variables = []) {
     super('provider', name, variables);
   }
+
+  validate(metadata, errors = []) {
+    if (this.name === metadata.getProvider().name) {
+      return true;
+    }
+
+    errors.push(`Bad provider name, expect "${metadata.provider.name}" but have "${this.name}".`);
+    return false;
+  }
 }
 
 export default TerraformProvider;

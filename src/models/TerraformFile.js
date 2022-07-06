@@ -13,6 +13,16 @@ class TerraformFile {
     this.fileName = fileName;
     this.blocks = blocks;
   }
+
+  validate(metadata) {
+    const provider = metadata.getProvider();
+    // Check that we have only one provider
+    if (provider.required && this.blocks.filter((block) => block.blockType === 'provider').length !== 1) {
+      return false;
+    }
+    const errors = [];
+    return this.blocks.every((block) => block.validate(metadata, errors));
+  }
 }
 
 export default TerraformFile;

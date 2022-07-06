@@ -15,6 +15,10 @@ class TerraformData extends TerraformBlock {
     super('data', name, variables);
     this.type = type;
   }
+
+  validate(metadata, errors = []) {
+    return true;
+  }
 }
 
 export default TerraformData;

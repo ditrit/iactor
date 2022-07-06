@@ -14,6 +14,27 @@ class TerraformResource extends TerraformBlock {
     super('resource', name, variables);
     this.type = type;
   }
+
+  validate(metadata, errors = []) {
+    const resource = metadata.provider.resources.find((r) => r.resourceType === this.type);
+
+    if (!resource) {
+      errors.push(`Resource type "${this.type}" for "${this.name}" is not defined in the metadata.`);
+      return false;
+    }
+
+    let hasError = false;
+    resource.attributes.forEach((attribute) => {
+      if (attribute.required
+        && !this.variables.some((variable) => variable.name === attribute.variableName)) {
+        errors.push(`Resource "${this.name}" does not contain attribute "${attribute.name}".`);
+        hasError = false;
+        return;
+      }
+    });
+
+    return hasError;
+  }
 }
 
 export default TerraformResource;
