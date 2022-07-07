@@ -246,7 +246,7 @@
             "representation": "contained",
             "array": true,
             "required": true,
-            "widget": "inputString"
+            "widget": "inputTextArea"
           }
         ],
         "icon": "aws_db_subnet_group.svg",
@@ -259,7 +259,7 @@
           {
             "variableName": "name",
             "required": true,
-            "widget": "inputString"
+            "widget": "inputInteger"
           }
         ],
         "icon": "aws_route53_zone.svg",
@@ -274,17 +274,17 @@
             "resourceType": "aws_route53_zone",
             "representation": "contained",
             "required": true,
-            "widget": "inputString"
+            "widget": "inputFloat"
           },
           {
             "variableName": "name",
             "required": true,
-            "widget": "inputString"
+            "widget": "inputToggle"
           },
           {
             "variableName": "type",
             "required": true,
-            "widget": "inputString"
+            "widget": "inputDropbox"
           },
           {
             "variableName": "records",
@@ -304,7 +304,7 @@
           {
             "variableName": "instance_class",
             "required": true,
-            "widget": "select",
+            "widget": "inputString",
             "options": ["a", "b", "c"] 
           },
           {
@@ -312,7 +312,7 @@
             "resourceType": "aws_db_subnet_group",
             "representation": "link",
             "required": false,
-            "widget": "inputInteger",
+            "widget": "inputString",
             "min": 0,
             "max": 100
           },

@@ -51,7 +51,16 @@ export default {
         representation: { type: 'string' },
         array: { type: 'boolean' },
         required: { type: 'boolean' },
-        widget: { type: 'string' },
+        widget: {
+          enum: [
+            'inputString',
+            'inputTextArea',
+            'inputFloat',
+            'inputInteger',
+            'inputDropbox',
+            'inputToggle',
+          ],
+        },
         min: { type: 'integer' },
         max: { type: 'integer' },
         options: {
