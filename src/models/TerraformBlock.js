@@ -6,12 +6,12 @@ class TerraformBlock {
    * Default constructor.
    * @param {String} blockType Type of block, can be: 'data', 'module', 'provider or 'resource'.
    * @param {String} name Local name of the block.
-   * @param {TerraformVariable[]} variables List of all variables in the block.
+   * @param {TerraformAttribute[]} attributes List of all attributes in the block.
    */
-  constructor(blockType = null, name = null, variables = []) {
+  constructor(blockType = null, name = null, attributes = []) {
     this.blockType = blockType;
     this.name = name;
-    this.variables = variables;
+    this.attributes = attributes;
   }
 }
 

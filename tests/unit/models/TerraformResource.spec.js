@@ -1,5 +1,5 @@
 import TerraformResource from 'src/models/TerraformResource';
-import TerraformVariable from 'src/models/TerraformVariable';
+import TerraformAttribute from 'src/models/TerraformAttribute';
 
 describe('Test class: TerraformResource', () => {
   describe('Test: constructor', () => {
@@ -8,15 +8,15 @@ describe('Test class: TerraformResource', () => {
       expect(terraformResource.blockType).toEqual('resource');
       expect(terraformResource.type).toBeNull();
       expect(terraformResource.name).toBeNull();
-      expect(terraformResource.variables).toEqual([]);
+      expect(terraformResource.attributes).toEqual([]);
     });
 
     it('Test constructor with parameters', () => {
-      const terraformResource = new TerraformResource('test', 'name', [new TerraformVariable()]);
+      const terraformResource = new TerraformResource('test', 'name', [new TerraformAttribute()]);
       expect(terraformResource.blockType).toEqual('resource');
       expect(terraformResource.type).toEqual('test');
       expect(terraformResource.name).toEqual('name');
-      expect(terraformResource.variables).toEqual([new TerraformVariable()]);
+      expect(terraformResource.attributes).toEqual([new TerraformAttribute()]);
     });
   });
 });

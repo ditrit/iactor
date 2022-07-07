@@ -1,5 +1,5 @@
 import TerraformBlock from 'src/models/TerraformBlock';
-import TerraformVariable from 'src/models/TerraformVariable';
+import TerraformAttribute from 'src/models/TerraformAttribute';
 
 describe('Test class: TerraformBlock', () => {
   describe('Test: constructor', () => {
@@ -7,14 +7,14 @@ describe('Test class: TerraformBlock', () => {
       const terraFormBlock = new TerraformBlock();
       expect(terraFormBlock.blockType).toBeNull();
       expect(terraFormBlock.name).toBeNull();
-      expect(terraFormBlock.variables).toEqual([]);
+      expect(terraFormBlock.attributes).toEqual([]);
     });
 
     it('Test constructor with parameters', () => {
-      const terraFormBlock = new TerraformBlock('test', 'name', [new TerraformVariable()]);
+      const terraFormBlock = new TerraformBlock('test', 'name', [new TerraformAttribute()]);
       expect(terraFormBlock.blockType).toEqual('test');
       expect(terraFormBlock.name).toEqual('name');
-      expect(terraFormBlock.variables).toEqual([new TerraformVariable()]);
+      expect(terraFormBlock.attributes).toEqual([new TerraformAttribute()]);
     });
   });
 });

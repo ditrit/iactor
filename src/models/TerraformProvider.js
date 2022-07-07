@@ -8,10 +8,10 @@ class TerraformProvider extends TerraformBlock {
   /**
    * Default constructor.
    * @param {String} name Local name of the provider.
-   * @param {TerraformVariable[]} variables List of all variables in the provider.
+   * @param {TerraformAttribute[]} attributes List of all attributes in the provider.
    */
-  constructor(name = null, variables = []) {
-    super('provider', name, variables);
+  constructor(name = null, attributes = []) {
+    super('provider', name, attributes);
   }
 }
 

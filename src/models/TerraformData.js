@@ -9,10 +9,10 @@ class TerraformData extends TerraformBlock {
    * Default constructor.
    * @param {String} type Type of the data source.
    * @param {String} name Local name of the data source.
-   * @param {TerraformVariable[]} variables List of all variables in the data source.
+   * @param {TerraformAttribute[]} attributes List of all attributes in the data source.
    */
-  constructor(type = null, name = null, variables = []) {
-    super('data', name, variables);
+  constructor(type = null, name = null, attributes = []) {
+    super('data', name, attributes);
     this.type = type;
   }
 }
