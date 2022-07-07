@@ -8,10 +8,10 @@ class TerraformModule extends TerraformBlock {
   /**
    * Default constructor.
    * @param {String} name Local name of the module.
-   * @param {TerraformVariable[]} variables List of all variables in the module.
+   * @param {TerraformAttribute[]} attributes List of all attributes in the module.
    */
-  constructor(name = null, variables = []) {
-    super('module', name, variables);
+  constructor(name = null, attributes = []) {
+    super('module', name, attributes);
   }
 }
 

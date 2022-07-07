@@ -1,19 +1,17 @@
+import TerraformBlock from './TerraformBlock';
+
 /**
- * Class that represent a variable in a Terraform block.
- * @see https://www.terraform.io/language/expressions
+ * Class that represent a variable block in Terraform.
+ * @see https://www.terraform.io/language/values/variables
  */
-class TerraformVariable {
+class TerraformVariable extends TerraformBlock {
   /**
    * Default constructor.
-   * @param {String} type Type of the variable, can be: 'string', 'number', 'boolean', 'array'
-   * or 'map'.
-   * @param {String} name Name of the variable.
-   * @param {String|Boolean|Number|Array|TerraformVariable[]} value Value of the variable.
+   * @param {String} name Local name of the variable.
+   * @param {TerraformAttribute[]} attributes List of all attributes in the variable.
    */
-  constructor(type = null, name = null, value = null) {
-    this.type = type;
-    this.name = name;
-    this.value = value;
+  constructor(name = null, attributes = []) {
+    super('variable', name, attributes);
   }
 }
 

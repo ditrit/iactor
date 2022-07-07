@@ -8,10 +8,10 @@ class TerraformResource extends TerraformBlock {
    * Default constructor.
    * @param {String} type Type of the resource.
    * @param {String} name Local name of the resource.
-   * @param {TerraformVariable[]} variables List of all variables in the resource.
+   * @param {TerraformAttribute[]} attributes List of all attributes in the resource.
    */
-  constructor(type = null, name = null, variables = []) {
-    super('resource', name, variables);
+  constructor(type = null, name = null, attributes = []) {
+    super('resource', name, attributes);
     this.type = type;
   }
 }

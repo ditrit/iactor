@@ -1,19 +1,20 @@
 import TerraformVariable from 'src/models/TerraformVariable';
+import TerraformAttribute from 'src/models/TerraformAttribute';
 
 describe('Test class: TerraformVariable', () => {
   describe('Test: constructor', () => {
     it('Test constructor without parameters', () => {
       const terraformVariable = new TerraformVariable();
-      expect(terraformVariable.type).toBeNull();
+      expect(terraformVariable.blockType).toEqual('variable');
       expect(terraformVariable.name).toBeNull();
-      expect(terraformVariable.value).toEqual(null);
+      expect(terraformVariable.attributes).toEqual([]);
     });
 
     it('Test constructor with parameters', () => {
-      const terraformVariable = new TerraformVariable('test', 'name', 'value');
-      expect(terraformVariable.type).toEqual('test');
+      const terraformVariable = new TerraformVariable('name', [new TerraformAttribute()]);
+      expect(terraformVariable.blockType).toEqual('variable');
       expect(terraformVariable.name).toEqual('name');
-      expect(terraformVariable.value).toEqual('value');
+      expect(terraformVariable.attributes).toEqual([new TerraformAttribute()]);
     });
   });
 });

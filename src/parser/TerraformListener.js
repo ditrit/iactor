@@ -5,6 +5,7 @@ import TerraformResource from '../models/TerraformResource';
 import TerraformData from '../models/TerraformData';
 import TerraformModule from '../models/TerraformModule';
 import TerraformProvider from '../models/TerraformProvider';
+import TerraformAttribute from '../models/TerraformAttribute';
 import TerraformVariable from '../models/TerraformVariable';
 
 const getText = (ctx) => ctx.getText().replaceAll('"', '').trim();
@@ -62,7 +63,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Exit a parse tree produced by terraformParser#moduleSource.
   exitModuleSource(ctx) {
-    this.currentTerraformBlock.variables.push(new TerraformVariable('string', 'source', getText(ctx.STRING())));
+    this.currentTerraformBlock.attributes.push(new TerraformAttribute('string', 'source', getText(ctx.STRING())));
   }
 
   // Enter a parse tree produced by terraformParser#providerDirective.
@@ -97,10 +98,13 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Enter a parse tree produced by terraformParser#variableDirective.
   enterVariableDirective() {
+    this.currentTerraformBlock = new TerraformVariable();
   }
 
   // Exit a parse tree produced by terraformParser#variableDirective.
   exitVariableDirective() {
+    this.terraformFile.blocks.push(this.currentTerraformBlock);
+    this.currentTerraformBlock = null;
   }
 
   // Enter a parse tree produced by terraformParser#outputDirective.
@@ -153,19 +157,19 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   exitField(ctx) {
     if (!this.currentField) {
       if (ctx.expression().BOOLEAN()) {
-        this.currentField = new TerraformVariable(
+        this.currentField = new TerraformAttribute(
           'boolean',
           null,
           ctx.expression().BOOLEAN().getText() === 'true',
         );
       } else if (ctx.expression().NUMBER()) {
-        this.currentField = new TerraformVariable(
+        this.currentField = new TerraformAttribute(
           'number',
           null,
           parseFloat(ctx.expression().NUMBER().getText()),
         );
       } else {
-        this.currentField = new TerraformVariable(
+        this.currentField = new TerraformAttribute(
           'string',
           null,
           ctx.expression().getText() === 'null' ? null : getText(ctx.expression()),
@@ -176,7 +180,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
     if (this.currentComplexeField) {
       this.currentComplexeField.value.push(this.currentField);
     } else {
-      this.currentTerraformBlock.variables
+      this.currentTerraformBlock.attributes
         .push(this.currentField);
     }
     this.currentField = null;
@@ -184,13 +188,13 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Enter a parse tree produced by terraformParser#complexField.
   enterComplexField() {
-    this.currentComplexeField = new TerraformVariable('map', null, []);
+    this.currentComplexeField = new TerraformAttribute('map', null, []);
   }
 
   // Exit a parse tree produced by terraformParser#complexField.
   exitComplexField(ctx) {
     this.currentComplexeField.name = getText(ctx.IDENTIFIER());
-    this.currentTerraformBlock.variables
+    this.currentTerraformBlock.attributes
       .push(this.currentComplexeField);
     this.currentComplexeField = null;
   }
@@ -237,7 +241,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Enter a parse tree produced by terraformParser#array.
   enterArray() {
-    this.currentField = new TerraformVariable('array');
+    this.currentField = new TerraformAttribute('array');
   }
 
   // Exit a parse tree produced by terraformParser#array.
