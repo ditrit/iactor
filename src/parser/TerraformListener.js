@@ -6,6 +6,7 @@ import TerraformData from '../models/TerraformData';
 import TerraformModule from '../models/TerraformModule';
 import TerraformProvider from '../models/TerraformProvider';
 import TerraformAttribute from '../models/TerraformAttribute';
+import TerraformVariable from '../models/TerraformVariable';
 
 const getText = (ctx) => ctx.getText().replaceAll('"', '').trim();
 
@@ -97,10 +98,13 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Enter a parse tree produced by terraformParser#variableDirective.
   enterVariableDirective() {
+    this.currentTerraformBlock = new TerraformVariable();
   }
 
   // Exit a parse tree produced by terraformParser#variableDirective.
   exitVariableDirective() {
+    this.terraformFile.blocks.push(this.currentTerraformBlock);
+    this.currentTerraformBlock = null;
   }
 
   // Enter a parse tree produced by terraformParser#outputDirective.

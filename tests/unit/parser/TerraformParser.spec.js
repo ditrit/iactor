@@ -6,6 +6,7 @@ import TerraformData from 'src/models/TerraformData';
 import TerraformAttribute from 'src/models/TerraformAttribute';
 import TerraformModule from 'src/models/TerraformModule';
 import TerraformProvider from 'src/models/TerraformProvider';
+import TerraformVariable from 'src/models/TerraformVariable';
 
 describe('Test TerraformParser', () => {
   describe('Test method: parse', () => {
@@ -99,6 +100,13 @@ describe('Test TerraformParser', () => {
       expect(terraformFile).toEqual(new TerraformFile(null, null, [new TerraformResource('aws_instance', 'web', [
         new TerraformAttribute('string', 'ami', 'data.aws_ami.web.id'),
         new TerraformAttribute('string', 'instance_type', 't1.micro'),
+      ])]));
+    });
+
+    it('With variableExample.tf', () => {
+      const terraformFile = TerraformParser.parse(fs.readFileSync('tests/tf/variableExample.tf', 'utf8'));
+      expect(terraformFile).toEqual(new TerraformFile(null, null, [new TerraformVariable('image_id', [
+        new TerraformAttribute('string', 'type', 'string'),
       ])]));
     });
   });
