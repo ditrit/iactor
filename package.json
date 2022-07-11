@@ -18,6 +18,7 @@
     "ajv": "^8.11.0",
     "ajv-errors": "^3.0.0",
     "antlr4": "^4.9.3",
+    "leto-module-client": "github:ditrit/leto-module-client#0.1.0",
     "nunjucks": "^3.2.3"
   },
   "devDependencies": {
