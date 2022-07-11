@@ -13,5 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Template for bug report and user story.
 - Organizing of the directory structure.
 - Metadata validation.
+- Render class to generate Terraform files
 
 [unreleased]: https://github.com/ditrit/iactor/blob/dev/changelog.md#unreleased
