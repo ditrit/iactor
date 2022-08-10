@@ -1,0 +1,42 @@
+{
+  "provider": {
+    "name": "aws",
+    "required": true,
+    "providerType": "ProviderDirective",
+    "orderResources": [],
+    "modules": {
+      "representation": "container",
+      "source": {
+        "required": true
+      },
+      "resources": {
+        "resourceType": "ResourceDirective",
+        "required": false,
+        "array": true,
+        "representation": "contained"
+      },
+      "icon": "module.svg"
+    },
+    "resources": [{
+      "resourceType": "aws_db_subnet_group",
+      "representation": "block",
+      "icon": "aws_db_subnet_group",
+      "required": false
+    }, {
+      "resourceType": "aws_instance",
+      "representation": "block",
+      "icon": "aws_instance",
+      "required": false
+    }, {
+      "resourceType": "aws_db_instance",
+      "representation": "block",
+      "icon": "aws_db_instance",
+      "required": false
+    }, {
+      "resourceType": "aws_security_group",
+      "representation": "block",
+      "icon": "aws_security_group",
+      "required": false
+    }]
+  }
+}

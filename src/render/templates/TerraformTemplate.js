@@ -1,7 +1,7 @@
-const TerraformTemplate = `{% for _block in terraformFile.blocks %}
-{{ _block.blockType }} {% if _block.type != null %}"{{ _block.type }}" {% endif %}"{{ _block.name }}" {
+const TerraformTemplate = `{% for _block in components %}
+{{ _block.definition.blockType }} {% if _block.definition.type != null %}"{{ _block.definition.type }}" {% endif %}"{{ _block.name }}" {
 {% for attribute in _block.attributes %}
-    {% if attribute.type == 'map' %}
+    {% if attribute.type == 'Object' %}
     {{ attribute.name }} {
         {% for attr in attribute.value %}
         {{ attr.name }} = {{ attr.value | dump }}

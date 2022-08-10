@@ -12,16 +12,25 @@ class TerraformParser {
    * @param {String} input Content of a file to parse.
    * @returns {TerraformFile} TerraformFile's object.
    */
-  static parse(input) {
-    const listener = new TerraformListener();
-    const stream = new antlr4.InputStream(input);
-    const lexer = new Lexer(stream);
-    const tokens = new antlr4.CommonTokenStream(lexer);
-    const parser = new Parser(tokens);
-    parser.buildParseTrees = true;
-    const tree = parser.file();
-    antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
-    return listener.terraformFile;
+  parse(definitions, inputs) {
+    const listener = new TerraformListener(definitions);
+    inputs.forEach((input) => {
+      const stream = new antlr4.InputStream(input);
+      const lexer = new Lexer(stream);
+      const tokens = new antlr4.CommonTokenStream(lexer);
+      const parser = new Parser(tokens);
+      parser.buildParseTrees = true;
+      const tree = parser.file();
+      antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
+    });
+    listener.components.forEach((component, index) => {
+      component.id = `${index}`;
+    });
+    return {
+      components: listener.components,
+      links: [],
+      errors: listener.errors,
+    };
   }
 }
 export default TerraformParser;

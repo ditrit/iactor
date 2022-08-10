@@ -1,0 +1,66 @@
+{
+  "provider": {
+    "name": "aws",
+    "required": true,
+    "providerType": "ProviderDirective",
+    "orderResources": [
+      "aws_vpc",
+      "aws_elb",
+      "aws_security_group",
+      [
+        "aws_db_instance",
+        "aws_instance"
+      ],
+      "aws_route53_zone"
+    ],
+    "modules": {
+      "representation": "container",
+      "source": {
+        "required": true
+      },
+      "resources": {
+        "resourceType": "ResourceDirective",
+        "required": false,
+        "array": true,
+        "representation": "contained"
+      },
+      "icon": "module.svg"
+    },
+    "resources": [
+      {
+        "resourceType": "aws_instance",
+        "representation": "block",
+        "attributes": [
+          {
+            "variableName": "short_name",
+            "required": true,
+            "widget": "inputString"
+          },
+          {
+            "variableName": "security_groups",
+            "resourceType": "aws_security_group",
+            "representation": "inverseLink",
+            "array": true,
+            "required": false,
+            "widget": "inputString"
+          },
+          {
+            "variableName": "subnet_id",
+            "resourceType": "aws_subnet",
+            "representation": "link",
+            "required": false,
+            "widget": "inputString"
+          }
+        ],
+        "icon": "aws_instance",
+        "required": false
+      },
+      {
+        "resourceType": "aws_key_pair",
+        "representation": "block",
+        "icon": "aws_key_pair",
+        "required": false
+      }
+    ]
+  }
+}

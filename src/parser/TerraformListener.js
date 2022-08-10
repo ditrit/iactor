@@ -1,22 +1,29 @@
 /* eslint class-methods-use-this: 0 */
 import antlr4 from 'antlr4';
-import TerraformFile from '../models/TerraformFile';
-import TerraformResource from '../models/TerraformResource';
-import TerraformData from '../models/TerraformData';
-import TerraformModule from '../models/TerraformModule';
-import TerraformProvider from '../models/TerraformProvider';
-import TerraformAttribute from '../models/TerraformAttribute';
-import TerraformVariable from '../models/TerraformVariable';
+import {
+  Component,
+  ComponentAttribute,
+} from 'leto-modelizer-plugin-core';
 
 const getText = (ctx) => ctx.getText().replaceAll('"', '').trim();
 
 class TerraformListener extends antlr4.tree.ParseTreeListener {
-  constructor() {
+  constructor(definitions = []) {
     super();
-    this.terraformFile = new TerraformFile();
-    this.currentTerraformBlock = null;
+    this.definitions = definitions;
+    this.components = [];
+    this.errors = [];
+
+    this.currentComponent = null;
+    this.currentBlockType = null;
     this.currentField = null;
     this.currentComplexeField = null;
+  }
+
+  addComponent() {
+    this.components.push(this.currentComponent);
+    this.currentComponent = null;
+    this.currentBlockType = null;
   }
 
   // Enter a parse tree produced by terraformParser#file.
@@ -37,24 +44,27 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Enter a parse tree produced by terraformParser#dataDirective.
   enterDataDirective() {
-    this.currentTerraformBlock = new TerraformData();
+    this.currentBlockType = 'data';
+    this.currentComponent = new Component();
+    this.currentComponent.definition = this.definitions.find((definition) => definition.blockType === 'data');
+
   }
 
   // Exit a parse tree produced by terraformParser#dataDirective.
   exitDataDirective() {
-    this.terraformFile.blocks.push(this.currentTerraformBlock);
-    this.currentTerraformBlock = null;
+    this.addComponent();
   }
 
   // Enter a parse tree produced by terraformParser#moduleDirective.
   enterModuleDirective() {
-    this.currentTerraformBlock = new TerraformModule();
+    this.currentBlockType = 'module';
+    this.currentComponent = new Component();
+    this.currentComponent.definition = this.definitions.find((definition) => definition.blockType === 'module');
   }
 
   // Exit a parse tree produced by terraformParser#moduleDirective.
   exitModuleDirective() {
-    this.terraformFile.blocks.push(this.currentTerraformBlock);
-    this.currentTerraformBlock = null;
+    this.addComponent();
   }
 
   // Enter a parse tree produced by terraformParser#moduleSource.
@@ -63,18 +73,19 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Exit a parse tree produced by terraformParser#moduleSource.
   exitModuleSource(ctx) {
-    this.currentTerraformBlock.attributes.push(new TerraformAttribute('string', 'source', getText(ctx.STRING())));
+    this.currentComponent.attributes.push(new ComponentAttribute('source', getText(ctx.STRING())));
   }
 
   // Enter a parse tree produced by terraformParser#providerDirective.
   enterProviderDirective() {
-    this.currentTerraformBlock = new TerraformProvider();
+    this.currentBlockType = 'provider';
+    this.currentComponent = new Component();
+    this.currentComponent.definition = this.definitions.find((definition) => definition.blockType === 'provider');
   }
 
   // Exit a parse tree produced by terraformParser#providerDirective.
   exitProviderDirective() {
-    this.terraformFile.blocks.push(this.currentTerraformBlock);
-    this.currentTerraformBlock = null;
+    this.addComponent();
   }
 
   // Enter a parse tree produced by terraformParser#terraformDirective.
@@ -87,24 +98,25 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Enter a parse tree produced by terraformParser#resourceDirective.
   enterResourceDirective() {
-    this.currentTerraformBlock = new TerraformResource();
+    this.currentBlockType = 'resource';
+    this.currentComponent = new Component();
   }
 
   // Exit a parse tree produced by terraformParser#resourceDirective.
   exitResourceDirective() {
-    this.terraformFile.blocks.push(this.currentTerraformBlock);
-    this.currentTerraformBlock = null;
+    this.addComponent();
   }
 
   // Enter a parse tree produced by terraformParser#variableDirective.
   enterVariableDirective() {
-    this.currentTerraformBlock = new TerraformVariable();
+    this.currentBlockType = 'variable';
+    this.currentComponent = new Component();
+    this.currentComponent.definition = this.definitions.find((definition) => definition.blockType === 'variable');
   }
 
   // Exit a parse tree produced by terraformParser#variableDirective.
   exitVariableDirective() {
-    this.terraformFile.blocks.push(this.currentTerraformBlock);
-    this.currentTerraformBlock = null;
+    this.addComponent();
   }
 
   // Enter a parse tree produced by terraformParser#outputDirective.
@@ -121,7 +133,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Exit a parse tree produced by terraformParser#name.
   exitName(ctx) {
-    this.currentTerraformBlock.name = getText(ctx);
+    this.currentComponent.name = getText(ctx);
   }
 
   // Enter a parse tree produced by terraformParser#resourceType.
@@ -130,7 +142,11 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Exit a parse tree produced by terraformParser#resourceType.
   exitProviderType(ctx) {
-    this.currentTerraformBlock.type = getText(ctx);
+    const type = getText(ctx);
+    if (this.currentBlockType === 'resource') {
+      this.currentComponent.definition = this.definitions.find((definition) => definition.blockType === 'resource'
+      && definition.type === type);
+    }
   }
 
   // Enter a parse tree produced by terraformParser#type.
@@ -157,30 +173,31 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   exitField(ctx) {
     if (!this.currentField) {
       if (ctx.expression().BOOLEAN()) {
-        this.currentField = new TerraformAttribute(
-          'boolean',
+        this.currentField = new ComponentAttribute(
           null,
           ctx.expression().BOOLEAN().getText() === 'true',
         );
+        this.currentField.type = 'Boolean';
       } else if (ctx.expression().NUMBER()) {
-        this.currentField = new TerraformAttribute(
-          'number',
+        this.currentField = new ComponentAttribute(
           null,
           parseFloat(ctx.expression().NUMBER().getText()),
         );
+        this.currentField.type = 'Number';
       } else {
-        this.currentField = new TerraformAttribute(
-          'string',
+        this.currentField = new ComponentAttribute(
           null,
           ctx.expression().getText() === 'null' ? null : getText(ctx.expression()),
         );
+        this.currentField.type = 'String';
       }
     }
     this.currentField.name = getText(ctx.IDENTIFIER());
     if (this.currentComplexeField) {
+      this.currentField.type = 'Object';
       this.currentComplexeField.value.push(this.currentField);
     } else {
-      this.currentTerraformBlock.attributes
+      this.currentComponent.attributes
         .push(this.currentField);
     }
     this.currentField = null;
@@ -188,13 +205,13 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Enter a parse tree produced by terraformParser#complexField.
   enterComplexField() {
-    this.currentComplexeField = new TerraformAttribute('map', null, []);
+    this.currentComplexeField = new ComponentAttribute(null, []);
   }
 
   // Exit a parse tree produced by terraformParser#complexField.
   exitComplexField(ctx) {
     this.currentComplexeField.name = getText(ctx.IDENTIFIER());
-    this.currentTerraformBlock.attributes
+    this.currentComponent.attributes
       .push(this.currentComplexeField);
     this.currentComplexeField = null;
   }
@@ -241,11 +258,12 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Enter a parse tree produced by terraformParser#array.
   enterArray() {
-    this.currentField = new TerraformAttribute('array');
+    this.currentField = new ComponentAttribute();
   }
 
   // Exit a parse tree produced by terraformParser#array.
   exitArray(ctx) {
+    this.currentField.type = 'Array';
     this.currentField.value = ctx.children
       .map((value) => getText(value))
       .filter((value) => value !== '[' && value !== ']' && value !== ',');
